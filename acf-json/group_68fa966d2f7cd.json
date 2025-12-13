@@ -1,0 +1,461 @@
+{
+    "key": "group_68fa966d2f7cd",
+    "title": "Template Block",
+    "fields": [
+        {
+            "key": "field_68fa9f5866266",
+            "label": "TEMPLATE BLOCK",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_68fa9f6b66267",
+            "label": "TEMPLATE BLOCK",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_68fa9fb584fe3",
+            "label": "Add \/ Edit Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_68fa966d5ecef",
+            "label": "Section Title",
+            "name": "section_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Section Heading displayed above all tiles",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68fa96aa5ecf0",
+            "label": "Section Description",
+            "name": "section_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Optional short intro",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_68fa96b65ecf1",
+            "label": "Tmpl Cat 1",
+            "name": "tmpl_cat_1",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Level 1 categories (e.g., Video Brochure, Video Box, POP \/ Buttons)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_68fa970e5ecf2",
+            "button_label": "Add Level 1 Category",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_68fa970e5ecf2",
+                    "label": "Title 1",
+                    "name": "title_1",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Level 1 category title (e.g., Video Brochure)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_68fa96b65ecf1"
+                },
+                {
+                    "key": "field_68faa055580e1",
+                    "label": "Description 1",
+                    "name": "description_1",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": "",
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_68fa96b65ecf1"
+                },
+                {
+                    "key": "field_68fa97205ecf3",
+                    "label": "Tmpl Cat 2",
+                    "name": "tmpl_cat_2",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Template Categories Level 2 (eg. Portrait, Landscape)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "field_68fa97335ecf4",
+                    "button_label": "Add Level 2 Category",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_68fa97335ecf4",
+                            "label": "Title 2",
+                            "name": "title_2",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Level 2 category title (e.g., Portrait, Landscape)",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_68fa97205ecf3"
+                        },
+                        {
+                            "key": "field_68fa973d5ecf5",
+                            "label": "Image 2",
+                            "name": "image_2",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "Tile image for Level 2 Categories",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0,
+                            "preview_size": "medium",
+                            "parent_repeater": "field_68fa97205ecf3"
+                        },
+                        {
+                            "key": "field_68fa974a5ecf6",
+                            "label": "Tmpl Cat 3",
+                            "name": "tmpl_cat_3",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "Template Categories Level 3 (eg. 2.4\" SD)",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "block",
+                            "min": 0,
+                            "max": 0,
+                            "collapsed": "field_68fa975e5ecf7",
+                            "button_label": "Add Level 3 Category",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "key": "field_68fa975e5ecf7",
+                                    "label": "Title 3",
+                                    "name": "title_3",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "Add Level 3 Tile Titles (e.g., 2.4\" SD)",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "parent_repeater": "field_68fa974a5ecf6"
+                                },
+                                {
+                                    "key": "field_68fa976b5ecf8",
+                                    "label": "Image 3",
+                                    "name": "image_3",
+                                    "aria-label": "",
+                                    "type": "image",
+                                    "instructions": "Add Level 3 Tile Image",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": "",
+                                    "allow_in_bindings": 0,
+                                    "preview_size": "medium",
+                                    "parent_repeater": "field_68fa974a5ecf6"
+                                },
+                                {
+                                    "key": "field_68fa979a3e8f7",
+                                    "label": "Tmpl Cat 4",
+                                    "name": "tmpl_cat_4",
+                                    "aria-label": "",
+                                    "type": "repeater",
+                                    "instructions": "Add Template Categories Level 4",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "layout": "block",
+                                    "min": 0,
+                                    "max": 0,
+                                    "collapsed": "field_68fa97ae3e8f8",
+                                    "button_label": "Add PDF",
+                                    "rows_per_page": 20,
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_68fa97ae3e8f8",
+                                            "label": "Title 4",
+                                            "name": "title_4",
+                                            "aria-label": "",
+                                            "type": "text",
+                                            "instructions": "Add title for Template Categories Level 4 (eg. 2.8in_5.8_x_8.3_Portrait)",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "default_value": "",
+                                            "maxlength": "",
+                                            "allow_in_bindings": 0,
+                                            "placeholder": "",
+                                            "prepend": "",
+                                            "append": "",
+                                            "parent_repeater": "field_68fa979a3e8f7"
+                                        },
+                                        {
+                                            "key": "field_68fa97cf3e8f9",
+                                            "label": "Image 4",
+                                            "name": "image_4",
+                                            "aria-label": "",
+                                            "type": "image",
+                                            "instructions": "Add Level 4 Tile Image",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "min_width": "",
+                                            "min_height": "",
+                                            "min_size": "",
+                                            "max_width": "",
+                                            "max_height": "",
+                                            "max_size": "",
+                                            "mime_types": "",
+                                            "allow_in_bindings": 0,
+                                            "preview_size": "medium",
+                                            "parent_repeater": "field_68fa979a3e8f7"
+                                        },
+                                        {
+                                            "key": "field_68fa97e83e8fa",
+                                            "label": "PDF File",
+                                            "name": "pdf_file",
+                                            "aria-label": "",
+                                            "type": "file",
+                                            "instructions": "Add link to PDF",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_68fa97f63e8fb",
+                                                        "operator": "!=",
+                                                        "value": "1"
+                                                    }
+                                                ]
+                                            ],
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "min_size": "",
+                                            "max_size": "",
+                                            "mime_types": "",
+                                            "allow_in_bindings": 0,
+                                            "parent_repeater": "field_68fa979a3e8f7"
+                                        },
+                                        {
+                                            "key": "field_68fa97f63e8fb",
+                                            "label": "No PDF Note",
+                                            "name": "no_pdf_note",
+                                            "aria-label": "",
+                                            "type": "true_false",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "message": "No PDF Available",
+                                            "default_value": 0,
+                                            "allow_in_bindings": 0,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "ui": 1,
+                                            "parent_repeater": "field_68fa979a3e8f7"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_68fa974a5ecf6"
+                                }
+                            ],
+                            "parent_repeater": "field_68fa97205ecf3"
+                        }
+                    ],
+                    "parent_repeater": "field_68fa96b65ecf1"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/template-block"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1761345124
+}

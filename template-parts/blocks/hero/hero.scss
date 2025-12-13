@@ -1,0 +1,594 @@
+// .component--video-hero {
+//   position: relative;
+//   background-color: black;
+//   height: 55vh;
+//   min-height: 30rem;
+//   width: 100%;
+//   overflow: hidden;
+// }
+
+// .component--video-hero video {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   min-width: 100%;
+//   min-height: 100%;
+//   width: auto;
+//   height: auto;
+//   z-index: 0;
+//   -ms-transform: translateX(-50%) translateY(-50%);
+//   -moz-transform: translateX(-50%) translateY(-50%);
+//   -webkit-transform: translateX(-50%) translateY(-50%);
+//   transform: translateX(-50%) translateY(-50%);
+// }
+
+// .component--video-hero .container {
+//   position: relative;
+//   z-index: 2;
+// }
+
+.component--video-hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Media Query for devices withi coarse pointers and no hover functionality */
+
+/* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+// @media (pointer: coarse) and (hover: none) {
+//   .component--video-hero {
+//     background: url("https://source.unsplash.com/XT5OInaElMw/1600x900") black
+//       no-repeat center center scroll;
+//   }
+
+//   .component--video-hero video {
+//     display: none;
+//   }
+// }
+
+// Pages Hero
+
+.component--hero {
+  .background-image {
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+}
+
+.overlay {
+  content: "";
+  position: absolute;
+  inset: 0; // shorthand for top: 0; right: 0; bottom: 0; left: 0;
+  background: black;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.border-color-gold {
+  border-color: $gold !important;
+}
+
+.overlay-lg::after {
+  @media screen and (max-width: 1200px) {
+    content: "";
+    position: absolute;
+    inset: 0; /* top, right, bottom, left: 0 */
+    background: rgba(255, 255, 255, 0.5); /* semi-transparent white overlay */
+    pointer-events: none; /* don’t block clicks */
+    z-index: 1; /* sits above background but below children */
+  }
+}
+
+/* -------------------------------------------
+   HERO — Home Page Slider
+-------------------------------------------- */
+
+.component--video-hero {
+  margin-top: -75px;
+  position: relative;
+}
+
+/* bg gradient color */
+.bg-gradient-black-dark-brown {
+  background-image: linear-gradient(
+    to right top,
+    #000000,
+    #000000,
+    #000000,
+    #000000,
+    #040405
+  );
+  z-index: 1;
+}
+
+.opacity-full-dark,
+.opacity-full,
+.opacity-medium,
+.opacity-extra-medium,
+.opacity-light,
+.opacity-very-light {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.opacity-extra-medium {
+  opacity: 0.5;
+}
+
+.cover-background {
+  background-repeat: no-repeat !important;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  background-position: center center !important;
+}
+
+/* background image + built-in black overlay */
+.home-hero-swiper {
+  position: relative;
+  overflow: hidden;
+  height: 75vh;
+  min-height: 40rem;
+}
+.home-hero-swiper .cover-background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Slide content above background */
+.home-hero-swiper .swiper-slide > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fade animation */
+.home-hero-swiper .swiper-slide {
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+  position: relative;
+}
+
+.home-hero-swiper .swiper-slide-active {
+  opacity: 1 !important;
+}
+
+/* Prevent theme script from messing with bg opacity */
+.no-anime {
+  opacity: 1 !important;
+}
+
+.swiper-light-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 15px !important;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: var(--white);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  outline: none;
+  opacity: 0.5;
+}
+.swiper-light-pagination .swiper-pagination-bullet:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  opacity: 0;
+}
+.swiper-light-pagination .swiper-pagination-bullet:hover {
+  background-color: var(--white);
+  opacity: 1;
+}
+.swiper-light-pagination .swiper-pagination-bullet:hover:before {
+  opacity: 1;
+}
+.swiper-light-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: var(--white);
+  opacity: 1;
+}
+.swiper-light-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active:before {
+  opacity: 1;
+}
+
+/* Swiper pagination style 03 */
+.swiper-pagination-style-3 .swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  opacity: 0.4;
+  margin: 0 7px !important;
+  border: 2px solid var(--white);
+}
+.swiper-pagination-style-3 .swiper-pagination-bullet:hover,
+.swiper-pagination-style-3
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: var(--white);
+  opacity: 1;
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+.swiper-pagination-style-3 .swiper-pagination-bullet:before {
+  display: none;
+}
+.swiper-pagination-style-3.dark .swiper-pagination-bullet {
+  border: 2px solid var(--dark-gray);
+}
+.swiper-pagination-style-3.dark
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: var(--dark-gray);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Swiper navigation style 06 */
+.slider-navigation-style-06 {
+  left: 15px;
+}
+.slider-navigation-style-06.swiper-button-next {
+  right: 15px;
+}
+
+/* Swiper navigation style 06 */
+.slider-navigation-style-06 {
+  width: auto;
+  height: auto;
+  left: 60px;
+}
+.slider-navigation-style-06.swiper-button-next {
+  right: 60px;
+  left: inherit;
+}
+
+.home-hero-swiper .swiper-button-prev,
+.home-hero-swiper .swiper-button-next {
+  cursor: pointer;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+.home-hero-swiper .cover-background,
+.home-hero-swiper .opacity-extra-medium {
+  pointer-events: none !important;
+}
+
+// === Home Page feature cards ===
+
+$home-card-bg: #ffffff;
+$home-card-radius: 1rem;
+$home-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+$home-card-shadow-hover: 0 24px 70px rgba(0, 0, 0, 0.18);
+
+$home-card-title-color: #1f355a; // navy
+$home-card-text-color: #212529; // body gray
+$home-card-accent: #0075a8; // teal/blue accent
+$home-card-circle-border: #dde3ed; // light gray border
+
+.home-feature-cards {
+  position: relative;
+  z-index: 2;
+  @media (max-width: 991.98px) {
+    position: static;
+  }
+
+  // overlap the hero on desktop only
+  &__row {
+    margin-top: -9rem;
+    height: 380px;
+
+    @media screen and (max-width: 1199.98px) {
+      margin-top: 50px;
+      height: auto;
+    }
+  }
+}
+
+.home-feature-card {
+  background-color: $home-card-bg;
+  border-radius: $home-card-radius;
+  box-shadow: $home-card-shadow;
+  padding: 2.75rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  // equal height + buttons at bottom
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  @media (max-width: 575.98px) {
+    padding: 2.25rem 1.75rem;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $home-card-shadow-hover;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at top,
+      rgba(0, 0, 0, 0.04),
+      transparent 55%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.home-feature-card__circle {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  border: 2px solid $home-card-circle-border;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.75rem;
+}
+
+.home-feature-card__number {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $home-card-title-color;
+}
+
+.home-feature-card__title {
+  color: $home-card-title-color;
+  margin-bottom: 0.75rem;
+}
+
+.home-feature-card__text {
+  font-size: 1rem;
+  color: $home-card-text-color;
+  margin-bottom: 1.75rem;
+
+  // this is what lets the CTA sit on the bottom
+  flex-grow: 1;
+}
+
+.home-feature-card__cta {
+  margin-top: auto; // extra safety w/ flex
+}
+
+.home-feature-card__link {
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $home-card-accent;
+  border-bottom: 2px solid $dk-gold;
+  padding-bottom: 0.1rem;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $dk-gold;
+  }
+}
+
+// Animation
+.home-feature-card {
+  opacity: 0;
+  transform: rotateX(20deg) translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+.home-feature-card.animate-in {
+  opacity: 1;
+  transform: rotateX(0deg) translateY(0);
+}
+
+.home-feature-cards__row {
+  .col:nth-child(1) .home-feature-card {
+    transition-delay: 0ms;
+  }
+  .col:nth-child(2) .home-feature-card {
+    transition-delay: 120ms;
+  }
+  .col:nth-child(3) .home-feature-card {
+    transition-delay: 240ms;
+  }
+  .col:nth-child(4) .home-feature-card {
+    transition-delay: 360ms;
+  }
+}
+
+// =============================
+// About Section Styling + Animation
+// =============================
+
+.about-section {
+  &__title {
+    font-weight: 600;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateX(40px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  &__item {
+    opacity: 0;
+    transform: translateX(40px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #dde3ed;
+    align-self: center;
+    i {
+      font-size: 1rem;
+      text-align: center;
+      color: $dk-gold;
+    }
+  }
+
+  &__cta-block {
+    opacity: 0;
+    transform: translateX(40px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .btn.btn-link {
+    padding: 0 0 2px;
+    position: relative;
+    text-decoration: none;
+    border: 0;
+    border-bottom: 2px solid;
+    letter-spacing: 0;
+    background-color: transparent;
+  }
+  .btn.btn-link.thin {
+    border-bottom: 1px solid;
+  }
+  .btn.btn-link:hover {
+    opacity: 0.7;
+  }
+  .btn.btn-link:focus-visible {
+    box-shadow: none;
+  }
+  .btn.btn-extra-large {
+    font-size: 16px;
+    padding: 24px 46px;
+  }
+  .btn.btn-large {
+    font-size: 14px;
+    padding: 18px 34px;
+  }
+  .btn.btn-medium {
+    font-size: 13px;
+    padding: 16px 30px;
+  }
+  .btn.btn-small {
+    font-size: 12px;
+    padding: 13px 26px;
+  }
+  @media (max-width: 767px) {
+    .btn.btn-extra-large {
+      font-size: 15px;
+      padding: 20px 40px;
+    }
+    .btn.btn-large {
+      font-size: 13px;
+      padding: 16px 8px;
+    }
+  }
+
+  // when animate-in is applied by JS
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  // Stagger delays
+  .stagger-1 {
+    transition-delay: 0.15s;
+  }
+  .stagger-2 {
+    transition-delay: 0.3s;
+  }
+  .stagger-3 {
+    transition-delay: 0.45s;
+  }
+  .stagger-4 {
+    transition-delay: 0.6s;
+  }
+  .stagger-cta {
+    transition-delay: 0.75s;
+  }
+}
+
+// VIDEO HERO
+.video-hero {
+  min-height: 80vh;
+  position: relative;
+
+  .video-hero-bg {
+    z-index: 1;
+    object-fit: cover;
+    filter: brightness(0.65);
+  }
+
+  .video-hero-overlay {
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2;
+  }
+
+  .container {
+    z-index: 3;
+  }
+
+  .video-hero-headline {
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 700;
+  }
+
+  .video-hero-subheadline {
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
+    max-width: 700px;
+  }
+}

@@ -1,0 +1,269 @@
+.image-anime {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-anime:after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  z-index: 1;
+}
+
+.image-anime:hover:after {
+  height: 250%;
+  transition: all 600ms linear;
+  background-color: transparent;
+}
+
+.reveal {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.reveal img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+
+/*************************************/
+/***       06. About Us css	       ***/
+/*************************************/
+
+.about-image {
+  position: relative;
+  margin-right: 30px;
+}
+
+.about-img figure {
+  display: block;
+  border-radius: 40px;
+}
+
+.about-img img {
+  // aspect-ratio: 1 / 1.11;
+  object-fit: cover;
+  border-radius: 40px;
+}
+
+.section-title {
+  .supertitle {
+    font-size: 14px;
+    color: $dk-gold;
+    text-transform: uppercase;
+  }
+}
+
+.happy-patients-counter {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  background: $secondary;
+  border: 1px solid $secondary;
+  border-radius: 40px;
+  width: 175px;
+  height: 170px;
+  padding: 25px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.happy-patients-counter .icon-box {
+  position: relative;
+  background-color: $white;
+  border: 1px solid $secondary;
+  border-radius: 14px;
+  width: 131px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.happy-patients-counter:hover .icon-box {
+  border-color: transparent;
+}
+
+.happy-patients-counter .icon-box::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $primary;
+  border-radius: 14px;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.happy-patients-counter:hover .icon-box::before {
+  transform: scale(1);
+}
+
+.happy-patients-counter-box .icon-box img {
+  position: relative;
+  max-width: 89px;
+  z-index: 1;
+}
+
+.happy-patients-counter-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: $white;
+}
+
+.happy-patients-counter-content p {
+  color: $white;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.about-content-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-content-list ul li {
+  position: relative;
+}
+
+.about-content-list ul li p {
+  color: $base;
+  font-weight: 600;
+  padding-left: 40px;
+  margin-bottom: 25px;
+}
+.about-content-list ul li h3 {
+  position: relative;
+  color: $secondary;
+  font-weight: 600;
+  padding-left: 40px;
+}
+
+// .about-content-list ul li:last-child{
+// 	margin-bottom: 0;
+// }
+
+.about-content-list ul li h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: translateY(31%);
+  background: url("../assets/images/icon-check.svg") no-repeat;
+  background-position: left center;
+  background-size: cover;
+  height: 22px;
+  width: 22px;
+}
+
+.experience-counter {
+  background: $secondary;
+  padding: 30px;
+  border-radius: 30px;
+  width: 215px;
+  float: right;
+}
+
+.experience-counter .icon-box {
+  position: relative;
+  background-color: $white;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  transition: all 0.4s ease-in-out;
+}
+
+.experience-counter:hover .icon-box {
+  background-color: $secondary;
+}
+
+.experience-counter .icon-box::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $secondary;
+  border-radius: 12px;
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.experience-counter:hover .icon-box::before {
+  transform: scale(1);
+}
+
+.experience-counter .icon-box img {
+  position: relative;
+  max-width: 30px;
+  z-index: 1;
+  transition: all 0.4s ease-in-out;
+}
+
+.experience-counter:hover .icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+.experience-counter .experience-counter-content h3 {
+  color: $white;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.experience-counter .experience-counter-content p {
+  color: $white;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.about-content-btn {
+  margin-top: 30px;
+}
+
+// Content Image Block Dark
+
+.accordion-item-dark .accordion-body ul li {
+  padding: 0.5rem 0;
+  a {
+    color: #ffffff;
+  }
+}
+
+.cvb-video-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}

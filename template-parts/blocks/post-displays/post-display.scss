@@ -1,0 +1,67 @@
+.blog-item .post-featured-image {
+  width: 100%;
+  height: 100%;
+}
+
+.blog-item .post-featured-image figure {
+  height: 100%;
+}
+
+.blog-item .post-featured-image a {
+  height: 100%;
+  cursor: none;
+  display: block;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.blog-item .post-featured-image figure a img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 0.52;
+  object-fit: cover;
+  border-radius: 40px;
+  box-shadow: $box-shadow;
+  transition: all 0.5s ease-in-out;
+}
+
+.blog-item:hover .post-featured-image figure a img {
+  transform: scale(1.1);
+}
+
+.by-author {
+  display: none;
+  visibility: hidden;
+}
+
+.size-post-display-thumbnail {
+  width: 400px;
+  height: 179px;
+  object-fit: cover;
+  overflow: hidden;
+}
+.dark-section-post-display {
+  width: 400px;
+  height: 215px;
+}
+
+// Case Studies Display
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  left: 50%;
+}
+
+.case-study-slide {
+  height: auto;
+}
+
+.case-study-slide img {
+  /* Or other content elements */
+  display: block; /* For images */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* For images to maintain aspect ratio */
+}

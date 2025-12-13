@@ -1,0 +1,57 @@
+.gallery-thumbnails {
+    max-height: 236px;
+    overflow: hidden;
+}
+
+
+// article.type-gallery {
+//     max-width: 20%;
+// }
+
+
+// Navigation for Gallery, Testimonials, Blog
+
+.custom-pagination .pagination {
+    gap: 0.5rem; /* space between numbers */
+  }
+  
+  .custom-pagination .page-numbers {
+    display: inline-block;
+    width: 40px; height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    color: $gray-600; /* base text color */
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .custom-pagination .page-numbers.prev,
+.custom-pagination .page-numbers.next {
+  font-size: 1.5rem;   /* increase size */
+  line-height: 40px;   /* keep vertically centered */
+}
+
+.custom-pagination .current {
+    background: $gray-600; /* dark blue */
+    color: #fff;
+    font-weight: bold;
+  }
+
+/* Base hover effect */
+.custom-pagination .page-numbers:not(.current):hover {
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    background: #f8f9fa; /* light background */
+    color: $gray-600; /* keep your text color */
+  }
+  
+ .text-underline-hover {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.grid-auto-rows-1 {
+    grid-auto-rows: 1fr;
+}

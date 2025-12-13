@@ -1,0 +1,53 @@
+#mediaModal .btn-close {
+  z-index: 1055; /* above modal content */
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+#mediaModal .btn-close:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 576px) {
+  #mediaModal .btn-close {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+.calendly-wrapper {
+  margin-top: -55px;
+}
+
+#mediaModal iframe#calendlyIframe {
+  height: 85vh !important;
+  min-height: 600px;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+.each-video-multiple-videos .video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+  overflow: hidden;
+}
+.each-video-multiple-videos .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}/*# sourceMappingURL=creative-content-blocks.css.map */

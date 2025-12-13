@@ -1,0 +1,58 @@
+.component--testimonial-slider-section .container {
+  overflow: visible;
+}
+.component--testimonial-slider-section .container .container .swiper .swiper-wrapper {
+  align-items: start;
+}
+
+.testimonial-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  padding-bottom: 3rem;
+  padding-left: 1.6rem;
+  padding-right: 1.8rem;
+  --swiper-navigation-color: #bc9846;
+}
+.testimonial-slider .swiper-wrapper {
+  transition-timing-function: ease;
+}
+
+.swiper-button-next.swiper-testimonial,
+.swiper-button-prev.swiper-testimonial {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.swiper-button-next.swiper-testimonial {
+  transform: translateX(14px);
+}
+
+.swiper-button-prev.swiper-testimonial {
+  transform: translateX(-10px);
+}
+
+.swiper-pagination.swiper-testimonial {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.testimonial-card {
+  min-height: 500px;
+}
+
+@media screen and (min-width: 768px) {
+  .component--image-slider-section {
+    transform: translateY(-100px);
+  }
+}/*# sourceMappingURL=testimonial-slider.css.map */

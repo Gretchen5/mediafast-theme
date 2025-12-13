@@ -1,0 +1,30 @@
+.parallax-section {
+    position: relative;
+    background-attachment: fixed;   /* creates the parallax effect */
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;              /* adjust as needed */
+    padding: 80px 0;                /* vertical spacing */
+    z-index: 1;
+  }
+  
+  .parallax-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);   /* dark overlay for readability */
+    z-index: -1;
+  }
+  
+  .lead, .lead p {
+    font-size: 1.5rem;
+  }
+
+  // PDF Block
+
+  .pdf-overlay {
+    transform: translateY(-75px);
+    position: relative;
+    z-index: 1;
+    margin-bottom: -75px;
+  }

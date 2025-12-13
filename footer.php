@@ -1,0 +1,173 @@
+			<?php
+			// If Single or Archive (Category, Tag, Author or a Date based page).
+			if (is_single() || is_archive()) :
+			?>
+				</div><!-- /.col -->
+
+				<?php
+				get_sidebar();
+				?>
+
+				</div><!-- /.row -->
+			<?php
+			endif;
+			?>
+			</main><!-- /#main -->
+			<?php
+
+			$wysiwyg = get_field('wysiwyg', 'option') ? get_field('wysiwyg', 'option') : '';
+			$vertical_padding = get_field('vertical_padding', 'option') ? get_field('vertical_padding', 'option') : '';
+
+			?>
+
+			<section class="cta_button-block <?php echo esc_attr($vertical_padding); ?>">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<hr class="bg-cyan border-0 mx-auto mb-5" style="padding: 1px; width: 30%;">
+							<?php if ($wysiwyg) : ?>
+								<div class="wysiwyg-content">
+									<?php echo $wysiwyg; ?>
+								</div>
+							<?php endif; ?>
+							<?php if (have_rows('cta_button_repeater', 'option')) : ?>
+								<div class="button-cta-container d-flex flex-wrap justify-content-center">
+									<?php while (have_rows('cta_button_repeater', 'option')) : the_row();
+										$cta_button = get_sub_field('cta_button') ? get_sub_field('cta_button') : '';
+									?>
+										<?php if ($cta_button) : ?>
+											<a class="btn btn-primary m-2" href="<?php echo esc_url($cta_button['url']); ?>" target="<?php echo esc_attr($cta_button['target']); ?>">
+												<?php echo $cta_button['title']; ?>
+											</a>
+										<?php endif; ?>
+									<?php endwhile; ?>
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<?php
+			$footer_logo_woman = get_field('footer_logo_woman', 'option') ? get_field('footer_logo_woman', 'option') : '';
+			$footer_logo = get_field('footer_logo', 'option') ? get_field('footer_logo', 'option') : '';
+			?>
+			<footer class="bg-secondary py-0" id="footer">
+				<div class="container py-5">
+					<div class="row">
+						<div class="col footer-col footer-col-1">
+							<h2 class="h3 text-light-blue mb-3">About MediaFast</h2>
+							<?php
+							if (has_nav_menu('footer-menu-1')) : // See function register_nav_menus() in functions.php
+								/*
+								Loading WordPress Custom Menu (theme_location) ... remove <div> <ul> containers and show only <li> items!!!
+								Menu name taken from functions.php!!! ... register_nav_menu( 'footer-menu', 'Footer Menu' );
+								!!! IMPORTANT: After adding all pages to the menu, don't forget to assign this menu to the Footer menu of "Theme locations" /wp-admin/nav-menus.php (on left side) ... Otherwise the themes will not know, which menu to use!!!
+							*/
+								wp_nav_menu(
+									array(
+										'container'       => 'nav',
+										'container_class' => 'col-md-6',
+										//'fallback_cb'     => 'WP_Bootstrap4_Navwalker_Footer::fallback',
+										'walker'          => new WP_Bootstrap4_Navwalker_Footer(),
+										'theme_location'  => 'footer-menu-1',
+										'items_wrap'      => '<ul class="menu nav">%3$s</ul>',
+									)
+								);
+							endif; ?>
+							<?php if ($footer_logo_woman) : ?>
+								<div class="logo-container col-md-6 col-12 pt-4">
+									<img width="150" src="<?php echo esc_url($footer_logo_woman['url']); ?>" alt="<?php echo esc_attr($footer_logo_woman['alt']); ?>">
+								</div>
+							<?php endif; ?>
+						</div>
+						<div class="col footer-col footer-col-2">
+							<h2 class="h3 text-light-blue mb-3">Products</h2>
+							<?php if (has_nav_menu('footer-menu-2')) : // See function register_nav_menus() in functions.php
+								/*
+								Loading WordPress Custom Menu (theme_location) ... remove <div> <ul> containers and show only <li> items!!!
+								Menu name taken from functions.php!!! ... register_nav_menu( 'footer-menu', 'Footer Menu' );
+								!!! IMPORTANT: After adding all pages to the menu, don't forget to assign this menu to the Footer menu of "Theme locations" /wp-admin/nav-menus.php (on left side) ... Otherwise the themes will not know, which menu to use!!!
+								*/
+								wp_nav_menu(
+									array(
+										'container'       => 'nav',
+										'container_class' => 'col-md-6',
+										//'fallback_cb'     => 'WP_Bootstrap4_Navwalker_Footer::fallback',
+										'walker'          => new WP_Bootstrap4_Navwalker_Footer(),
+										'theme_location'  => 'footer-menu-2',
+										'items_wrap'      => '<ul class="menu nav">%3$s</ul>',
+									)
+								);
+							endif; ?>
+						</div>
+
+						<div class="col footer-col footer-col-3">
+							<h2 class="h3 text-light-blue mb-3">Resources</h2>
+							<?php
+							if (has_nav_menu('footer-menu-3')) : // See function register_nav_menus() in functions.php
+								/*
+								Loading WordPress Custom Menu (theme_location) ... remove <div> <ul> containers and show only <li> items!!!
+								Menu name taken from functions.php!!! ... register_nav_menu( 'footer-menu', 'Footer Menu' );
+								!!! IMPORTANT: After adding all pages to the menu, don't forget to assign this menu to the Footer menu of "Theme locations" /wp-admin/nav-menus.php (on left side) ... Otherwise the themes will not know, which menu to use!!!
+							*/
+								wp_nav_menu(
+									array(
+										'container'       => 'nav',
+										'container_class' => 'col-12',
+										//'fallback_cb'     => 'WP_Bootstrap4_Navwalker_Footer::fallback',
+										'walker'          => new WP_Bootstrap4_Navwalker_Footer(),
+										'theme_location'  => 'footer-menu-3',
+										'items_wrap'      => '<ul class="menu nav">%3$s</ul>',
+									)
+								);
+							endif; ?>
+						</div>
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+				<div class="row subfooter bg-lt-gray pt-4 pb-3">
+					<div class="col subfooter-col-1 d-flex align-items-center"><?php
+																				if (is_active_sidebar('third_widget_area')) :
+																				?>
+							<div class="col-md-12 d-flex flex-column align-items-center">
+								<?php
+																					dynamic_sidebar('third_widget_area');
+
+																					if (current_user_can('manage_options')) :
+								?>
+									<span class="edit-link"><a href="<?php echo esc_url(admin_url('widgets.php')); ?>" class="badge bg-secondary"><?php esc_html_e('Edit', 'mediafast'); ?></a></span>
+									<!-- Show Edit Widget link -->
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+					<div class="col subfooter-col-2 d-flex align-items-center">
+						<p class="text-secondary m-0"><?php printf(esc_html__('&copy; %1$s %2$s. All rights reserved.', 'MediaFast'), wp_date('Y'), get_bloginfo('name', 'display')); ?></p>
+					</div>
+					<div class="col subfooter-col-3 d-flex align-items-center">
+						<?php if ($footer_logo) : ?>
+							<div class="logo-container">
+								<img width="350" src="<?php echo esc_url($footer_logo['url']); ?>" alt="<?php echo esc_attr($footer_logo['alt']); ?>">
+							</div>
+						<?php endif; ?>
+					</div>
+
+				</div>
+
+			</footer><!-- /#footer -->
+			</div><!-- /#wrapper -->
+			<?php
+			wp_footer();
+			?>
+
+			</body>
+
+			</html>
+
+			<div class="magic-cursor">
+				<div class="cursor-dot-outline"></div>
+				<div class="cursor-dot"></div>
+			</div>
+			</body>
+
+			</html>
