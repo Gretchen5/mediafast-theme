@@ -127,3 +127,65 @@ background: #002b55;
     }
   }
 }
+
+// Accordion 2 component
+.component--accordion-2 {
+  background-color: $white;
+
+  .component-accordion {
+    background: #fff;
+    border-radius: 10px;
+    // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+
+    .accordion-item {
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  .accordion-item + .accordion-item {
+    border-top: 1px solid $gray-100;
+  }
+
+  .accordion-button {
+    font-weight: 600;
+    color: $secondary;
+    padding: 1.1rem 1.25rem;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &::after {
+      filter: invert(33%) sepia(16%) saturate(1821%) hue-rotate(180deg) brightness(94%) contrast(90%);
+    }
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: $secondary;
+    background-color: $gray-100;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .accordion-body {
+    color: $gray-700;
+    line-height: 1.6;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .stats-rotator {
+    display: inline-block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+
+    &.is-fading {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+
+  .bi-phone::before {
+    vertical-align: 0.5em;
+  }
+
+}

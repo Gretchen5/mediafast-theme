@@ -365,3 +365,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach((card) => observer.observe(card));
 });
+
+// Stats rotator (lightweight, no theme animations)
+document.addEventListener("DOMContentLoaded", () => {
+  const rotators = document.querySelectorAll(".stats-rotator[data-stats]");
+  rotators.forEach((el) => {
+    let stats;
+    try {
+      stats = JSON.parse(el.getAttribute("data-stats")) || [];
+    } catch (e) {
+      stats = [];
+    }
+    if (!Array.isArray(stats) || stats.length < 2) return;
+
+    const textEl = el.querySelector(".stats-text") || el;
+    let index = 0;
+    const rotate = () => {
+      index = (index + 1) % stats.length;
+      el.classList.add("is-fading");
+      setTimeout(() => {
+        textEl.textContent = stats[index];
+        el.classList.remove("is-fading");
+      }, 200);
+    };
+
+    const interval = setInterval(rotate, 3000);
+
+    // Cleanup if element removed
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(el)) {
+        clearInterval(interval);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+});
