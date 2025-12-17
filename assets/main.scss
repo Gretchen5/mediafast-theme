@@ -58,6 +58,7 @@ $dk-teal: #17536b;
 $cyan: #01719d;
 $dk-cyan: #267798;
 $gold: #b38442;
+$lt-gold: #b5976d;
 $dk-gold: #b38442;
 
 $primary: $cyan;
@@ -101,7 +102,9 @@ $base: $gray-900;
 .has-gold-text-color {
   color: $dk-gold;
 }
-
+.has-lt-gold-text-color {
+  color: $lt-gold;
+}
 .has-gold-background-background-color {
   background-color: $dk-gold;
 }
@@ -233,6 +236,11 @@ img {
 }
 
 /* Header */
+
+#header {
+  z-index: 100;
+  position: relative;
+}
 
 #menu-primary-menu-1 .menu-item {
   .dropdown-menu {
@@ -741,15 +749,15 @@ h5,
 h6,
 .h6 {
   // font-family: 'Rubik', sans-serif;
-  font-family: $font-family-sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   line-height: 1;
 }
 
-h1,
-.h1 {
-  text-transform: uppercase;
-}
+// h1,
+// .h1 {
+//   text-transform: uppercase;
+// }
 
 .h1-fs-5 {
   font-size: 5rem;
@@ -1019,18 +1027,10 @@ figure.rounded img {
 @import "../template-parts/blocks/accordion-blocks/accordion";
 @import "../template-parts/blocks/accordion-blocks/template-block";
 @import "../template-parts/blocks/cards/cards";
-// @import 'short-cta-block';
-// @import 'phase-cards';
 @import "../template-parts/blocks/post-displays/post-display";
 @import "gallery";
-// @import 'contact-form';
-// @import 'content-single';
 @import "../template-parts/blocks/testimonial/testimonial-slider";
 @import "../template-parts/blocks/cta/cta-blocks";
-
-// @import 'header';
-// @import 'buttons';
-// @import 'footer';
 
 a {
   color: $cyan;
@@ -1040,6 +1040,7 @@ a {
     color: $dk-gold;
   }
 }
+
 
 .list-style-disc li {
   list-style: disc;

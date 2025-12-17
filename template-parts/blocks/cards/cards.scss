@@ -130,19 +130,365 @@
   padding-top: var(--overlap);
 }
 
+// PDF section positioning specific to cards-side-by-side component
+// This overlaps with the section above
 .component--cards-side-by-side .pdf-section {
   position: relative;
   margin-top: calc(-0.81 * var(--overlap));
   z-index: 5;
   @media screen and (min-width: 1200px) {
-    margin-top: calc(-1 * var(--overlap));
+    margin-top: calc(-1.5 * var(--overlap));
   }
 }
 
-.pdf-image img {
-  width: 100px;
-  margin: 0 auto;
-  @media screen and (min-width: 768px) {
+// PDF block card uses shared styles from cta-blocks.scss
+// Only component-specific overrides here
+.component--cards-side-by-side .pdf-block-card {
+  margin-bottom: 0; // Remove default margin since positioning is handled by parent
+}
+
+// Side by Side Card Styles
+.side-by-side-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  
+  // Narrower width when in columns (mobile/stacked)
+  @media (max-width: 991.98px) {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // Fade in when visible (triggered by existing Intersection Observer in main.js)
+  &.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__icon-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Semi-circular background behind icon
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 60px;
+      background-color: #f4f1ed; // Light beige
+      border-radius: 120px 120px 0 0;
+      z-index: 0;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    color: $secondary; // Dark blue (#1f355a)
+    line-height: 1;
+  }
+
+  &__content {
+    flex-grow: 1;
     width: 100%;
+  }
+
+  &__heading {
+    font-size: 1.375rem; // 22px
+    font-weight: 500;
+    color: $gray-900; // Dark gray
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  &__description {
+    color: $gray-700;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: $cyan;
+      font-weight: 600;
+      text-decoration: underline;
+
+      &:hover {
+        color: $dk-cyan;
+      }
+    }
+  }
+}
+
+// Border styles - target the columns, not the cards
+.component--cards-side-by-side .row > .col {
+  // Border between cards on desktop (right border, not on last in row)
+  @media (min-width: 992px) {
+    border-right: 1px solid $gray-300;
+    
+    // Remove border from 3rd card (last in row)
+    &:nth-child(3n) {
+      border-right: none;
+    }
+  }
+  
+  // Border between cards on mobile (bottom border, not on last card)
+  @media (max-width: 991.98px) {
+    border-bottom: 1px solid $gray-300;
+    padding-bottom: 2rem; // Add padding below to balance the border
+    
+    // Remove border and extra padding from last card
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Stagger animation delays for cards
+.component--cards-side-by-side .row > [class*="col-"]:nth-child(1) .side-by-side-card {
+  transition-delay: 0ms;
+}
+
+.component--cards-side-by-side .row > [class*="col-"]:nth-child(2) .side-by-side-card {
+  transition-delay: 200ms;
+}
+
+.component--cards-side-by-side .row > [class*="col-"]:nth-child(3) .side-by-side-card {
+  transition-delay: 400ms;
+}
+
+.component--cards-side-by-side .row > [class*="col-"]:nth-child(4) .side-by-side-card {
+  transition-delay: 600ms;
+}
+
+// Responsive adjustments
+@media (max-width: 991.98px) {
+  .side-by-side-card {
+    &__icon-wrapper {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
+
+      &::before {
+        width: 100px;
+        height: 50px;
+        border-radius: 100px 100px 0 0;
+      }
+    }
+
+    &__icon {
+      font-size: 2.5rem;
+    }
+
+    &__heading {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+// Sliding Cards
+.component--sliding-cards {
+  position: relative;
+}
+
+.sliding-cards-wrapper {
+  padding: 1rem 0;
+  padding-left: 0; // No space on the left
+  padding-right: 150px; // 150px space on the right
+  
+  // Remove right padding at 1400px and below
+  @media (max-width: 1400px) {
+    padding-right: 0;
+    padding-left: 1rem; // Normal padding on left
+  }
+  
+  @media (max-width: 767.98px) {
+    padding-left: 1rem; // Normal padding on mobile
+    padding-right: 1rem;
+  }
+}
+
+.sliding-cards-slider {
+  padding-bottom: 3rem; // Space for navigation
+  overflow: visible;
+  
+  .swiper-wrapper {
+    display: flex;
+    align-items: stretch; // Make all slides the same height
+  }
+  
+  .swiper-slide {
+    height: auto;
+    display: flex; // Make slide a flex container
+    align-items: stretch; // Stretch to match tallest slide
+  }
+}
+
+.sliding-card {
+  border-radius: 6px;
+  overflow: hidden;
+  min-height: 300px; // Increased minimum height for consistency
+  max-width: 600px; // Make cards more rectangular/longer
+  width: 100%;
+  display: flex; // Make card a flex container
+  flex-direction: column;
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid $gray-300; // Border between content and image columns
+    min-height: 100%; // Ensure content column fills card height
+  }
+
+  &__inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__icon {
+    i {
+      font-size: 3.5rem;
+      color: $dk-gold; // Gold color for icons
+      line-height: 1;
+    }
+  }
+
+  &__heading {
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  &__description {
+    color: $gray-700;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__image {
+    overflow: hidden;
+    padding: 1rem; // Padding so images don't touch edges
+    display: flex;
+    align-items: center; // Center image vertically
+    min-height: 100%; // Ensure image column fills card height
+  }
+
+  &__image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3; // Rectangular container (4:3 ratio) - same as image slider
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; // Show full image without cropping
+    }
+  }
+}
+
+// Swiper navigation styling for sliding cards
+.sliding-cards-slider .swiper-button-prev,
+.sliding-cards-slider .swiper-button-next {
+  color: $secondary;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: #ffffff;
+    transform: scale(1.1);
+  }
+  
+  &::after {
+    content: "";
+    display: none;
+  }
+  
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+}
+
+.sliding-cards-slider .swiper-button-prev::before {
+  border-width: 8px 12px 8px 0;
+  border-color: transparent $secondary transparent transparent;
+  margin-left: -4px;
+}
+
+.sliding-cards-slider .swiper-button-next::before {
+  border-width: 8px 0 8px 12px;
+  border-color: transparent transparent transparent $secondary;
+  margin-right: -4px;
+}
+
+.sliding-cards-slider .swiper-button-prev {
+  left: -20px;
+  
+  @media (max-width: 767.98px) {
+    left: 0;
+  }
+}
+
+.sliding-cards-slider .swiper-button-next {
+  right: -20px;
+  
+  @media (max-width: 767.98px) {
+    right: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767.98px) {
+  .sliding-card {
+    &__inner {
+      padding: 1.5rem !important;
+    }
+
+    &__icon {
+      i {
+        font-size: 2.5rem;
+      }
+    }
+
+    &__heading {
+      font-size: 1.25rem;
+    }
   }
 }

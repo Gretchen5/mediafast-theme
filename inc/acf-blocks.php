@@ -262,6 +262,14 @@ function register_acf_blocks()
             'icon'        => 'images-alt2',
             'keywords'    => ['case studies', 'post display', 'cpt posts'],
         ],
+        [
+            'name'        => 'slider_hero',
+            'title'       => __('Slider Hero'),
+            'description' => __('A slider hero masthead.'),
+            'template'    => '/template-parts/blocks/hero/slider_hero.php',
+            'icon'        => 'slides',
+            'keywords'    => ['hero', 'masthead', 'banner', 'slider', 'slider hero'],
+        ],
         // Add more blocks here
     ];
 

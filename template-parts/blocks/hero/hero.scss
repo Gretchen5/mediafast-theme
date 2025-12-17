@@ -298,30 +298,14 @@ $home-card-accent: #0075a8; // teal/blue accent
 $home-card-circle-border: #dde3ed; // light gray border
 
 .home-feature-cards {
-  position: relative;
-  z-index: 2;
-  @media (max-width: 991.98px) {
-    position: static;
-  }
-
-  // overlap the hero on desktop only
-  &__row {
-    margin-top: -9rem;
-    height: 380px;
-
-    @media screen and (max-width: 1199.98px) {
-      margin-top: 50px;
-      height: auto;
-    }
-  }
+  margin-top: -3rem;
 }
 
 .home-feature-card {
   background-color: $home-card-bg;
   border-radius: $home-card-radius;
   box-shadow: $home-card-shadow;
-  padding: 2.75rem 2rem;
-  position: relative;
+  padding: 1rem 1rem 2rem;
   overflow: hidden;
 
   // equal height + buttons at bottom
@@ -361,16 +345,9 @@ $home-card-circle-border: #dde3ed; // light gray border
   }
 }
 
-.home-feature-card__circle {
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  border: 2px solid $home-card-circle-border;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.75rem;
+.home-feature-card__image-container {
+  width: 17rem;
+  margin: 0 auto 1rem;
 }
 
 .home-feature-card__number {
@@ -516,8 +493,8 @@ $home-card-circle-border: #dde3ed; // light gray border
     padding: 24px 46px;
   }
   .btn.btn-large {
-    font-size: 14px;
-    padding: 18px 34px;
+    font-size: 16px;
+    padding: 12px 34px;
   }
   .btn.btn-medium {
     font-size: 13px;
@@ -564,26 +541,45 @@ $home-card-circle-border: #dde3ed; // light gray border
 
 // VIDEO HERO
 .video-hero {
-  min-height: 80vh;
-  position: relative;
+  min-height: 70vh;
+  height: auto;
+  transform: translateY(-100px);
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    min-height: 50vh;
+  }
+
+  @media (max-width: 576px) {
+    min-height: 40vh;
+  }
 
   .video-hero-bg {
     z-index: 1;
     object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
     filter: brightness(0.65);
+    pointer-events: none;
   }
 
   .video-hero-overlay {
     background: rgba(0, 0, 0, 0.35);
     z-index: 2;
+    pointer-events: none;
   }
 
   .container {
     z-index: 3;
+    pointer-events: auto;
+    position: relative;
   }
 
   .video-hero-headline {
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(1.8rem, 3.09vw, 3.026rem); // ~29px mobile to ~48px desktop (3% larger)
     font-weight: 700;
   }
 

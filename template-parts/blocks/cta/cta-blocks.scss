@@ -28,3 +28,107 @@
     z-index: 1;
     margin-bottom: -75px;
   }
+
+  .pdf-block-card {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 1.5rem 1.5rem 4rem; // Extra left padding for vertical label
+    position: relative;
+    overflow: visible; // Allow label to be visible
+    margin-bottom: 2rem;
+
+    @media (min-width: 992px) {
+      padding: 1.5rem 2rem 1.5rem 4.5rem;
+    }
+
+    @media (max-width: 991.98px) {
+      padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+    }
+
+    &__label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 50px;
+      background-color: $dk-gold; // Brown-gold color (#b38442)
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      border-radius: 6px 0 0 6px;
+
+      @media (max-width: 991.98px) {
+        width: 40px;
+      }
+    }
+
+    &__label-text {
+      color: #ffffff;
+      font-size: 0.9375rem; // 15px
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      white-space: nowrap;
+    }
+
+    &__icon {
+
+      img {
+        max-width: 155px;
+        height: auto;
+
+        @media (max-width: 991.98px) {
+          max-width: 150px;
+        }
+      }
+    }
+
+    &__content {
+      padding: 1rem;
+
+      @media (max-width: 991.98px) {
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    &__text {
+      font-size: 1.625rem; // 26px
+      font-weight: 500;
+      color: $secondary; // Dark blue (#1f355a)
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+      margin: 0;
+
+      @media (max-width: 991.98px) {
+        font-size: 1.25rem;
+      }
+    }
+
+    &__buttons {
+      padding: 1rem;
+
+      @media (max-width: 991.98px) {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    &__button {
+      min-width: 200px;
+
+      @media (max-width: 767.98px) {
+        width: 100%;
+        min-width: auto;
+      }
+
+      @media (max-width: 400px) {
+        font-size: 0.875rem; // 14px
+        padding: 0.5rem 1rem;
+      }
+    }
+  }

@@ -108,33 +108,94 @@ const testimonialSwiper = new Swiper(".testimonial-swiper", {
   },
 });
 
-// Image Slider
-const imageSlider = new Swiper(".image-slider", {
-  loop: true,
-  slidesPerView: 3,
-  spaceBetween: 16,
-  pagination: {
-    el: ".image-slider .swiper-pagination",
-    clickable: true,
-  },
-  speed: 10000,
-  autoplay: {
-    delay: 4000, // ⏱ 4 seconds
-    disableOnInteraction: false, // keep autoplay after user nav
-  },
-  navigation: {
-    nextEl: ".image-slider .swiper-button-next",
-    prevEl: ".image-slider .swiper-button-prev",
-  },
-  scrollbar: {
-    el: ".image-slider .swiper-scrollbar",
-    draggable: true,
-  },
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
+// Image Slider - Optimized for performance
+// Only initialize if element exists (prevents errors if block not on page)
+document.addEventListener("DOMContentLoaded", () => {
+  const imageSliderEl = document.querySelector(".image-slider");
+  if (imageSliderEl) {
+    const imageSlider = new Swiper(".image-slider", {
+      modules: [Navigation, Pagination, Autoplay],
+      loop: true,
+      slidesPerView: 4,
+      spaceBetween: 8, // Reduced spacing by half
+      speed: 600, // Smooth transition
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true, // Pause on hover for better UX
+      },
+      pagination: {
+        el: ".image-slider .swiper-pagination",
+        clickable: true,
+        dynamicBullets: false, // Disabled to prevent duplicate dots
+      },
+      navigation: {
+        nextEl: ".image-slider .swiper-button-next",
+        prevEl: ".image-slider .swiper-button-prev",
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      watchOverflow: true, // Disable if not enough slides
+      breakpoints: {
+        0: {
+          slidesPerView: 1, // 1 on very small screens (500px and smaller)
+          spaceBetween: 5,
+        },
+        500: {
+          slidesPerView: 2, // 2 on small mobile
+          spaceBetween: 5,
+        },
+        576: {
+          slidesPerView: 3, // 3 on small tablets
+          spaceBetween: 6,
+        },
+        768: {
+          slidesPerView: 4, // 4 on tablets and desktop
+          spaceBetween: 8,
+        },
+      },
+    });
+  }
+});
+
+// Sliding Cards Slider - Optimized for performance
+document.addEventListener("DOMContentLoaded", () => {
+  const slidingCardsEl = document.querySelector(".sliding-cards-slider");
+  if (slidingCardsEl) {
+    const slidingCards = new Swiper(".sliding-cards-slider", {
+      modules: [Pagination, Autoplay],
+      loop: true,
+      slidesPerView: 1, // Default: 1 slide (for 1400px and below)
+      spaceBetween: 30,
+      speed: 1500, // Slower transition for soft stop
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      watchOverflow: true,
+      breakpoints: {
+        0: {
+          slidesPerView: 1, // 1 on mobile
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 1, // 1 on tablet
+          spaceBetween: 30,
+        },
+        1401: {
+          slidesPerView: 2, // 2 slides above 1400px
+          spaceBetween: 15, // Reduced spacing between slides
+        },
+      },
+    });
+  }
 });
 
 // Animations

@@ -1,7 +1,7 @@
 <?php
 // Video Hero Fields
 $video_mp4      = get_field('video_mp4');
-$poster_image   = get_field('poster_image');
+$poster_image   = get_field('poster_image') ? get_field('poster_image') : '';
 $heading        = get_field('heading');
 $subheading     = get_field('subheading');
 
@@ -21,12 +21,12 @@ $unique_id_2 = uniqid('formModal2_');
 $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafast.com&embed_type=PopupText';
 ?>
 
-<section class="video-hero position-relative overflow-hidden">
+<section class="video-hero position-relative overflow-hidden d-flex align-items-center">
 
     <!-- Background Video -->
     <?php if ($video_mp4) : ?>
         <video 
-            class="video-hero-bg position-absolute w-100 h-100 top-0 start-0 object-fit-cover"
+            class="video-hero-bg position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1"
             autoplay 
             muted 
             loop 
@@ -41,15 +41,15 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
     <?php endif; ?>
 
     <!-- Overlay -->
-    <div class="video-hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+    <div class="video-hero-overlay position-absolute top-0 start-0 w-100 h-100 z-2"></div>
 
     <!-- Content -->
-    <div class="container position-relative z-2 pt-150">
+    <div class="container position-relative pt-150 z-3">
         <div class="row">
-            <div class="col-12 col-lg-8 text-white">
+            <div class="col-12 text-white">
 
                 <?php if ($heading) : ?>
-                    <h1 class="video-hero-headline mb-3 text-center text-md-start">
+                    <h1 class="video-hero-headline text-center text-md-start mb-2">
                         <?php echo $heading; ?>
                     </h1>
                 <?php endif; ?>
@@ -157,7 +157,7 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
 <!-- start FEATURE CARDS section -->
 
 <section class="home-feature-cards">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row d-flex align-items-stretch row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 home-feature-cards__row">
         <?php if (have_rows('home_hero_feature_cards')) : 
     $i = 0; // counter for AOS delays
@@ -168,15 +168,20 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
         $card_title       = get_sub_field('card_title');
         $card_description = get_sub_field('card_description');
         $card_link        = get_sub_field('card_link');
+        $card_image       = get_sub_field('card_image');
 ?>
-    <div class="col h-100">
+    <div class="col">
         <div class="home-feature-card d-flex flex-column h-100" data-animate>
 
-            <div class="home-feature-card__circle">
-                <span class="home-feature-card__number">
-                    <?php echo sprintf("%02d", $i); ?>
-                </span>
-            </div>
+            <?php if ($card_image): ?>
+                <div class="home-feature-card__image-container">
+                    <img 
+                        src="<?php echo esc_url($card_image['url']); ?>" 
+                        alt="<?php echo esc_attr($card_image['alt']); ?>"
+                        class="home-feature-card__image img-fluid"
+                    >
+                </div>
+            <?php endif; ?>
 
             <?php if ($card_title): ?>
                 <h2 class="fs-22 home-feature-card__title">
@@ -216,10 +221,10 @@ endif; ?>
         <!-- start ABOUT SECTION -->
         <?php
         $about_section_heading = get_field('about_section_heading') ? get_field('about_section_heading') : '';
-        $cta_button = get_field('cta_button') ? get_field('cta_button') : '';
-        $cta_button_2 = get_field('cta_button_2') ? get_field('cta_button_2') : '';
+        $about_cta_button = get_field('about_cta_button') ? get_field('about_cta_button') : '';
+        $about_cta_button_2 = get_field('about_cta_button_2') ? get_field('about_cta_button_2') : '';
     
-        $background_image = get_field('about_section_background_image') ? get_field('about_section_background_image') : '';
+        $about_image = get_field('about_image') ? get_field('about_image') : '';
       
 
         ?>
@@ -232,7 +237,7 @@ endif; ?>
             <!-- IMAGE -->
             <div class="col-10 col-md-5 col-lg-4 mx-auto d-flex justify-content-center">
                 <img 
-                    src="<?php echo $background_image; ?>" 
+                    src="<?php echo $about_image; ?>" 
                     class="img-fluid"
                     alt="About MediaFast"
                 >
@@ -287,15 +292,15 @@ endif; ?>
                 <!-- CTA -->
                 <div class="about-section__cta-block stagger-cta mt-3 text-center text-md-start" data-animate>
                     
-                    <?php if ($cta_button): ?>
-                        <a href="<?php echo $cta_button['url']; ?>" class="btn btn-primary btn-box-shadow btn-round-edge me-2">
-                            <?php echo $cta_button['title']; ?>
+                    <?php if ($about_cta_button): ?>
+                        <a href="<?php echo $about_cta_button['url']; ?>" class="btn btn-primary btn-box-shadow btn-round-edge me-2">
+                            <?php echo $about_cta_button['title']; ?>
                         </a>
                     <?php endif; ?>
 
-                    <?php if ($cta_button_2): ?>
-                        <a href="<?php echo $cta_button_2['url']; ?>" class="btn btn-link btn-extra-large thin text-dark-gray">
-                            <?php echo $cta_button_2['title']; ?>
+                    <?php if ($about_cta_button_2): ?>
+                        <a href="<?php echo $about_cta_button_2['url']; ?>" class="btn btn-link btn-large thin text-dark-gray">
+                            <?php echo $about_cta_button_2['title']; ?>
                         </a>
                     <?php endif; ?>
 

@@ -1,70 +1,3 @@
-// .component--testimonial-slider-section {
-
-// 	.container {
-// 		overflow: visible;
-// 		.container {
-// 			.swiper {
-// 				.swiper-wrapper {
-// 					align-items: start;
-// 				}
-// 			}
-
-// 		}
-// 	}
-// }
-
-// .testimonial-slider {
-// 	position: relative;
-// 	width: 100%;
-// 	overflow: hidden;
-// 	z-index: 1;
-// 	padding-bottom: 3rem;
-// 	padding-left: 1.6rem;
-// 	padding-right: 1.8rem;
-// 	--swiper-navigation-color: #bc9846;
-// 	.swiper-wrapper {
-// 		transition-timing-function: ease;
-// 	}
-// }
-
-// .swiper-button-next.swiper-testimonial,
-// .swiper-button-prev.swiper-testimonial {
-// 	display: block;
-// 	position: absolute;
-// 	top: 50%;
-// 	transform: translateY(-50%);
-// 	z-index: 20;
-// 	cursor: pointer;
-//     pointer-events: auto;
-// }
-
-// .swiper-button-next.swiper-testimonial {
-// 	transform: translateX(14px);
-// }
-// .swiper-button-prev.swiper-testimonial {
-// 	transform: translateX(-10px);
-// }
-
-// .swiper-pagination.swiper-testimonial {
-// 	position: absolute;
-// 	bottom: 2rem;
-// 	left: 50%;
-//     transform: translateX(-50%);
-// 	width: 100%;
-// 	text-align: center;
-// }
-
-// .testimonial-card {
-// 	min-height: 530px;
-// }
-
-// .swiper-testimonial.swiper-pagination-bullets {
-
-// 	.swiper-pagination-bullet-active {
-// 		background: $primary;
-// 		opacity: 1;
-// 	}
-// }
 
 // =======================================
 // Testimonial Slider — Component Scoped
@@ -238,16 +171,129 @@
 
 // Image Slider
 
+.component--image-slider-section {
+  position: relative;
+}
+
+.image-slider-wrapper {
+  padding: 1rem 0;
+}
+
+.image-slider {
+  padding-bottom: 3rem; // Space for pagination
+  overflow: visible;
+}
+
 .image-swiper-slide {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: .5rem; // Padding so images don't touch edges
+  height: 100%;
+  aspect-ratio: 4 / 3; // Rectangular container (4:3 ratio)
+  overflow: hidden; // Ensure images don't overflow container
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; // Show full image without cropping
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
 }
 
-.image-swiper-slide img {
-  max-height: 150px;
-  width: auto;
-  object-fit: contain;
+// Swiper pagination styling
+.image-slider .swiper-pagination {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: $gray-400;
+    opacity: 1;
+    margin: 0 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    
+    &.swiper-pagination-bullet-active {
+      background: $primary;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Swiper navigation styling
+.image-slider .swiper-button-prev,
+.image-slider .swiper-button-next {
+  color: $secondary;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: #ffffff;
+    transform: scale(1.1);
+  }
+  
+  &::after {
+    content: "";
+    display: none; // Hide default Swiper icon
+  }
+  
+  // Use Unicode arrows instead
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+}
+
+.image-slider .swiper-button-prev::before {
+  border-width: 8px 12px 8px 0;
+  border-color: transparent $secondary transparent transparent;
+  margin-left: -4px; // Center the arrow
+}
+
+.image-slider .swiper-button-next::before {
+  border-width: 8px 0 8px 12px;
+  border-color: transparent transparent transparent $secondary;
+  margin-right: -4px; // Center the arrow
+}
+
+.image-slider .swiper-button-prev {
+  left: -20px;
+  
+  @media (max-width: 767.98px) {
+    left: 0;
+  }
+}
+
+.image-slider .swiper-button-next {
+  right: -20px;
+  
+  @media (max-width: 767.98px) {
+    right: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767.98px) {
+  .image-slider {
+    padding-bottom: 2.5rem;
+  }
 }

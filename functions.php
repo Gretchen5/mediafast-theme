@@ -612,6 +612,7 @@ require_once get_template_directory() . '/inc/acf-blocks.php';
 add_action('after_setup_theme', function () {
 	add_image_size('post-card-thumb', 600, 400, true);
 	add_image_size('post-featured', 1200, 700, true);
+	add_image_size('post-display-thumbnail', 400, 208, true); // 1.92:1 aspect ratio for post display cards
 });
 
 // Add Bootstrap Icons Inline to Card Components

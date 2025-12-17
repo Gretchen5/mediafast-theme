@@ -464,7 +464,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "all"
+                "value": "acf\/slider-hero"
             }
         ]
     ],
@@ -478,5 +478,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765395221
+    "modified": 1765600470
 }

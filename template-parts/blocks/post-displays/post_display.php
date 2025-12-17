@@ -1,106 +1,88 @@
 <?php
+// ACF Fields
 $section_heading = get_field('section_heading');
 $cta_button = get_field('cta_button') ?: '';
 $background_color = get_field('background_color');
 $section_padding_top = get_field('section_padding_top') ?: '';
 $section_padding_bottom = get_field('section_padding_bottom') ?: '';
 
+// Build WP_Query args
+$args = array(
+    'post_type'      => 'post',
+    'posts_per_page' => 3,
+    'orderby'        => 'date',
+    'order'          => 'DESC'
+);
+
+// Filter by category if selected
+$category = get_field('post_category');
+if ($category) {
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'category',
+            'field'    => 'term_id',
+            'terms'    => $category
+        )
+    );
+}
+
+$recent_posts = new WP_Query($args);
 ?>
 
-<!-- start section -->
-<section class="component--recent-posts py-75 <?php echo esc_attr($background_color); ?>" style="padding-top: <?php echo esc_attr($section_padding_top); ?>; padding-bottom: <?php echo esc_attr($section_padding_bottom); ?>;">
+<!-- Post Display Section -->
+<section class="component--recent-posts py-75 <?php echo esc_attr($background_color); ?>" 
+         style="padding-top: <?php echo esc_attr($section_padding_top); ?>; padding-bottom: <?php echo esc_attr($section_padding_bottom); ?>;">
     <div class="container">
+        <!-- Section Header -->
         <div class="row justify-content-center mb-5">
-            <div class="col-lg-7 text-center" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
-                <span class="fs-17 d-inline-block fw-500 text-uppercase text-base-color ls-1px">Best Practices, Testimonials, Case Studies and Videos</span>
-                <h2 class="alt-font text-secondary fw-600 ls-minus-1px mb-0"><?php echo $section_heading; ?></h2>
+            <div class="col-lg-7 text-center">
+                <span class="fs-17 d-inline-block fw-500 text-uppercase text-dk-gold ls-1px mb-2">
+                    Best Practices, Testimonials, Case Studies and Videos
+                </span>
+                <?php if ($section_heading) : ?>
+                    <h2 class="text-secondary fw-600 mb-0"><?php echo esc_html($section_heading); ?></h2>
+                <?php endif; ?>
             </div>
         </div>
-        <?php
 
-        $args = array(
-            'post_type'      => 'post',  // Only pull blog posts
-            'posts_per_page' => 3,       // Show 3 most recent posts
-            'orderby'        => 'date',  // Order by newest first
-            'order'          => 'DESC'
-        );
+        <!-- Blog Posts Grid -->
+        <?php if ($recent_posts->have_posts()) : ?>
+            <div class="row g-4 g-lg-4">
+                <?php while ($recent_posts->have_posts()) : $recent_posts->the_post(); ?>
+                    <div class="col-12 col-lg-4">
+                        <article class="post-display-card h-100" data-animate>
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="post-display-card__image">
+                                    <a href="<?php the_permalink(); ?>" class="d-block">
+                                        <?php the_post_thumbnail('post-display-thumbnail', array(
+                                            'class' => 'img-fluid w-100',
+                                            'loading' => 'lazy'
+                                        )); ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
 
-        $category = get_field('post_category');
-        if ($category) {
-            $args['tax_query'] = array(array(
-                'taxonomy' => 'category',
-                'field'    => 'term_id',
-                'terms'    => $category
-            ));
-        }
-
-
-
-
-
-        $recent_posts = new WP_Query($args);
-
-
-        if ($recent_posts->have_posts()) : ?>
-            <div class="row">
-                <div class="col-12">
-                    <ul class="blog-simple blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "willchange": "transform", "translateY": [30, 0], "perspective": [1200,1200], "scale": [1.05, 1], "rotateY": [-30, 0], "opacity": [0,1], "duration": 800, "delay": 100, "staggervalue": 200, "easing": "easeOutQuad" }'>
-                        <li class="grid-sizer"></li>
-                        <?php while ($recent_posts->have_posts()) : $recent_posts->the_post();
-
-                            $excerpt = get_the_content();
-                            $trimmed_excerpt = wp_trim_words($excerpt, 7, '...'); // Trim based on word count
-                            $char_limit = 45; // Define the desired character length
-
-                            if (strlen($trimmed_excerpt) > $char_limit) {
-                                $trimmed_excerpt = substr($trimmed_excerpt, 0, $char_limit) . '...'; // Trimming by character length
-                            }
-                        ?>
-                            <!-- start blog item -->
-                            <li class="grid-item">
-
-                                <figure class="position-relative mb-0 box-hover">
-
-                                    <div class="blog-image">
-                                        <?php if (has_post_thumbnail()) : ?>
-                                            <div class="post-featured-image">
-                                                <figure class="mb-0">
-                                                    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-display-thumbnail'); ?></a>
-                                                    <div class="bg-secondary dark-section-post-display"></div>
-                                                </figure>
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <span class="box-overlay bg-dark-slate-blue"></span>
-                                        <span class="bg-gradient-gray-light-dark-transparent position-absolute opacity-4 top-0px left-0px w-100 h-100"></span>
-                                    </div>
-
-                                    <figcaption class="d-flex flex-column h-100 justify-content-end">
-                                        <div class="position-relative post-content p-11 text-center last-paragraph-no-margin">
-                                            <div class="position-relative z-index-2 overflow-hidden">
-                                                <div class="d-inline-block fs-16 mb-5px text-base-color text-uppercase fw-500"><?php echo get_the_date('F j, Y'); ?></div>
-                                                <a href="<?php the_permalink(); ?>" class="card-title fs-22 alt-font fw-400 text-white mb-0 d-block text-decoration-none">
-                                                    <h3 class="h5 alt-font fw-600 text-white"><?php the_title(); ?></h3>
-                                                </a>
-                                                <div class="hover-text"><a href="<?php the_permalink(); ?>" class="btn btn-link-gradient btn-large text-white thin mt-20px mb-5px fw-400">Continue reading<span class="bg-white"></span></a></div>
-                                            </div>
-                                            <div class="box-overlay bg-dark-gray"></div>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-
-                            </li>
-                        <?php endwhile; ?>
-                        <!-- end blog item -->
-
-                    </ul>
-                </div>
+                            <div class="post-display-card__content">
+                                <div class="post-display-card__date has-lt-gold-text-color text-uppercase fw-500 mb-2">
+                                    <?php echo get_the_date('F j, Y'); ?>
+                                </div>
+                                <h3 class="post-display-card__title h5 mb-3">
+                                    <a href="<?php the_permalink(); ?>" class="text-white text-decoration-none">
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h3>
+                                <a href="<?php the_permalink(); ?>" class="post-display-card__link btn btn-link text-white p-0">
+                                    Continue reading
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                <?php endwhile; ?>
             </div>
         <?php else : ?>
-            <p>No posts available.</p>
-        <?php endif;
-        wp_reset_postdata();
-        ?>
+            <p class="text-center">No posts available.</p>
+        <?php endif; ?>
+
+        <?php wp_reset_postdata(); ?>
     </div>
 </section>
-<!-- end section -->
