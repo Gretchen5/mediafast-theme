@@ -23,16 +23,16 @@ if (have_rows('stats_list')) {
             <!-- Left Column: Heading / Description / Stats -->
             <div class="col-12 col-lg-5">
                 <?php if ($heading) : ?>
-                    <h2 class="text-secondary mb-2 fw-600"><?php echo wp_kses_post($heading); ?></h2>
+                    <h2 class="text-secondary mb-2 fw-700"><?php echo wp_kses_post($heading); ?></h2>
                 <?php endif; ?>
                 <?php if ($description) : ?>
                     <p class="text-body mb-4"><?php echo wp_kses_post($description); ?></p>
                 <?php endif; ?>
 
                 <?php if (!empty($stats)) : ?>
-                    <div class="stats pt-3">
+                    <div class="stats pt-5">
                         <div class="d-flex align-items-center text-secondary fw-600 mb-2">
-                            <span class="stats-rotator h3 fw-600"
+                            <span class="stats-rotator h3 fw-700"
                                   data-stats='<?php echo wp_json_encode($stats); ?>'>
                                 <i class="fa-solid fa-chart-line me-2"></i>
                                 <span class="stats-text"><?php echo esc_html($stats[0]); ?></span>
