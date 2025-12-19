@@ -267,3 +267,102 @@
     border: 0;
   }
 }
+
+// Content Image Block Dark
+.component--content-image-dark {
+  color: #fff;
+  .container-fluid {
+    .row {
+      .content-column {
+        .content-pane {
+          background: transparent;
+        }
+      
+        .component-accordion-dark {
+          // Kill default Bootstrap borders/backgrounds
+          --bs-accordion-border-color: transparent;
+          --bs-accordion-border-width: 0;
+          --bs-accordion-border-radius: 0;
+          --bs-accordion-bg: transparent;
+          --bs-accordion-btn-bg: transparent;
+          --bs-accordion-active-bg: transparent;
+          --bs-accordion-btn-focus-box-shadow: none;
+          --bs-accordion-btn-padding-y: 1rem;
+          --bs-accordion-btn-padding-x: 1.1rem;
+      
+          .accordion-item {
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+      
+            // Keep divider lines under each item
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      
+            &:last-child {
+              border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            }
+      
+            & + .accordion-item {
+              margin-top: 0.5rem;
+            }
+          }
+      
+          .accordion-button {
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            padding: 1rem 1.1rem;
+            border: none;
+            box-shadow: none;
+      
+            &::after {
+              filter: invert(100%);
+            }
+      
+            &:not(.collapsed) {
+              background: transparent;
+              color: #fff;
+              box-shadow: none;
+            }
+      
+            &:focus {
+              box-shadow: none;
+            }
+          }
+      
+      }
+      
+        .accordion-body {
+          background: transparent;
+          color: rgba(255, 255, 255, 0.95);
+          border-top: 1px solid rgba(255, 255, 255, 0.4);
+          line-height: 1.7;
+          padding: 1rem 1.1rem;
+    
+          a {
+            color: #9ae2ff;
+    
+            &:hover {
+              color: lighten(#9ae2ff, 5%);
+            }
+          }
+        }
+      }
+      .image-column {
+        .image-pane {
+          background: #fff;
+    
+          .image-pane__bg {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 320px;
+          }
+        }
+      }
+    }
+  }
+  
+  
+}
