@@ -131,22 +131,24 @@ if (have_posts()) :
 
 	</section>
 
-	<ul class="blog-side-image testimonial-cpt blog-wrapper grid-loading grid grid-2col xxl-grid-2col xl-grid-2col lg-grid-2col md-grid-1col sm-grid-1col xs-grid-1col gutter-extra-large pt-5 grid-auto-rows-1">
-		<li class="grid-sizer"></li>
+	<div class="testimonial-archive">
+		<div class="container-fluid">
+			<div class="row g-4">
+				<?php
+				while (have_posts()) :
+					the_post();
 
-		<?php
-		while (have_posts()) :
-			the_post();
-
-			/**
-			 * Include the Post-Format-specific template for the content.
-			 * If you want to overload this in a child theme then include a file
-			 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-			 */
-			get_template_part('content', 'index-testimonial'); // Post format: content-index.php
-		endwhile;
-		?>
-	</ul>
+					/**
+					 * Include the Post-Format-specific template for the content.
+					 * If you want to overload this in a child theme then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part('content', 'index-testimonial'); // Post format: content-index.php
+				endwhile;
+				?>
+			</div>
+		</div>
+	</div>
 <?php
 endif;
 

@@ -1,0 +1,127 @@
+// Testimonial Archive Styles
+
+.testimonial-archive {
+  padding: 3rem 0;
+
+  &__card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  &__image {
+    width: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #fff; // White background for PNGs
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem; // Padding so images don't touch edges
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain; // Show full image without cropping
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  &__content {
+    width: 50%;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $secondary;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $dk-gold;
+      }
+    }
+  }
+
+  &__description {
+    color: $gray-700;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    flex: 1;
+
+    p {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .testimonial-archive {
+    padding: 2rem 0;
+
+    &__card {
+      flex-direction: column; // Stack vertically at 768px and below
+    }
+
+    &__image {
+      width: 100%;
+      aspect-ratio: 4 / 3; // Maintain aspect ratio when stacked
+    }
+
+    &__content {
+      width: 100%;
+      padding: 1.25rem;
+    }
+
+    &__heading {
+      font-size: 1rem;
+    }
+
+    &__description {
+      font-size: 0.9rem;
+    }
+  }
+}
+

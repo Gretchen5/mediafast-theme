@@ -1033,6 +1033,7 @@ figure.rounded img {
 @import "gallery";
 @import "../template-parts/blocks/testimonial/testimonial-slider";
 @import "../template-parts/blocks/cta/cta-blocks";
+@import "testimonial-archive";
 
 a {
   color: $cyan;
@@ -1096,7 +1097,7 @@ ul.wp-block-list li {
   height: auto;
   display: block;
   margin: 0 auto;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 
