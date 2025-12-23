@@ -69,6 +69,7 @@ function mediafast_customize( $wp_customize ) {
 				'navbar-light bg-light'  => __( 'Default', 'mediafast' ),
 				'navbar-dark bg-dark'    => __( 'Dark', 'mediafast' ),
 				'navbar-dark bg-primary' => __( 'Primary', 'mediafast' ),
+				'navbar-light bg-transparent' => __( 'Transparent', 'mediafast' ),
 			),
 		)
 	);
