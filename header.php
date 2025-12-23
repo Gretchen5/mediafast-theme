@@ -16,6 +16,7 @@ $navbar_scheme   = get_theme_mod('navbar_scheme', 'navbar-light bg-transparent')
 $navbar_position = get_theme_mod('navbar_position', 'static'); // Get custom meta-value.
 
 $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-value.
+
 ?>
 
 <body <?php body_class(); ?>>
