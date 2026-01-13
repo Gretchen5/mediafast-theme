@@ -167,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const slidingCards = new Swiper(".sliding-cards-slider", {
       modules: [Pagination, Autoplay],
       loop: true,
-      slidesPerView: 1, // Default: 1 slide (for 1400px and below)
-      spaceBetween: 30,
+      slidesPerView: 'auto', // Use auto to respect CSS-defined widths
+      spaceBetween: 15,
       speed: 1500, // Slower transition for soft stop
       autoplay: {
         delay: 6000,
@@ -182,15 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
       watchOverflow: true,
       breakpoints: {
         0: {
-          slidesPerView: 1, // 1 on mobile
+          slidesPerView: 1, // Show only 1 slide on mobile, no peek
           spaceBetween: 20,
         },
         768: {
-          slidesPerView: 1, // 1 on tablet
+          slidesPerView: 'auto', // Use auto to respect CSS-defined widths
           spaceBetween: 30,
         },
         1401: {
-          slidesPerView: 2, // 2 slides above 1400px
+          slidesPerView: 'auto', // Use auto to respect CSS-defined widths
           spaceBetween: 15, // Reduced spacing between slides
         },
       },
@@ -386,10 +386,10 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         textEl.textContent = stats[index];
         el.classList.remove("is-fading");
-      }, 200);
+      }, 300); // Match CSS transition duration
     };
 
-    const interval = setInterval(rotate, 3000);
+    const interval = setInterval(rotate, 4000); // Slowed from 3000ms to 6000ms (6 seconds)
 
     // Cleanup if element removed
     const observer = new MutationObserver(() => {

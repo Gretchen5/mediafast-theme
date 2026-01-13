@@ -8,7 +8,7 @@ $background_color = get_field('background_color');
 ?>
 
 <!-- Portfolio Section Start -->
-<div id="portfolio" class="section section-padding ag-masonary-wrapper py-75 bg-lt-gray <?php echo esc_attr($background_color); ?> background-position-center background-repeat" style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/vertical-center-line-bg.svg')">
+<div id="portfolio" class="section section-padding ag-masonary-wrapper py-75 bg-lt-gray">
     <div class="container">
         <div class="row flex-column align-items-center">
 

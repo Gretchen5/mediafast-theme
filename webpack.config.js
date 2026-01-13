@@ -4,10 +4,13 @@ const webpackConfig = require("@wordpress/scripts/config/webpack.config");
 const webpack = require('webpack');
 
 // Extend the @wordpress webpack config and add the entry points.
+// Determine mode: development for watch, production for build
+const isProduction = process.env.NODE_ENV === 'production' || process.argv.includes('build');
+
 module.exports = {
 	...webpackConfig,
 	...{
-		mode: "production",
+		mode: isProduction ? "production" : "development",
 		devServer: {
 			static: {
 				directory: path.join(__dirname, "assets"),
@@ -65,5 +68,10 @@ module.exports = {
 				filename: 'main.css',
 			}),
 		],
+		// Ensure watch mode works correctly
+		watchOptions: {
+			ignored: /node_modules/,
+			poll: 1000, // Check for changes every second
+		},
 	},
 };

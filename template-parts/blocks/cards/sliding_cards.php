@@ -24,7 +24,7 @@ $bg_class = $background_color ? '' : 'bg-lt-gray';
 
         <?php if (have_rows('card_repeater')) : ?>
             <div class="row">
-                <div class="col-12 position-relative">
+                <div class="position-relative">
                     <div class="sliding-cards-wrapper px-3 px-md-5">
                         <div class="swiper sliding-cards-slider">
                             <div class="swiper-wrapper">

@@ -379,12 +379,14 @@
 // Sliding Cards
 .component--sliding-cards {
   position: relative;
+  overflow: visible; // Allow cards to peek outside component
 }
 
 .sliding-cards-wrapper {
   padding: 1rem 0;
   padding-left: 0; // No space on the left
   padding-right: 150px; // 150px space on the right
+  overflow: visible; // Allow cards to peek outside wrapper
   
   // Remove right padding at 1400px and below
   @media (max-width: 1400px) {
@@ -411,6 +413,17 @@
     height: auto;
     display: flex; // Make slide a flex container
     align-items: stretch; // Stretch to match tallest slide
+    justify-content: center; // Center card if it's smaller than slide width
+    flex-shrink: 0; // Prevent slides from shrinking
+    
+    // Fixed width for desktop (with slidesPerView: 'auto')
+    width: 537px;
+    
+    // On mobile, let Swiper handle width automatically (slidesPerView: 1)
+    // Scoped only to .sliding-cards-slider to avoid affecting other sliders
+    @media (max-width: 767.98px) {
+      width: auto; // Let Swiper calculate based on slidesPerView: 1
+    }
   }
 }
 
@@ -418,16 +431,29 @@
   border-radius: 6px;
   overflow: hidden;
   min-height: 300px; // Increased minimum height for consistency
-  max-width: 600px; // Make cards more rectangular/longer
+  max-width: 537px; // Constrain card width to show 2 full cards + peek
   width: 100%;
   display: flex; // Make card a flex container
   flex-direction: column;
+  
+  // On mobile, remove min-height and max-width constraints
+  @media (max-width: 767.98px) {
+    min-height: auto;
+    max-width: 100%;
+  }
   
   &__content {
     display: flex;
     flex-direction: column;
     border-right: 1px solid $gray-300; // Border between content and image columns
     min-height: 100%; // Ensure content column fills card height
+    
+    // Remove border on mobile since columns stack
+    @media (max-width: 767.98px) {
+      border-right: none;
+      border-bottom: 1px solid $gray-300;
+      min-height: auto;
+    }
   }
 
   &__inner {
@@ -464,10 +490,16 @@
 
   &__image {
     overflow: hidden;
-    padding: 1rem; // Padding so images don't touch edges
+    padding: 0.5rem; // Reduced padding to give more space to images
     display: flex;
     align-items: center; // Center image vertically
     min-height: 100%; // Ensure image column fills card height
+    
+    // Fix image display on mobile
+    @media (max-width: 767.98px) {
+      min-height: auto;
+      padding: 0.5rem;
+    }
   }
 
   &__image-wrapper {
@@ -478,7 +510,14 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain; // Show full image without cropping
+      object-fit: cover; // Fill the space completely (may crop edges)
+      object-position: center; // Center the image when cropping
+    }
+    
+    // Ensure image displays on mobile
+    @media (max-width: 767.98px) {
+      display: block; // Ensure wrapper is visible
+      min-height: 200px; // Give it a minimum height on mobile
     }
   }
 }

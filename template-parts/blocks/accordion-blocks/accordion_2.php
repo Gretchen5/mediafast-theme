@@ -1,5 +1,6 @@
 <?php
 $heading      = get_field('heading');
+$description  = get_field('description');
 $bottom_description  = get_field('bottom_description');
 $accordion_id = 'accordion-2-' . uniqid();
 
@@ -26,7 +27,7 @@ if (have_rows('stats_list')) {
                     <h2 class="text-secondary mb-2 fw-700"><?php echo wp_kses_post($heading); ?></h2>
                 <?php endif; ?>
                 <?php if ($description) : ?>
-                    <p class="text-body mb-4"><?php echo wp_kses_post($description); ?></p>
+                    <p class="text-body mb-4"><?php echo $description; ?></p>
                 <?php endif; ?>
 
                 <?php if (!empty($stats)) : ?>
