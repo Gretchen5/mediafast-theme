@@ -67,11 +67,30 @@ function tmpl_build_lvl3($rows)
         $title = $row['title_3'] ?? '';
         $img   = tmpl_safe_url($row['image_3'] ?? '');
         $lvl4  = tmpl_build_lvl4($row['tmpl_cat_4'] ?? []);
-        $out[] = [
+        
+        $item = [
             'title' => $title,
-            'image' => $img,
-            'children' => $lvl4
+            'image' => $img
         ];
+        
+        // If there are children (level 4), use them
+        if (!empty($lvl4)) {
+            $item['children'] = $lvl4;
+        } else {
+            // No children, check if there's a PDF at this level
+            $file = $row['pdf_file'] ?? null;
+            $url  = $file ? tmpl_safe_url($file) : '';
+            $no_pdf = !empty($row['no_pdf_note']) || empty($url);
+            
+            if (!$no_pdf && $url) {
+                $item['url'] = $url;
+                $item['type'] = 'pdf';
+            } else {
+                $item['type'] = 'placeholder';
+            }
+        }
+        
+        $out[] = $item;
     }
     return $out;
 }
@@ -85,11 +104,30 @@ function tmpl_build_lvl2($rows)
         $title = $row['title_2'] ?? '';
         $img   = tmpl_safe_url($row['image_2'] ?? '');
         $lvl3  = tmpl_build_lvl3($row['tmpl_cat_3'] ?? []);
-        $out[] = [
+        
+        $item = [
             'title' => $title,
-            'image' => $img,
-            'children' => $lvl3
+            'image' => $img
         ];
+        
+        // If there are children (level 3), use them
+        if (!empty($lvl3)) {
+            $item['children'] = $lvl3;
+        } else {
+            // No children, check if there's a PDF at this level
+            $file = $row['pdf_file'] ?? null;
+            $url  = $file ? tmpl_safe_url($file) : '';
+            $no_pdf = !empty($row['no_pdf_note']) || empty($url);
+            
+            if (!$no_pdf && $url) {
+                $item['url'] = $url;
+                $item['type'] = 'pdf';
+            } else {
+                $item['type'] = 'placeholder';
+            }
+        }
+        
+        $out[] = $item;
     }
     return $out;
 }

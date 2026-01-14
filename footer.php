@@ -54,8 +54,8 @@
 			?>
 			<footer class="bg-secondary py-0" id="footer">
 				<div class="container py-5">
-					<div class="row">
-						<div class="col footer-col footer-col-1">
+					<div class="row flex-column flex-sm-row gap-4 justify-content-center justify-content-sm-start">
+						<div class="col footer-col footer-col-1 text-center text-sm-start">
 							<h2 class="h3 text-light-blue mb-3">About MediaFast</h2>
 							<?php
 							if (has_nav_menu('footer-menu-1')) : // See function register_nav_menus() in functions.php
@@ -67,7 +67,7 @@
 								wp_nav_menu(
 									array(
 										'container'       => 'nav',
-										'container_class' => 'col-md-6',
+										'container_class' => 'col-12',
 										//'fallback_cb'     => 'WP_Bootstrap4_Navwalker_Footer::fallback',
 										'walker'          => new WP_Bootstrap4_Navwalker_Footer(),
 										'theme_location'  => 'footer-menu-1',
@@ -81,7 +81,7 @@
 								</div>
 							<?php endif; ?>
 						</div>
-						<div class="col footer-col footer-col-2">
+						<div class="col footer-col footer-col-2 text-center text-sm-start">
 							<h2 class="h3 text-light-blue mb-3">Products</h2>
 							<?php if (has_nav_menu('footer-menu-2')) : // See function register_nav_menus() in functions.php
 								/*
@@ -92,7 +92,7 @@
 								wp_nav_menu(
 									array(
 										'container'       => 'nav',
-										'container_class' => 'col-md-6',
+										'container_class' => 'col-12',
 										//'fallback_cb'     => 'WP_Bootstrap4_Navwalker_Footer::fallback',
 										'walker'          => new WP_Bootstrap4_Navwalker_Footer(),
 										'theme_location'  => 'footer-menu-2',
@@ -102,7 +102,7 @@
 							endif; ?>
 						</div>
 
-						<div class="col footer-col footer-col-3">
+						<div class="col footer-col footer-col-3 text-center text-sm-start">
 							<h2 class="h3 text-light-blue mb-3">Resources</h2>
 							<?php
 							if (has_nav_menu('footer-menu-3')) : // See function register_nav_menus() in functions.php
@@ -125,15 +125,15 @@
 						</div>
 					</div><!-- /.row -->
 				</div><!-- /.container -->
-				<div class="row subfooter bg-lt-gray pt-4 pb-3">
-					<div class="col subfooter-col-1 d-flex align-items-center"><?php
+				<div class="row flex-column flex-md-row subfooter bg-lt-gray pt-4 pb-3 justify-content-center justify-content-sm-start gap-2">
+					<div class="col subfooter-col-1 d-flex align-items-center text-center text-sm-start"><?php
 																				if (is_active_sidebar('third_widget_area')) :
-																				?>
-							<div class="col-md-12 d-flex flex-column align-items-center">
+																					?>
+								<div class="col-12 d-flex flex-column align-items-center justify-content-center">
 								<?php
-																					dynamic_sidebar('third_widget_area');
+									dynamic_sidebar('third_widget_area');
 
-																					if (current_user_can('manage_options')) :
+									if (current_user_can('manage_options')) :
 								?>
 									<span class="edit-link"><a href="<?php echo esc_url(admin_url('widgets.php')); ?>" class="badge bg-secondary"><?php esc_html_e('Edit', 'mediafast'); ?></a></span>
 									<!-- Show Edit Widget link -->
@@ -141,19 +141,22 @@
 							</div>
 						<?php endif; ?>
 					</div>
-					<div class="col subfooter-col-2 d-flex align-items-center">
-						<p class="text-secondary m-0"><?php printf(esc_html__('&copy; %1$s %2$s. All rights reserved.', 'MediaFast'), wp_date('Y'), get_bloginfo('name', 'display')); ?></p>
+
+					<div class="col subfooter-col-2 d-flex align-items-center justify-content-center bg-lt-gray py-3 py-md-2">
+						<small class="text-secondary text-center text-lg-start m-0"><?php printf(esc_html__('&copy; %1$s %2$s. All rights reserved.', 'MediaFast'), wp_date('Y'), get_bloginfo('name', 'display')); ?></small>
 					</div>
-					<div class="col subfooter-col-3 d-flex align-items-center">
+					
+					<div class="col subfooter-col-3 d-flex align-items-center justify-content-center text-center text-sm-start">
 						<?php if ($footer_logo) : ?>
-							<div class="logo-container">
-								<img width="350" src="<?php echo esc_url($footer_logo['url']); ?>" alt="<?php echo esc_attr($footer_logo['alt']); ?>">
+							<div class="logo-container px-4">
+								<img width="100%" src="<?php echo esc_url($footer_logo['url']); ?>" alt="<?php echo esc_attr($footer_logo['alt']); ?>">
 							</div>
 						<?php endif; ?>
 					</div>
 
 				</div>
-
+				
+				
 			</footer><!-- /#footer -->
 			</div><!-- /#wrapper -->
 			<?php

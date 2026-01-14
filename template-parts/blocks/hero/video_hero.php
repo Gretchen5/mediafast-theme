@@ -229,7 +229,7 @@ endif; ?>
 
         ?>
 
-<section class="about-section py-75">
+<section class="about-section pt-75">
     <div class="container">
 
         <div class="row align-items-center g-4">

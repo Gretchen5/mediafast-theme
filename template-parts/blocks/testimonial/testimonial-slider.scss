@@ -177,11 +177,30 @@
 
 .image-slider-wrapper {
   padding: 1rem 0;
+  // Keep horizontal padding for visual spacing, but extend slider beyond it
 }
 
 .image-slider {
   padding-bottom: 3rem; // Space for pagination
   overflow: visible;
+  // Extend slider beyond wrapper padding to create seamless loop
+  margin-left: calc(-1rem - 0.75rem); // Negative margin to extend beyond px-3 (0.75rem)
+  margin-right: calc(-1rem - 0.75rem);
+  width: calc(100% + 2rem + 1.5rem); // Extend width to compensate
+  
+  // On medium screens and up, account for px-md-5 (3rem)
+  @media (min-width: 768px) {
+    margin-left: calc(-1rem - 3rem); // Negative margin to extend beyond px-md-5 (3rem)
+    margin-right: calc(-1rem - 3rem);
+    width: calc(100% + 2rem + 6rem); // Extend width to compensate
+  }
+  
+  // On mobile, keep normal margins
+  @media (max-width: 575.98px) {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
 }
 
 .image-swiper-slide {
@@ -230,65 +249,10 @@
   }
 }
 
-// Swiper navigation styling
+// Swiper navigation styling - Hidden because slider extends to edges
 .image-slider .swiper-button-prev,
 .image-slider .swiper-button-next {
-  color: $secondary;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  &:hover {
-    background: #ffffff;
-    transform: scale(1.1);
-  }
-  
-  &::after {
-    content: "";
-    display: none; // Hide default Swiper icon
-  }
-  
-  // Use Unicode arrows instead
-  &::before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-}
-
-.image-slider .swiper-button-prev::before {
-  border-width: 8px 12px 8px 0;
-  border-color: transparent $secondary transparent transparent;
-  margin-left: -4px; // Center the arrow
-}
-
-.image-slider .swiper-button-next::before {
-  border-width: 8px 0 8px 12px;
-  border-color: transparent transparent transparent $secondary;
-  margin-right: -4px; // Center the arrow
-}
-
-.image-slider .swiper-button-prev {
-  left: -20px;
-  
-  @media (max-width: 767.98px) {
-    left: 0;
-  }
-}
-
-.image-slider .swiper-button-next {
-  right: -20px;
-  
-  @media (max-width: 767.98px) {
-    right: 0;
-  }
+  display: none; // Hide navigation arrows since slider extends to edges
 }
 
 // Responsive adjustments

@@ -17,15 +17,26 @@ document.addEventListener("DOMContentLoaded", () => {
       while (el.firstChild) el.removeChild(el.firstChild);
     }
 
-    /** Renders one level of tiles (expands downward, doesn’t replace) */
+    /** Renders one level of tiles (expands downward, doesn't replace) */
     function renderTiles(items, level = 1, parentTitle = "") {
       // Remove deeper levels when navigating sideways
       const deeperLevels = Array.from(
         gridsContainer.querySelectorAll(`.template-grid-level`)
       ).filter((el) => parseInt(el.dataset.level) >= level);
       deeperLevels.forEach((el) => el.remove());
+      
+      // Clear active states only from deeper levels (not the current/parent level)
+      // This preserves the active state of the tile that triggered this render
+      const deeperLevelElements = Array.from(
+        gridsContainer.querySelectorAll(`.template-grid-level`)
+      ).filter((el) => parseInt(el.dataset.level) > level);
+      deeperLevelElements.forEach(levelEl => {
+        levelEl.querySelectorAll('.template-tile.active').forEach(tile => {
+          tile.classList.remove('active');
+        });
+      });
 
-      if (!items || !items.length) return;
+      if (!items || !items.length) return null;
 
       // Create new level container
       const levelWrapper = document.createElement("div");
@@ -75,7 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // Click handler
         tile.addEventListener("click", () => {
           if (item.children && item.children.length) {
-            renderTiles(item.children, level + 1, item.title);
+            // Remove active class from all tiles in the same grid
+            const currentGrid = tile.closest('.template-grid');
+            if (currentGrid) {
+              currentGrid.querySelectorAll('.template-tile').forEach(t => {
+                t.classList.remove('active');
+              });
+            }
+            
+            // Add active class to clicked tile
+            tile.classList.add('active');
+            
+            const newLevel = renderTiles(item.children, level + 1, item.title);
+            // Scroll to the newly created level after rendering
+            if (newLevel) {
+              scrollToElement(newLevel);
+            }
           } else if (item.url) {
             window.open(item.url, "_blank");
           }
@@ -86,6 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       levelWrapper.appendChild(grid);
       gridsContainer.appendChild(levelWrapper);
+      
+      // Return the level wrapper so we can scroll to it
+      return levelWrapper;
     }
 
     /** Render top-level tabs */
@@ -108,12 +137,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Clear all grids
           clear(gridsContainer);
+          
+          // Clear any active tile states when switching tabs
+          blockEl.querySelectorAll('.template-tile.active').forEach(tile => {
+            tile.classList.remove('active');
+          });
 
           // Render Level 1 grid
           const grid = blockData.grids[tab.key];
-          renderTiles(grid.items, 1, grid.label);
+          const newLevel = renderTiles(grid.items, 1, grid.label);
 
           updateLevelTitle(grid.label);
+          
+          // Scroll to the newly created level after rendering
+          if (newLevel) {
+            scrollToElement(newLevel);
+          } else {
+            scrollToGridsContainer();
+          }
         });
 
         tabsContainer.appendChild(btn);
@@ -123,6 +164,32 @@ document.addEventListener("DOMContentLoaded", () => {
     /** Update section heading (Level Title) */
     function updateLevelTitle(text) {
       if (levelTitle) levelTitle.textContent = text || "";
+    }
+
+    /** Smooth scroll to grids container */
+    function scrollToGridsContainer() {
+      if (gridsContainer) {
+        // Use requestAnimationFrame to ensure DOM is updated before scrolling
+        requestAnimationFrame(() => {
+          gridsContainer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        });
+      }
+    }
+
+    /** Smooth scroll to a specific element */
+    function scrollToElement(element) {
+      if (element) {
+        // Use requestAnimationFrame to ensure DOM is updated before scrolling
+        requestAnimationFrame(() => {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        });
+      }
     }
 
     // Initialize

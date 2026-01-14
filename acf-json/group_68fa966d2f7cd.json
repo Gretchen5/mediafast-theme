@@ -184,6 +184,7 @@
                     "collapsed": "field_68fa97335ecf4",
                     "button_label": "Add Level 2 Category",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_68fa96b65ecf1",
                     "sub_fields": [
                         {
                             "key": "field_68fa97335ecf4",
@@ -235,6 +236,28 @@
                             "parent_repeater": "field_68fa97205ecf3"
                         },
                         {
+                            "key": "field_6966f6cb1c462",
+                            "label": "PDF File",
+                            "name": "pdf_file",
+                            "aria-label": "",
+                            "type": "file",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0,
+                            "parent_repeater": "field_68fa97205ecf3"
+                        },
+                        {
                             "key": "field_68fa974a5ecf6",
                             "label": "Tmpl Cat 3",
                             "name": "tmpl_cat_3",
@@ -242,7 +265,14 @@
                             "type": "repeater",
                             "instructions": "Template Categories Level 3 (eg. 2.4\" SD)",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_6966f6cb1c462",
+                                        "operator": "==empty"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -305,6 +335,28 @@
                                     "parent_repeater": "field_68fa974a5ecf6"
                                 },
                                 {
+                                    "key": "field_6966f9591c463",
+                                    "label": "PDF File",
+                                    "name": "pdf_file",
+                                    "aria-label": "",
+                                    "type": "file",
+                                    "instructions": "If there is only one PDF file and this is the end of the branching of categories, add the PDF link here.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_size": "",
+                                    "max_size": "",
+                                    "mime_types": "",
+                                    "allow_in_bindings": 0,
+                                    "parent_repeater": "field_68fa974a5ecf6"
+                                },
+                                {
                                     "key": "field_68fa979a3e8f7",
                                     "label": "Tmpl Cat 4",
                                     "name": "tmpl_cat_4",
@@ -312,7 +364,14 @@
                                     "type": "repeater",
                                     "instructions": "Add Template Categories Level 4",
                                     "required": 0,
-                                    "conditional_logic": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_6966f9591c463",
+                                                "operator": "==empty"
+                                            }
+                                        ]
+                                    ],
                                     "wrapper": {
                                         "width": "",
                                         "class": "",
@@ -403,28 +462,6 @@
                                             "mime_types": "",
                                             "allow_in_bindings": 0,
                                             "parent_repeater": "field_68fa979a3e8f7"
-                                        },
-                                        {
-                                            "key": "field_68fa97f63e8fb",
-                                            "label": "No PDF Note",
-                                            "name": "no_pdf_note",
-                                            "aria-label": "",
-                                            "type": "true_false",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "message": "No PDF Available",
-                                            "default_value": 0,
-                                            "allow_in_bindings": 0,
-                                            "ui_on_text": "Yes",
-                                            "ui_off_text": "No",
-                                            "ui": 1,
-                                            "parent_repeater": "field_68fa979a3e8f7"
                                         }
                                     ],
                                     "parent_repeater": "field_68fa974a5ecf6"
@@ -432,8 +469,7 @@
                             ],
                             "parent_repeater": "field_68fa97205ecf3"
                         }
-                    ],
-                    "parent_repeater": "field_68fa96b65ecf1"
+                    ]
                 }
             ]
         }
@@ -457,5 +493,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1761345124
+    "modified": 1768359295
 }

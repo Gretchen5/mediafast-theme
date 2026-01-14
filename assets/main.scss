@@ -930,6 +930,11 @@ h4,
   padding-bottom: 20rem;
 }
 
+.px-2rem {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
 .mt-neg-100 {
   margin-top: -100px;
   @media screen and (max-width: 767px) {
@@ -955,6 +960,10 @@ h4,
 
 .fs-20 {
   font-size: 20px;
+}
+
+small {
+  line-height: 1;
 }
 
 .btn-primary {
@@ -1009,6 +1018,51 @@ figure.rounded img {
 .subfooter-col-1 div .wp-block-social-links {
   justify-content: center;
   margin-bottom: 0;
+  
+  // Responsive icon sizing - reduce incrementally as screen gets smaller
+  .wp-block-social-link {
+    // Default size: 24px (set by WordPress)
+    
+    // Tablet and smaller
+    @media (max-width: 991.98px) {
+      .wp-block-social-link-anchor {
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+    
+    // Mobile landscape
+    @media (max-width: 767.98px) {
+      .wp-block-social-link-anchor {
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+    
+    // Mobile portrait
+    @media (max-width: 575.98px) {
+      .wp-block-social-link-anchor {
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+    
+    // Small mobile
+    @media (max-width: 375px) {
+      .wp-block-social-link-anchor {
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
 }
 
 #footer .menu-item.current-menu-item > a[aria-current="page"] {
@@ -2593,4 +2647,28 @@ ul.wp-block-list li {
 }
 .min-h-950px {
   min-height: 950px !important;
+}
+
+
+.video-responsive-width {
+  width: 60%;
+  margin: 0 auto;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+// Footer Logo
+.logo-container img {
+  max-width: 350px;
 }

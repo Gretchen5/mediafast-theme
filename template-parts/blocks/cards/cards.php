@@ -28,7 +28,7 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
         <?php if ($section_description) : ?>
             <div class="my-4"><?php echo $section_description; ?></div>
         <?php endif; ?>
-        <div class="row g-4 pt-4">
+        <div class="row g-4 pt-4 justify-content-center">
             <?php
             if (have_rows('card_repeater')) :
 
@@ -43,7 +43,7 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                     $card_icon_color = get_sub_field('card_icon_color') ? get_sub_field('card_icon_color') : '';
 
             ?>
-                    <div class="col card-col">
+                    <div class="col-10 col-md-6 col-lg-4 card-col">
                         <div class="card shadow <?php echo $card_border . ' ' . $card_background_color; ?> h-100 border-radius-40 px-3">
                             <?php if ($card_image) : ?>
                                 <img src="<?php echo esc_url($card_image['url']); ?>" class="card-img-top p-3" alt="<?php echo esc_attr($card_image['alt']); ?>">

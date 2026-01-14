@@ -116,6 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageSlider = new Swiper(".image-slider", {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
+      loopAdditionalSlides: 2, // Add extra slides for seamless looping
+      loopedSlides: 4, // Number of slides to duplicate for loop
       slidesPerView: 4,
       spaceBetween: 8, // Reduced spacing by half
       speed: 600, // Smooth transition

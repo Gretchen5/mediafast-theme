@@ -23,7 +23,7 @@ if ($testimonials->have_posts()) : ?>
         </div>
 
         <!-- Swiper -->
-        <div class="swiper testimonial-swiper pb-75">
+        <div class="swiper testimonial-swiper pb-5">
             <div class="swiper-wrapper">
 
                 <?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>

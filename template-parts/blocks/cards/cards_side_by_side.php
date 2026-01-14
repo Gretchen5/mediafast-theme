@@ -4,10 +4,13 @@ $cards = get_field('card_repeater');
 $pdf_intro = get_field('pdf_intro') ?: '';
 $pdf_link = get_field('pdf_link');
 $number_of_cards = get_field('number_of_cards') ?: 'row-cols-lg-4';
+
+// Dynamic padding class based on PDF Guide presence
+$padding_class = (!empty($pdf_link) && is_array($pdf_link)) ? 'py-75' : 'py-5';
 ?>
 
 <!-- Cards Side by Side Section -->
-<section class="component--cards-side-by-side bg-very-light-gray py-75">
+<section class="component--cards-side-by-side bg-very-light-gray <?php echo esc_attr($padding_class); ?>">
     <?php if (!empty($pdf_link) && is_array($pdf_link)): ?>
         <div class="container pdf-section">
             <div class="pdf-block-card">

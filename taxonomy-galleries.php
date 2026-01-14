@@ -45,7 +45,7 @@ if (have_posts()) :
 	?>
 
 
-	<section class="component--hero position-relative my-5">
+	<section class="component--hero position-relative pb-5">
 		<div class="background-image py-75" style="<?php echo $background_image . '' . $background_position; ?>">
 			<div class="overlay" style="--overlay-opacity: <?php echo esc_attr($overlay_selection); ?>"></div>
 			<div class="content-container position-relative z-2 pt-175">

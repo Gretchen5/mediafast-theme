@@ -9,8 +9,8 @@ $accordion_id     = 'accordion-' . uniqid();
 
 <section class="component--content-image-dark <?php echo esc_attr($background_color . ' ' . $vertical_padding); ?>">
     <div class="container-fluid px-0">
-        <div class="row g-0 align-items-stretch">
-            <div class="content-column col-12 col-lg-6">
+        <div class="row g-0 align-items-stretch flex-column-reverse flex-md-row">
+            <div class="content-column col-12 col-md-6">
                 <div class="content-pane h-100 p-4 p-md-5 text-white d-flex flex-column">
                     <?php if ($heading) : ?>
                         <h2 class="fw-600 mb-4 lh-sm"><?php echo wp_kses_post($heading); ?></h2>
@@ -53,7 +53,7 @@ $accordion_id     = 'accordion-' . uniqid();
                 </div>
             </div>
 
-            <div class="image-column col-12 col-lg-6">
+            <div class="image-column col-12 col-md-6">
                 <div class="image-pane h-100">
                     <?php if ($background_url) : ?>
                         <div class="image-pane__bg h-100" style="background-image: url(<?php echo esc_url($background_url); ?>)"></div>

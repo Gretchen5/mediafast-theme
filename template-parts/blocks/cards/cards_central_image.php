@@ -11,7 +11,7 @@ $card_heading_padding_bottom = get_field('card_heading_padding-bottom') ? get_fi
 $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
 ?>
 
-<section class="component--cards py-5">
+<section class="component--cards pb-5">
     <div class="container">
         <?php if ($section_heading) : ?>
             <h2 class="text-center mb-4"><?php echo $section_heading; ?></h2>

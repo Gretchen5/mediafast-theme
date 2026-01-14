@@ -9,7 +9,7 @@ $images = get_field('image_slider');
 ?>
 
 <!-- Image Slider Section -->
-<section class="component--image-slider-section bg-lt-gray pt-5 <?php echo esc_attr($vertical_padding); ?>">
+<section class="component--image-slider-section bg-lt-gray <?php echo esc_attr($vertical_padding); ?>">
     <?php if ($section_heading || $description) : ?>
         <div class="container text-center">
             <?php if ($section_heading) : ?>
