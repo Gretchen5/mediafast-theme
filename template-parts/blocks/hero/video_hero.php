@@ -1,7 +1,14 @@
 <?php
 // Video Hero Fields
-$video_mp4      = get_field('video_mp4');
-$poster_image   = get_field('poster_image') ? get_field('poster_image') : '';
+$video_mp4_raw  = get_field('video_mp4');
+$video_mp4      = is_array($video_mp4_raw) ? ($video_mp4_raw['url'] ?? '') : (string) $video_mp4_raw;
+$video_mp4      = $video_mp4 ? set_url_scheme($video_mp4, 'https') : '';
+$poster_raw     = get_field('poster_image');
+$poster_image   = '';
+if ($poster_raw) {
+	$poster_image = is_array($poster_raw) ? ($poster_raw['url'] ?? '') : (string) $poster_raw;
+	$poster_image = $poster_image ? set_url_scheme($poster_image, 'https') : '';
+}
 $heading        = get_field('heading');
 $subheading     = get_field('subheading');
 

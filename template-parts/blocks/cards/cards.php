@@ -46,7 +46,7 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                     <div class="col-10 col-md-6 col-lg-4 card-col">
                         <div class="card shadow <?php echo $card_border . ' ' . $card_background_color; ?> h-100 border-radius-40 px-3">
                             <?php if ($card_image) : ?>
-                                <img src="<?php echo esc_url($card_image['url']); ?>" class="card-img-top p-3" alt="<?php echo esc_attr($card_image['alt']); ?>">
+                                <img src="<?php echo esc_url($card_image['url']); ?>" class="card-img-top p-3" alt="<?php echo esc_attr($card_image['alt']); ?>" loading="lazy" />
                             <?php elseif ($card_icon) : ?>
                                 <div class="card-icon text-center p-3 <?php echo $card_icon_color; ?>">
                                     <?php echo get_inline_icon($card_icon); ?>

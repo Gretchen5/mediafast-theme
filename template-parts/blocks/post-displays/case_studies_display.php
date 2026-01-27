@@ -39,20 +39,28 @@ $vertical_padding = get_field('vertical_padding') ?: '';
                     <div class="swiper-wrapper text-center pb-5">
 
                         <?php
-                        $case_studies = new WP_Query([
-                            'post_type'      => 'case-study',
-                            'posts_per_page' => -1,
-                            'orderby'        => 'rand',
-                        ]);
+                        $transient_key = 'mediafast_case_studies_slider';
+                        $case_posts    = get_transient($transient_key);
 
-                        if ($case_studies->have_posts()) :
-                            while ($case_studies->have_posts()) :
-                                $case_studies->the_post();
-                                $thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                        if (false === $case_posts) {
+                            $case_query = new WP_Query([
+                                'post_type'              => 'case-study',
+                                'posts_per_page'         => 20,
+                                'orderby'                => 'rand',
+                                'no_found_rows'          => true,
+                                'update_post_meta_cache' => false,
+                            ]);
+                            $case_posts = $case_query->posts;
+                            wp_reset_postdata();
+                            set_transient($transient_key, $case_posts, HOUR_IN_SECONDS);
+                        }
+
+                        if (! empty($case_posts)) :
+                            foreach ($case_posts as $post) :
+                                setup_postdata($post);
+                                $thumb = get_the_post_thumbnail_url($post->ID, 'large');
                                 $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words(strip_tags(get_the_content()), 25, '…');
-
-                                // Get taxonomy term
-                                $industry = wp_get_post_terms(get_the_ID(), 'industry');
+                                $industry = wp_get_post_terms($post->ID, 'industry');
                                 $industry_name = $industry ? $industry[0]->name : '';
                                 $industry_link = $industry ? get_term_link($industry[0]) : '';
                         ?>
@@ -72,18 +80,16 @@ $vertical_padding = get_field('vertical_padding') ?: '';
 
                                     <div class="p-4 d-flex flex-column flex-grow-1">
 
-                                       
-
                                         <h3 class="fs-5 fw-600 text-dark mb-2"><?php the_title(); ?></h3>
 
                                         <p class="text-muted flex-grow-1 mb-3">
-                                            <?php echo $excerpt; ?>
+                                            <?php echo esc_html($excerpt); ?>
                                         </p>
 
                                         <?php if ($industry_name): ?>
                                             <a href="<?php echo esc_url($industry_link); ?>" 
                                             class="btn btn-primary text-white mb-2 mx-auto">
-                                                <?php echo $industry_name; ?>
+                                                <?php echo esc_html($industry_name); ?>
                                             </a>
                                         <?php endif; ?>
 
@@ -92,7 +98,7 @@ $vertical_padding = get_field('vertical_padding') ?: '';
                             </div>
 
                         <?php
-                            endwhile;
+                            endforeach;
                             wp_reset_postdata();
                         endif;
                         ?>

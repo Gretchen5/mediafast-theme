@@ -1,12 +1,13 @@
 <?php
-
-$heading = get_field('heading');
-$description = get_field('description');
-$image = get_field('image');
-$cta_button = get_field('cta_button') ? get_field('cta_button') : '';
-$alignment = get_field('alignment');
-$vertical_padding = get_field('vertical_padding') ? get_field('vertical_padding') : '';
-$background_color = get_field('background_color') ? get_field('background_color') : '';
+// Optimized: Fetch all fields at once instead of multiple get_field() calls
+$fields = get_fields();
+$heading = $fields['heading'] ?? '';
+$description = $fields['description'] ?? '';
+$image = $fields['image'] ?? [];
+$cta_button = $fields['cta_button'] ?? '';
+$alignment = $fields['alignment'] ?? '';
+$vertical_padding = $fields['vertical_padding'] ?? '';
+$background_color = $fields['background_color'] ?? '';
 ?>
 
 <section class="component--content-image-block <?php echo esc_attr($vertical_padding . ' ' . $background_color); ?>">
@@ -20,7 +21,9 @@ $background_color = get_field('background_color') ? get_field('background_color'
                 <?php endif; ?>
             </div>
             <div class="col-12 col-lg-6">
-                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid" />
+                <?php if (!empty($image) && isset($image['url'])) : ?>
+                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>" class="img-fluid" loading="lazy" />
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -57,9 +57,9 @@ $dk-teal: #17536b;
 // $cyan: #027dad;
 $cyan: #01719d;
 $dk-cyan: #267798;
-$gold: #b38442;
-$lt-gold: #b5976d;
-$dk-gold: #b38442;
+$gold: #757575;
+$lt-gold: #adb5bd;
+$dk-gold: #757575;
 
 $primary: $cyan;
 $secondary: $blue;
@@ -385,9 +385,14 @@ nav:not(.home) .navbar-toggler-icon::after {
       height: 24px;
     }
     @media screen and (min-width: 992px) {
-      height: 26px;
+      height: 25px;
     }
   }
+}
+
+.menu-phone-link a {
+  color: $primary;
+  font-weight: 600;
 }
 
 // #header {
@@ -497,6 +502,15 @@ nav.home {
 
   p {
     margin-top: 10px;
+  }
+
+  // Remove default underline from all footer links
+  a {
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .menu-item {
@@ -752,7 +766,7 @@ h6,
 .h6 {
   // font-family: 'Rubik', sans-serif;
   font-family: "Montserrat", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
 }
 
@@ -1008,8 +1022,9 @@ figure.rounded img {
     color: #fff;
     padding: 0.2rem;
     display: block;
+    text-decoration: none;
     &:hover {
-      color: #cfb694 !important;
+      color: $lt-gold !important;
       text-decoration: underline;
     }
   }
@@ -1066,7 +1081,7 @@ figure.rounded img {
 }
 
 #footer .menu-item.current-menu-item > a[aria-current="page"] {
-  color: #cfb694;
+  color: $lt-gold;
   text-decoration: underline;
 }
 

@@ -40,7 +40,5 @@ document.addEventListener('DOMContentLoaded', () => {
 				iso.arrange({ filter: filterValue });
 			});
 		});
-
-		console.log('Isotope initialized');
 	});
 });

@@ -37,13 +37,13 @@ $vertical_padding = get_field('vertical_padding') ? get_field('vertical_padding'
             </div>
             <div class="col-xl-6 offset-xl-1 col-lg-6 position-relative md-mb-6 sm-mb-50px">
                 <div class="overflow-hidden text-end w-80 ms-auto animation-float" data-anime='{ "effect": "slide", "direction": "lr", "color": "#1f355a", "duration": 1000, "delay": 0 }'>
-                    <img src="http://mediafast.local/wp-content/uploads/2025/08/video_brochure_450x527.jpg" alt="" class="w-100 border-radius-5px">
+                    <img src="http://mediafast.local/wp-content/uploads/2025/08/video_brochure_450x527.jpg" alt="" class="w-100 border-radius-5px" loading="lazy" />
                 </div>
                 <div class="position-absolute bottom-minus-50px w-60 atropos" data-atropos data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)" data-anime='{ "effect": "slide", "direction": "lr", "color": "#027dad", "duration": 1000, "delay": 500 }'>
                     <div class="atropos-scale">
                         <div class="atropos-rotate">
                             <div class="atropos-inner text-center">
-                                <img class="w-100 border-radius-5px" data-atropos-offset="3" src="http://mediafast.local/wp-content/uploads/2025/08/video_brochure_2_450x367.jpg" alt="">
+                                <img class="w-100 border-radius-5px" data-atropos-offset="3" src="http://mediafast.local/wp-content/uploads/2025/08/video_brochure_2_450x367.jpg" alt="" loading="lazy" />
                             </div>
                         </div>
                     </div>

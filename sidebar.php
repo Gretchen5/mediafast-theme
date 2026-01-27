@@ -29,29 +29,40 @@ if (is_active_sidebar('primary_widget_area') && !is_archive() && !is_single()) :
 			<div class="bg-faded sidebar-nav">
 				<div id="primary-two" class="widget-area">
 					<?php
-					$output                = '<ul class="recentposts">';
-					$recentposts_query = new WP_Query(array('posts_per_page' => 5)); // Max. 5 posts in Sidebar!
-					$month_check       = null;
-					if ($recentposts_query->have_posts()) :
-						$output .= '<li><h3>' . esc_html__('Recent Posts', 'mediafast') . '</h3></li>';
-						while ($recentposts_query->have_posts()) :
-							$recentposts_query->the_post();
-							$output .= '<li>';
-							// Show monthly archive and link to months.
-							$month = get_the_date('F, Y');
-							if ($month !== $month_check) :
-								$output .= '<a href="' . esc_url(get_month_link(get_the_date('Y'), get_the_date('m'))) . '" title="' . esc_attr(get_the_date('F, Y')) . '">' . esc_html($month) . '</a>';
-							endif;
-							$month_check = $month;
+					$transient_key = 'mediafast_sidebar_recent_posts';
+					$recent_html   = get_transient($transient_key);
 
-							$output .= '<h4><a href="' . esc_url(get_permalink()) . '" title="' . sprintf(esc_attr__('Permalink to %s', 'mediafast'), the_title_attribute(array('echo' => false))) . '" rel="bookmark">' . esc_html(get_the_title()) . '</a></h4>';
-							$output .= '</li>';
-						endwhile;
-					endif;
-					wp_reset_postdata();
-					$output .= '</ul>';
-
-					echo $output;
+					if (false !== $recent_html) {
+						echo $recent_html;
+					} else {
+						$output  = '<ul class="recentposts">';
+						$query   = new WP_Query([
+							'posts_per_page'         => 5,
+							'post_type'              => 'post',
+							'no_found_rows'          => true,
+							'update_post_meta_cache' => false,
+							'update_post_term_cache' => false,
+						]);
+						$month_check = null;
+						if ($query->have_posts()) {
+							$output .= '<li><h3>' . esc_html__('Recent Posts', 'mediafast') . '</h3></li>';
+							while ($query->have_posts()) {
+								$query->the_post();
+								$output .= '<li>';
+								$month = get_the_date('F, Y');
+								if ($month !== $month_check) {
+									$output .= '<a href="' . esc_url(get_month_link(get_the_date('Y'), get_the_date('m'))) . '" title="' . esc_attr(get_the_date('F, Y')) . '">' . esc_html($month) . '</a>';
+								}
+								$month_check = $month;
+								$output .= '<h4><a href="' . esc_url(get_permalink()) . '" title="' . esc_attr(sprintf(__('Permalink to %s', 'mediafast'), get_the_title())) . '" rel="bookmark">' . esc_html(get_the_title()) . '</a></h4>';
+								$output .= '</li>';
+							}
+						}
+						wp_reset_postdata();
+						$output .= '</ul>';
+						set_transient($transient_key, $output, 30 * MINUTE_IN_SECONDS);
+						echo $output;
+					}
 					?>
 					<br />
 					<ul class="categories">

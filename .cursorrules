@@ -1,0 +1,105 @@
+# MediaFast WordPress Theme - Performance Optimization Rules
+
+## Core Performance Principles
+
+1. **Minimize HTTP Requests**
+   - Combine CSS/JS files where possible
+   - Use CSS sprites for icons when appropriate
+   - Limit external font/script dependencies
+
+2. **Optimize Asset Loading**
+   - Defer non-critical JavaScript
+   - Load CSS asynchronously when possible
+   - Use `preload` for critical resources
+   - Implement lazy loading for images and iframes
+
+3. **Image Optimization**
+   - Always use appropriate image sizes (WordPress image sizes)
+   - Implement lazy loading for images below the fold
+   - Use WebP format with fallbacks
+   - Compress images before upload
+   - Use `srcset` for responsive images
+
+4. **JavaScript Optimization**
+   - Load scripts in footer when possible (`true` in wp_enqueue_script)
+   - Use `defer` or `async` attributes for non-blocking scripts
+   - Conditionally load scripts only on pages that need them
+   - Minify JavaScript in production
+   - Remove unused JavaScript libraries
+
+5. **CSS Optimization**
+   - Remove unused CSS
+   - Minify CSS in production
+   - Avoid inline styles when possible
+   - Use critical CSS for above-the-fold content
+   - Split CSS by page type when beneficial
+
+6. **Database Optimization**
+   - Use `WP_Query` efficiently (limit fields, use caching)
+   - Avoid N+1 query problems
+   - Use transients for expensive queries
+   - Limit post queries with proper pagination
+
+7. **WordPress-Specific Optimizations**
+   - Disable unused WordPress features (emojis, embeds, etc.)
+   - Use object caching (Redis/Memcached) when available
+   - Implement proper caching headers
+   - Optimize ACF field queries
+   - Use `get_field()` efficiently (avoid repeated calls)
+
+8. **Third-Party Scripts**
+   - Load analytics asynchronously
+   - Defer third-party embeds (YouTube, etc.)
+   - Use `loading="lazy"` for iframes
+   - Consider self-hosting fonts instead of Google Fonts
+
+9. **Code Quality**
+   - Avoid `@import` in CSS (use `wp_enqueue_style` instead)
+   - Remove console.log statements in production
+   - Use efficient selectors in CSS
+   - Minimize DOM manipulation in JavaScript
+
+10. **Build Process**
+    - Minify and concatenate assets in production
+    - Use source maps for debugging in development only
+    - Tree-shake unused code
+    - Optimize bundle sizes
+
+## File-Specific Rules
+
+### PHP Files
+- Use `get_template_part()` instead of `include`/`require`
+- Cache expensive operations with transients
+- Use `wp_cache_get()` and `wp_cache_set()` for custom caching
+- Limit database queries in loops
+
+### JavaScript Files
+- Use event delegation for dynamic content
+- Debounce/throttle scroll/resize handlers
+- Remove event listeners when components unmount
+- Use `requestAnimationFrame` for animations
+
+### SCSS/CSS Files
+- Avoid deep nesting (max 3-4 levels)
+- Use CSS variables for theming
+- Avoid `!important` unless necessary
+- Use efficient selectors (avoid universal selectors)
+
+## Performance Checklist for New Features
+
+- [ ] Images are optimized and use appropriate sizes
+- [ ] JavaScript is loaded conditionally or deferred
+- [ ] CSS is minified and unused styles removed
+- [ ] Database queries are optimized and cached
+- [ ] No blocking resources in `<head>`
+- [ ] Third-party scripts are loaded asynchronously
+- [ ] Lazy loading is implemented for below-fold content
+- [ ] Code is minified in production builds
+
+## Performance Targets
+
+- First Contentful Paint (FCP): < 1.8s
+- Largest Contentful Paint (LCP): < 2.5s
+- Time to Interactive (TTI): < 3.8s
+- Cumulative Layout Shift (CLS): < 0.1
+- Total Blocking Time (TBT): < 200ms

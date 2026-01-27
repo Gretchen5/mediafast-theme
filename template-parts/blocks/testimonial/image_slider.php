@@ -13,7 +13,7 @@ $images = get_field('image_slider');
     <?php if ($section_heading || $description) : ?>
         <div class="container text-center">
             <?php if ($section_heading) : ?>
-                <h2 class="section-title pb-2 <?php echo esc_attr($heading_color); ?> mb-0 lh-1">
+                <h2 class="section-title pt-5 pb-2 <?php echo esc_attr($heading_color); ?> mb-0 lh-1">
                     <?php echo wp_kses_post($section_heading); ?>
                 </h2>
             <?php endif; ?>

@@ -38,74 +38,72 @@ import "swiper/css/effect-fade";
 
 Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
 
-// Home Hero Slider
-const heroSwiper = new Swiper(".home-hero-swiper", {
-  modules: [Navigation, Pagination, Autoplay, EffectFade],
-
-  slidesPerView: 1,
-  loop: true,
-
-  effect: "fade",
-  fadeEffect: { crossFade: true },
-
-  autoplay: {
-    delay: 2000,
-  },
-  allowTouchMove: false,
-
-  navigation: {
-    nextEl: ".slider-one-slide-next-1",
-    prevEl: ".slider-one-slide-prev-1",
-  },
-
-  pagination: {
-    el: ".swiper-pagination-bullets",
-    clickable: true,
-  },
-
-  keyboard: {
-    enabled: true,
-    onlyInViewport: true,
-  },
-
-  speed: 2000,
+// Home Hero Slider - Only initialize if element exists
+document.addEventListener("DOMContentLoaded", () => {
+  const heroSwiperEl = document.querySelector(".home-hero-swiper");
+  if (heroSwiperEl) {
+    new Swiper(".home-hero-swiper", {
+      modules: [Navigation, Pagination, Autoplay, EffectFade],
+      slidesPerView: 1,
+      loop: true,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      autoplay: {
+        delay: 2000,
+      },
+      allowTouchMove: false,
+      navigation: {
+        nextEl: ".slider-one-slide-next-1",
+        prevEl: ".slider-one-slide-prev-1",
+      },
+      pagination: {
+        el: ".swiper-pagination-bullets",
+        clickable: true,
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      speed: 2000,
+    });
+  }
 });
 
-// Testimonial Slider (Component Scoped)
-const testimonialSwiper = new Swiper(".testimonial-swiper", {
-  slidesPerView: 3,
-  loopedSlides: 20,
-  spaceBetween: 30,
-  slidesPerGroup: 1,
-  direction: "horizontal",
-  loop: true,
-  loopFillGroupWithBlank: true,
-
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-
-  pagination: {
-    el: ".testimonial-swiper-pagination",
-    clickable: true,
-  },
-
-  navigation: {
-    nextEl: ".testimonial-swiper-button-next",
-    prevEl: ".testimonial-swiper-button-prev",
-  },
-
-  scrollbar: {
-    el: ".testimonial-swiper-scrollbar",
-    draggable: true,
-  },
-
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
+// Testimonial Slider - Only initialize if element exists
+document.addEventListener("DOMContentLoaded", () => {
+  const testimonialSwiperEl = document.querySelector(".testimonial-swiper");
+  if (testimonialSwiperEl) {
+    new Swiper(".testimonial-swiper", {
+      slidesPerView: 3,
+      loopedSlides: 20,
+      spaceBetween: 30,
+      slidesPerGroup: 1,
+      direction: "horizontal",
+      loop: true,
+      loopFillGroupWithBlank: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".testimonial-swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".testimonial-swiper-button-next",
+        prevEl: ".testimonial-swiper-button-prev",
+      },
+      scrollbar: {
+        el: ".testimonial-swiper-scrollbar",
+        draggable: true,
+      },
+      breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  }
 });
 
 // Image Slider - Optimized for performance
@@ -219,7 +217,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!mediaModal || !mediaContainer) return;
 
     const type = trigger.getAttribute("data-type");
-    console.log("Modal trigger type:", type);
     const title = trigger.getAttribute("data-title") || "";
     const desc = trigger.getAttribute("data-description") || "";
     const video = trigger.getAttribute("data-video") || "";

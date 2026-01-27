@@ -87,7 +87,7 @@ $vertical_padding = get_field('vertical_padding') ? get_field('vertical_padding'
                                         </div>
                                     </div>
                                     <div class="col-sm-6 services-box-img xs-h-300px">
-                                        <img src="http://mediafast.local/wp-content/uploads/2025/07/Firman-Pollen-1024x683.jpg" alt="">
+                                        <img src="http://mediafast.local/wp-content/uploads/2025/07/Firman-Pollen-1024x683.jpg" alt="" loading="lazy" />
 
                                     </div>
                                 </div>

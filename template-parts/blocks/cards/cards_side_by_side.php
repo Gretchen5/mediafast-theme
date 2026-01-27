@@ -59,7 +59,7 @@ $padding_class = (!empty($pdf_link) && is_array($pdf_link)) ? 'py-75' : 'py-5';
                             <i class="<?php echo esc_attr($icon); ?> side-by-side-card__icon"></i>
                         </div>
                         <div class="side-by-side-card__content">
-                            <h3 class="side-by-side-card__heading"><?php echo wp_kses_post($heading); ?></h3>
+                            <h2 class="side-by-side-card__heading"><?php echo wp_kses_post($heading); ?></h2>
                             <div class="side-by-side-card__description">
                                 <?php echo wp_kses_post($description); ?>
                             </div>

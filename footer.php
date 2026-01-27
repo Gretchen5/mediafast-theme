@@ -77,7 +77,7 @@
 							endif; ?>
 							<?php if ($footer_logo_woman) : ?>
 								<div class="logo-container col-md-6 col-12 pt-4">
-									<img width="150" src="<?php echo esc_url($footer_logo_woman['url']); ?>" alt="<?php echo esc_attr($footer_logo_woman['alt']); ?>">
+									<img width="150" src="<?php echo esc_url($footer_logo_woman['url']); ?>" alt="<?php echo esc_attr($footer_logo_woman['alt']); ?>" loading="lazy" />
 								</div>
 							<?php endif; ?>
 						</div>
@@ -149,7 +149,7 @@
 					<div class="col subfooter-col-3 d-flex align-items-center justify-content-center text-center text-sm-start">
 						<?php if ($footer_logo) : ?>
 							<div class="logo-container px-4">
-								<img width="100%" src="<?php echo esc_url($footer_logo['url']); ?>" alt="<?php echo esc_attr($footer_logo['alt']); ?>">
+								<img width="100%" src="<?php echo esc_url($footer_logo['url']); ?>" alt="<?php echo esc_attr($footer_logo['alt']); ?>" loading="lazy" />
 							</div>
 						<?php endif; ?>
 					</div>

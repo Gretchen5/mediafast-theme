@@ -34,7 +34,8 @@ $heading = get_field('heading') ?: '';
                                 <div class="team-card__image">
                                     <img src="<?php echo esc_url($bio_image['url']); ?>"
                                          alt="<?php echo esc_attr($bio_image['alt'] ?: $name_text); ?>"
-                                         class="img-fluid">
+                                         class="img-fluid"
+                                         loading="lazy" />
                                 </div>
                             <?php endif; ?>
                             <div class="team-card__content pt-2">

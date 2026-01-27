@@ -1,5 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const webpackConfig = require("@wordpress/scripts/config/webpack.config");
 const webpack = require('webpack');
 
@@ -11,6 +13,26 @@ module.exports = {
 	...webpackConfig,
 	...{
 		mode: isProduction ? "production" : "development",
+		// Source maps only in development (faster builds, smaller production bundles)
+		devtool: isProduction ? false : "cheap-module-source-map",
+		// Production optimizations: minify JS (drop console) + CSS
+		...(isProduction && {
+			optimization: {
+				...webpackConfig.optimization,
+				minimizer: [
+					new TerserPlugin({
+						parallel: true,
+						terserOptions: {
+							output: { comments: /translators:/i },
+							compress: { passes: 2, drop_console: true },
+							mangle: { reserved: ["__", "_n", "_nx", "_x"] },
+						},
+						extractComments: false,
+					}),
+					new CssMinimizerPlugin(),
+				],
+			},
+		}),
 		devServer: {
 			static: {
 				directory: path.join(__dirname, "assets"),

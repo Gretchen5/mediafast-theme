@@ -4,14 +4,24 @@ $description          = get_field('description');
 $quote_icon           = get_field('quote_icon');
 $section_cta_button   = get_field('section_cta_button');
 
-$args = array(
-    'post_type'      => 'testimonial',
-    'posts_per_page' => -1,
-    'post_status'    => 'publish'
-);
-$testimonials = new WP_Query($args);
+$transient_key = 'mediafast_testimonials_slider';
+$posts        = get_transient($transient_key);
 
-if ($testimonials->have_posts()) : ?>
+if (false === $posts) {
+	$query = new WP_Query([
+		'post_type'              => 'testimonial',
+		'posts_per_page'         => 50,
+		'post_status'            => 'publish',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => false,
+		'update_post_term_cache' => false,
+	]);
+	$posts = $query->posts;
+	wp_reset_postdata();
+	set_transient($transient_key, $posts, HOUR_IN_SECONDS);
+}
+
+if (! empty($posts)) : ?>
 <section class="component--testimonial-slider-section">
 
     <div class="container py-5 position-relative">
@@ -26,7 +36,7 @@ if ($testimonials->have_posts()) : ?>
         <div class="swiper testimonial-swiper pb-5">
             <div class="swiper-wrapper">
 
-                <?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>
+                <?php foreach ($posts as $post) : setup_postdata($post); ?>
                 <div class="swiper-slide testimonial-swiper-slide">
 
                     <div class="testimonial-card p-4 d-flex flex-column align-items-center text-center">
@@ -59,7 +69,7 @@ if ($testimonials->have_posts()) : ?>
                     </div>
 
                 </div>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
 
             </div>
 

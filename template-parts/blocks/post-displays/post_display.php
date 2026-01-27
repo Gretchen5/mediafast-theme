@@ -8,10 +8,13 @@ $section_padding_bottom = get_field('section_padding_bottom') ?: '';
 
 // Build WP_Query args
 $args = array(
-    'post_type'      => 'post',
-    'posts_per_page' => 3,
-    'orderby'        => 'date',
-    'order'          => 'DESC'
+    'post_type'              => 'post',
+    'posts_per_page'         => 3,
+    'orderby'                => 'date',
+    'order'                  => 'DESC',
+    'no_found_rows'          => true,
+    'update_post_meta_cache' => false,
+    'update_post_term_cache' => false,
 );
 
 // Filter by category if selected

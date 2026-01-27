@@ -187,8 +187,8 @@
                 "id": ""
             },
             "choices": {
-                "flex-xl-row": "Video on the left",
-                "flex-xl-row-reverse": "Video on the right"
+                "flex-lg-row": "Video on the left",
+                "flex-lg-row-reverse": "Video on the right"
             },
             "default_value": false,
             "return_format": "value",
@@ -330,5 +330,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762631704
+    "modified": 1768886780
 }

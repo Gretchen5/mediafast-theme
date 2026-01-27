@@ -148,23 +148,28 @@ background: #002b55;
 
       &.active {
         background-color: #fff;
-        border-color: $gray-200 $gray-200 transparent $gray-200;
+        border-color: #afaeae #afaeae transparent #afaeae;
         color: $secondary;
+
+        &:hover {
+          background-color: #fff;
+          border-color: #afaeae #afaeae transparent #afaeae;
+        }
       }
 
-      &:hover {
+      &:hover:not(.active) {
         color: $secondary;
         background-color: $gray-100;
+        border-color: #afaeae;
       }
     }
   }
 
   .tab-content {
-    background: #fff;
-    border: 1px solid $gray-200;
-    border-radius: 0 8px 8px 8px;
+    background: #f8f6f4;
+    border-top: 1px solid #afaeae;
+    border-radius: 0;
     padding: 1.5rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
   }
 
   .component-pane {

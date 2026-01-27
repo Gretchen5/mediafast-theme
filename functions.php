@@ -99,7 +99,8 @@ if (! function_exists('mediafast_setup_theme')) {
 	function mediafast_load_editor_styles()
 	{
 		if (is_admin()) {
-			wp_enqueue_style('editor-style', get_theme_file_uri('style-editor.css'));
+			$theme_version = wp_get_theme()->get('Version');
+			wp_enqueue_style('editor-style', get_theme_file_uri('style-editor.css'), array(), $theme_version);
 		}
 	}
 	add_action('enqueue_block_assets', 'mediafast_load_editor_styles');
@@ -601,6 +602,25 @@ function mediafast_scripts_loader()
 }
 add_action('wp_enqueue_scripts', 'mediafast_scripts_loader');
 
+/**
+ * Add page slug to body class for reliable targeting across environments.
+ * Page IDs differ between local/staging/production; slug is consistent.
+ *
+ * @param array $classes Existing body classes.
+ * @return array Modified body classes.
+ */
+function mediafast_body_class_page_slug($classes) {
+	if (is_singular()) {
+		$post = get_queried_object();
+		if ($post && isset($post->post_name) && !empty($post->post_name)) {
+			$slug = sanitize_html_class($post->post_name);
+			$classes[] = 'page-slug-' . $slug;
+		}
+	}
+	return $classes;
+}
+add_filter('body_class', 'mediafast_body_class_page_slug');
+
 
 // Zade Balance Custom Functions
 
@@ -664,18 +684,7 @@ function reverse_gallery_order($query)
 	}
 }
 
-// Specificy How many Custom Posts Per Page for Custom Post Type
-add_action('pre_get_posts', 'custom_posts_per_page_for_cpt');
-function custom_posts_per_page_for_cpt($query)
-{
-	if (
-		!is_admin() &&
-		$query->is_main_query() &&
-		is_post_type_archive('your_cpt_slug') // ← Change this
-	) {
-		$query->set('posts_per_page', 15); // ← Change to desired number
-	}
-}
+// Removed: custom_posts_per_page_for_cpt (redundant; custom_posts_per_page handles all CPTs)
 
 // Add Gallery Type column to the Galleries CPT admin list
 add_filter('manage_gallery_posts_columns', 'add_gallery_type_column');
@@ -808,32 +817,54 @@ add_filter('paginate_links_output', function ($output) {
 });
 
 // Set number of posts to be shown on blog index page and on archive pages
-
 function custom_posts_per_page($query)
 {
-	// Only change the main query on the frontend
-	if (! is_admin() && $query->is_main_query()) {
+	if (is_admin() || ! $query->is_main_query()) {
+		return;
+	}
 
-		// Blog (posts index or category/tag archives)
-		if ($query->is_home() || $query->is_post_type_archive('post')) {
-			$query->set('posts_per_page', 8);
-		}
+	if ($query->is_home() || $query->is_post_type_archive('post')) {
+		$query->set('posts_per_page', 8);
+		return;
+	}
 
-		// Gallery CPT
-		if ($query->is_post_type_archive('gallery')) {
-			$query->set('posts_per_page', 15);
-		}
+	if ($query->is_post_type_archive('gallery')) {
+		$query->set('posts_per_page', 15);
+		return;
+	}
 
-		// Testimonials CPT
-		if ($query->is_post_type_archive('testimonials')) {
-			$query->set('posts_per_page', 15);
-		}
+	if ($query->is_post_type_archive('testimonial')) {
+		$query->set('posts_per_page', 15);
 	}
 }
 add_action('pre_get_posts', 'custom_posts_per_page');
 
-
-
+/**
+ * Invalidate cached query transients when relevant posts are saved.
+ * Ensures testimonial slider, case studies slider, and sidebar recent posts stay fresh.
+ */
+function mediafast_invalidate_query_transients($post_id)
+{
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+	$post = get_post($post_id);
+	if (! $post) {
+		return;
+	}
+	switch ($post->post_type) {
+		case 'testimonial':
+			delete_transient('mediafast_testimonials_slider');
+			break;
+		case 'case-study':
+			delete_transient('mediafast_case_studies_slider');
+			break;
+		case 'post':
+			delete_transient('mediafast_sidebar_recent_posts');
+			break;
+	}
+}
+add_action('save_post', 'mediafast_invalidate_query_transients');
 
 // Hide ACF "Pages Hero" on the taxonomy list page's Add form (keeps it visible on Edit Term)
 add_action('acf/input/admin_head', function () {

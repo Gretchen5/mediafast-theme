@@ -1,20 +1,20 @@
 <?php
-
-
-$heading = get_field('heading');
-$subheading = get_field('subheading');
-$description = get_field('description');
-$video_link = get_field('video_link');
-$background_color = get_field('background_color') ? get_field('background_color') : '';
-$video_position = get_field('video_position');
-$cta_button = get_field('cta_button') ? get_field('cta_button') : '';
-$vertical_padding = get_field('vertical_padding');
+// Optimized: Fetch all fields at once instead of multiple get_field() calls
+$fields = get_fields();
+$heading = $fields['heading'] ?? '';
+$subheading = $fields['subheading'] ?? '';
+$description = $fields['description'] ?? '';
+$video_link = $fields['video_link'] ?? '';
+$background_color = $fields['background_color'] ?? '';
+$video_position = $fields['video_position'] ?? '';
+$cta_button = $fields['cta_button'] ?? '';
+$vertical_padding = $fields['vertical_padding'] ?? '';
 ?>
 
 <section class="component--content-video-block <?php echo $background_color; ?>">
-    <div class="content-video-block-container container <?php echo $vertical_padding; ?> px-0">
-        <div class="content-video-block-flex-container d-flex flex-column-reverse gap-3 <?php echo $video_position; ?> justify-content-center align-items-center">
-            <div class="video-container col-12 col-xl-5">
+    <div class="content-video-block-container container <?php echo $vertical_padding; ?>">
+        <div class="content-video-block-flex-container d-flex flex-column-reverse gap-4 justify-content-center align-items-center">
+            <div class="video-container col-12 col-md-6">
                 <div class="video-player cvb-video-player">
                     <iframe
                         width="100%"
@@ -27,12 +27,12 @@ $vertical_padding = get_field('vertical_padding');
                     </iframe>
                 </div>
             </div>
-            <div class="content-container col-12 col-xl-5">
+            <div class="content-container col-12">
                 <?php if ($heading) { ?>
-                    <h2 class="text-secondary pb-3"><?php echo $heading; ?></h2>
+                    <h2 class="text-secondary text-center"><?php echo $heading; ?></h2>
                 <?php } ?>
                 <?php if ($subheading) { ?>
-                    <h3><?php echo $subheading; ?></h3>
+                    <h3 class="text-dk-gold text-center pb-3"><?php echo $subheading; ?></h3>
                 <?php } ?>
                 <?php if ($description) { ?>
                     <?php echo $description; ?>

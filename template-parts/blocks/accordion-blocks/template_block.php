@@ -162,7 +162,7 @@ $data = [
 ];
 
 // Attach data to window.TemplateTiles
-wp_enqueue_script('custom-template-tiles'); // make sure it’s enqueued
+// Script is enqueued in enqueue.php when on page-slug-templates-and-graphic-design
 $inline = 'window.TemplateTiles = window.TemplateTiles || {};'
     . 'window.TemplateTiles[' . json_encode($block_id) . '] = ' . wp_json_encode($data) . ';';
 wp_add_inline_script('custom-template-tiles', $inline, 'before');
