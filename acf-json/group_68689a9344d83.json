@@ -173,6 +173,58 @@
                     "parent_repeater": "field_68c4b2b8e1df2"
                 }
             ]
+        },
+        {
+            "key": "field_697909b21aa4f",
+            "label": "Privacy Policy Links",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6979096ee370c",
+            "label": "Footer Link 1",
+            "name": "footer_link_1",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_6979097de370d",
+            "label": "Footer Link 2",
+            "name": "footer_link_2",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -193,5 +245,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757721336
+    "display_title": "",
+    "modified": 1769540035
 }

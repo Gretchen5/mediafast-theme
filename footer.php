@@ -24,7 +24,6 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12">
-							<hr class="bg-cyan border-0 mx-auto mb-5" style="padding: 1px; width: 30%;">
 							<?php if ($wysiwyg) : ?>
 								<div class="wysiwyg-content">
 									<?php echo $wysiwyg; ?>
@@ -125,7 +124,7 @@
 						</div>
 					</div><!-- /.row -->
 				</div><!-- /.container -->
-				<div class="row flex-column flex-md-row subfooter bg-lt-gray pt-4 pb-3 justify-content-center justify-content-sm-start gap-2">
+				<div class="row flex-column flex-md-row subfooter bg-lt-gray pt-4 pb-3 justify-content-center justify-content-sm-start">
 					<div class="col subfooter-col-1 d-flex align-items-center text-center text-sm-start"><?php
 																				if (is_active_sidebar('third_widget_area')) :
 																					?>
@@ -142,8 +141,33 @@
 						<?php endif; ?>
 					</div>
 
-					<div class="col subfooter-col-2 d-flex align-items-center justify-content-center bg-lt-gray py-3 py-md-2">
+					<div class="col subfooter-col-2 d-flex flex-column align-items-center justify-content-center bg-lt-gray py-3 py-md-2">
 						<small class="text-secondary text-center text-lg-start m-0"><?php printf(esc_html__('&copy; %1$s %2$s. All rights reserved.', 'MediaFast'), wp_date('Y'), get_bloginfo('name', 'display')); ?></small>
+						<?php
+						$footer_link_1 = get_field('footer_link_1', 'option');
+						$footer_link_2 = get_field('footer_link_2', 'option');
+						?>
+						<?php if ($footer_link_1 || $footer_link_2) : ?>
+							<div class="footer-links d-flex flex-wrap align-items-center justify-content-center mt-2">
+								<?php if ($footer_link_1) : ?>
+									<a href="<?php echo esc_url($footer_link_1['url']); ?>" 
+									   target="<?php echo esc_attr($footer_link_1['target'] ?: '_self'); ?>"
+									   class="text-secondary text-decoration-none footer-link">
+										<?php echo esc_html($footer_link_1['title']); ?>
+									</a>
+								<?php endif; ?>
+								<?php if ($footer_link_1 && $footer_link_2) : ?>
+									<span class="text-secondary">|</span>
+								<?php endif; ?>
+								<?php if ($footer_link_2) : ?>
+									<a href="<?php echo esc_url($footer_link_2['url']); ?>" 
+									   target="<?php echo esc_attr($footer_link_2['target'] ?: '_self'); ?>"
+									   class="text-secondary text-decoration-none footer-link">
+										<?php echo esc_html($footer_link_2['title']); ?>
+									</a>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 					
 					<div class="col subfooter-col-3 d-flex align-items-center justify-content-center text-center text-sm-start">
