@@ -427,6 +427,12 @@ $home-card-circle-border: #dde3ed; // light gray border
 // =============================
 
 .about-section {
+  // Reduce image size by 20%
+  img {
+    max-width: 80%;
+    height: auto;
+  }
+
   &__title {
     font-weight: 600;
     line-height: 1.2;

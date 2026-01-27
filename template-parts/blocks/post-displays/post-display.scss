@@ -23,6 +23,9 @@
     border-radius: 40px 40px 0 0;
     margin-bottom: 0;
     box-shadow: $box-shadow;
+    // Increase height by 25px: use aspect-ratio with min-height
+    aspect-ratio: 1 / 0.52; // ~1.92:1 ratio
+    min-height: 233px; // Original ~208px + 25px = 233px
 
     a {
       display: block;
@@ -32,9 +35,9 @@
 
     img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 1 / 0.52; // ~1.92:1 ratio
-      object-fit: cover;
+      height: 100%;
+      object-fit: cover; // Fill entire space, crop if needed
+      object-position: center;
       border-radius: 40px 40px 0 0;
       transition: transform 0.4s ease;
       will-change: transform;
