@@ -13,7 +13,7 @@ if (false === $posts) {
 		'posts_per_page'         => 50,
 		'post_status'            => 'publish',
 		'no_found_rows'          => true,
-		'update_post_meta_cache' => false,
+		'update_post_meta_cache' => true, // Need meta cache for thumbnails
 		'update_post_term_cache' => false,
 	]);
 	$posts = $query->posts;
@@ -36,7 +36,12 @@ if (! empty($posts)) : ?>
         <div class="swiper testimonial-swiper pb-5">
             <div class="swiper-wrapper">
 
-                <?php foreach ($posts as $post) : setup_postdata($post); ?>
+                <?php 
+                global $post;
+                foreach ($posts as $cached_post) : 
+                    $post = $cached_post;
+                    setup_postdata($post);
+                ?>
                 <div class="swiper-slide testimonial-swiper-slide">
 
                     <div class="testimonial-card p-4 d-flex flex-column align-items-center text-center">
@@ -54,17 +59,21 @@ if (! empty($posts)) : ?>
                         <?php endif; ?>
 
                         <!-- Headshot -->
-                        <?php if (has_post_thumbnail()) : ?>
+                        <?php if (has_post_thumbnail($post->ID)) : ?>
                         <div class="testimonial-headshot mb-3">
-                            <?php the_post_thumbnail('medium'); ?>
+                            <?php echo get_the_post_thumbnail($post->ID, 'medium'); ?>
                         </div>
                         <?php endif; ?>
 
-                        <h3 class="h5 py-3 text-body"><?php the_title(); ?></h3>
+                        <h3 class="h5 py-3 text-body"><?php echo get_the_title($post->ID); ?></h3>
 
-                        <p class="">
-                            <?php echo wp_trim_words(get_the_content(), 40, '...'); ?>
+                        <p class="testimonial-excerpt">
+                            <?php echo wp_trim_words(get_post_field('post_content', $post->ID), 40, '...'); ?>
                         </p>
+
+                        <a href="<?php echo esc_url(get_permalink($post->ID)); ?>" class="btn btn-primary testimonial-read-more mt-3">
+                            Read More
+                        </a>
 
                     </div>
 

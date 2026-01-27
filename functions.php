@@ -110,6 +110,34 @@ if (! function_exists('mediafast_setup_theme')) {
 	remove_action('enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets_block_directory');
 }
 
+/**
+ * Remove Unused WordPress Features for Performance
+ * 
+ * - Disable emojis: Removes emoji scripts/styles (not used on site)
+ * - Disable oembed discovery: Removes oembed discovery links from wp_head (embeds still work via oembed filter)
+ * 
+ * Note: REST API is NOT disabled as it may be needed for:
+ * - Gutenberg/block editor functionality
+ * - ACF blocks
+ * - Plugins and admin features
+ * - Future development work
+ */
+function mediafast_remove_unused_features()
+{
+	// Disable WordPress emojis (not used on site)
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+	remove_action('wp_print_styles', 'print_emoji_styles');
+	remove_action('admin_print_scripts', 'print_emoji_detection_script');
+	remove_action('admin_print_styles', 'print_emoji_styles');
+	remove_filter('the_content_feed', 'wp_staticize_emoji');
+	remove_filter('comment_text_rss', 'wp_staticize_emoji');
+	remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+	
+	// Disable oembed discovery links (embeds still work, just removes metadata from wp_head)
+	remove_action('wp_head', 'wp_oembed_add_discovery_links');
+}
+add_action('init', 'mediafast_remove_unused_features');
+
 if (! function_exists('wp_body_open')) {
 	/**
 	 * Fire the wp_body_open action.
@@ -221,6 +249,7 @@ add_filter('edit_comment_link', 'mediafast_custom_edit_comment_link');
 
 /**
  * Responsive oEmbed filter: https://getbootstrap.com/docs/5.0/helpers/ratio
+ * Also adds lazy loading to iframes (videos/embeds are typically below the fold)
  *
  * @since v1.0
  *
@@ -230,6 +259,14 @@ add_filter('edit_comment_link', 'mediafast_custom_edit_comment_link');
  */
 function mediafast_oembed_filter($html)
 {
+	// Add lazy loading to iframes in oembeds (YouTube, Vimeo, etc.)
+	// Note: Hero video is a custom <video> element, not an oembed, so it won't be affected
+	if (strpos($html, '<iframe') !== false) {
+		// Only add loading="lazy" if it doesn't already exist
+		if (strpos($html, 'loading=') === false) {
+			$html = str_replace('<iframe', '<iframe loading="lazy"', $html);
+		}
+	}
 	return '<div class="ratio ratio-16x9">' . $html . '</div>';
 }
 add_filter('embed_oembed_html', 'mediafast_oembed_filter', 10);

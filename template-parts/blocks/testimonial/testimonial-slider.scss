@@ -20,12 +20,29 @@
 }
 
 /* -------------------------------
+	 SWIPER WRAPPER & SLIDE (ensure equal heights)
+	 ------------------------------- */
+.testimonial-swiper .swiper-wrapper {
+  align-items: stretch; // Make all slides stretch to same height
+}
+
+.testimonial-swiper-slide {
+  height: auto; // Allow Swiper to calculate height
+  display: flex; // Enable flexbox for slide
+  align-items: stretch; // Stretch card to fill slide height
+}
+
+/* -------------------------------
 	 CARD BASE STYLING
 	 ------------------------------- */
 .testimonial-card {
   background: $gray-100;
   border-radius: 10px;
   min-height: 540px; // adaptive height for Swiper
+  height: 100%; // Ensure cards fill Swiper slide height
+  width: 100%; // Full width of slide
+  display: flex; // Already has d-flex, but ensure it's set
+  flex-direction: column; // Already has flex-column, but ensure it's set
 
   transition:
     transform 0.25s ease,
@@ -39,6 +56,10 @@
 /* -------------------------------
 	 STAR RATING
 	 ------------------------------- */
+.testimonial-stars {
+  letter-spacing: 1.5px; // Add spacing between emoji stars
+}
+
 .testimonial-stars img {
   color: #f7a509; // bright gold
   font-size: 1.35rem;
@@ -80,6 +101,31 @@
   font-size: 1rem;
   line-height: 1.55;
   margin-top: auto; // push text to bottom
+}
+
+/* -------------------------------
+	 TESTIMONIAL EXCERPT (8-line limit)
+	 ------------------------------- */
+.testimonial-excerpt {
+  color: #212529;
+  font-size: 1rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+  flex-grow: 1; // Allow excerpt to grow and push other content
+}
+
+/* -------------------------------
+	 READ MORE BUTTON
+	 ------------------------------- */
+.testimonial-read-more {
+  margin-top: auto; // Push button to bottom of card
+  align-self: center; // Center the button
+  margin-bottom: 0;
 }
 
 /* -------------------------------

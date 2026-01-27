@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       direction: "horizontal",
       loop: true,
       loopFillGroupWithBlank: true,
+      autoHeight: false, // Ensure all slides have the same height
       autoplay: {
         delay: 4000,
         disableOnInteraction: false,
@@ -250,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendlyUrl = trigger.getAttribute("data-calendly-url");
       if (calendlyUrl) {
         contentHTML += `<div class="calendly-wrapper">
-					<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0"></iframe>
+					<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy"></iframe>
 				</div>`;
 
         if (typeof wc_iframe_ypbib === "function") {

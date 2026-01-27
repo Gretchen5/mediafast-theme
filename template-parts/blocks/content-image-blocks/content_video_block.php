@@ -18,12 +18,12 @@ $vertical_padding = $fields['vertical_padding'] ?? '';
                 <div class="video-player cvb-video-player">
                     <iframe
                         width="100%"
-
                         src="<?php echo esc_url($video_link); ?>"
                         title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
+                        allowfullscreen
+                        loading="lazy">
                     </iframe>
                 </div>
             </div>

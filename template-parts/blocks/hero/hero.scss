@@ -541,17 +541,16 @@ $home-card-circle-border: #dde3ed; // light gray border
 
 // VIDEO HERO
 .video-hero {
-  min-height: 70vh;
+  min-height: calc(70vh + 200px);
   height: auto;
-  transform: translateY(-100px);
   z-index: 0;
 
   @media (max-width: 768px) {
-    min-height: 50vh;
+    min-height: calc(50vh + 150px);
   }
 
   @media (max-width: 576px) {
-    min-height: 40vh;
+    min-height: calc(40vh + 100px);
   }
 
   .video-hero-bg {
@@ -587,4 +586,11 @@ $home-card-circle-border: #dde3ed; // light gray border
     font-size: clamp(1rem, 1.6vw, 1.5rem);
     max-width: 700px;
   }
+}
+
+// Home Feature Cards - positioned above video hero
+.home-feature-cards {
+  margin-top: -150px;
+  position: relative;
+  z-index: 10; // Above video hero
 }

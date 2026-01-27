@@ -28,7 +28,7 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 
 	<div id="wrapper">
 	<header>
-			<nav id="header" class="navbar navbar-expand-xl py-3 <?php
+			<nav id="header" class="navbar navbar-expand-xl py-3 border-bottom border-color-gold border-4 <?php
 				echo esc_attr($navbar_scheme);
 
 				if (isset($navbar_position) && 'fixed_top' === $navbar_position) {
@@ -36,33 +36,15 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 				} elseif (isset($navbar_position) && 'fixed_bottom' === $navbar_position) {
 					echo ' fixed-bottom';
 				}
-
-				// Add border classes only if NOT home/front page
-				if (!is_front_page()) {
-					echo ' border-bottom border-color-gold border-4';
-				} else {
-					echo ' home';
-				}
 				?>">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="<?php echo esc_url(home_url()); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 					<?php
-							$header_logo = get_theme_mod('header_logo'); // default logo
+							$header_logo = get_theme_mod('header_logo');
 
-							// Hard-coded front-page logo
-							$front_logo = get_stylesheet_directory_uri() . '/assets/images/mediafast_logo_white.svg';
-
-							if ( is_front_page() ) {
-								// Use custom front-page logo
-								$logo_to_use = $front_logo;
-							} else {
-								// Use regular logo from Customizer
-								$logo_to_use = $header_logo;
-							}
-
-							if ( ! empty( $logo_to_use ) ) :
+							if ( ! empty( $header_logo ) ) :
 							?>
-								<img src="<?php echo esc_url($logo_to_use); ?>" alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" />
+								<img src="<?php echo esc_url($header_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" />
 							<?php
 							else :
 								echo esc_attr(get_bloginfo('name', 'display'));
