@@ -231,9 +231,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (type === "image") {
-      contentHTML += `<img src="${image}" class="img-fluid rounded" alt="">`;
+      contentHTML += `<img src="${image}" class="img-fluid rounded" alt="${title || 'Modal image'}">`;
     } else if (type === "video") {
-      contentHTML += `<div class="ratio ratio-16x9"><iframe class="media-video-iframe" src="${video}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
+      contentHTML += `<div class="ratio ratio-16x9"><iframe class="media-video-iframe" src="${video}" frameborder="0" allowfullscreen loading="lazy" title="${title || 'Video content'}"></iframe></div>`;
     } else if (type === "form") {
       const form = document.getElementById(formId);
       contentHTML += form ? form.innerHTML : "<p>Form not found</p>";
@@ -244,14 +244,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					<button type="button" class="btn btn-outline-primary btn-sm" id="showVideo">Watch Video</button>
 				</div>
 				<div id="mediaToggleContainer">
-					<img src="${image}" class="img-fluid rounded" alt="">
+					<img src="${image}" class="img-fluid rounded" alt="${title || 'Modal image'}">
 				</div>
 			`;
     } else if (type === "calendly") {
       const calendlyUrl = trigger.getAttribute("data-calendly-url");
       if (calendlyUrl) {
         contentHTML += `<div class="calendly-wrapper">
-					<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy"></iframe>
+					<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy" title="Schedule a consultation with MediaFast"></iframe>
 				</div>`;
 
         if (typeof wc_iframe_ypbib === "function") {
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("showVideo")?.addEventListener("click", () => {
         document.getElementById(
           "mediaToggleContainer"
-        ).innerHTML = `<div class="ratio ratio-16x9"><iframe class="media-video-iframe" src="${video}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
+        ).innerHTML = `<div class="ratio ratio-16x9"><iframe class="media-video-iframe" src="${video}" frameborder="0" allowfullscreen loading="lazy" title="${title || 'Video content'}"></iframe></div>`;
       });
     }
   });
@@ -306,6 +306,40 @@ document.addEventListener("DOMContentLoaded", function () {
     iframes.forEach((iframe) => {
       iframe.src = "";
     });
+  });
+
+  // Footer menu Calendly link handler - convert footer menu Calendly links to modal triggers
+  const footerMenus = document.querySelectorAll("#footer .menu a");
+  footerMenus.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href && href.includes("calendly.com")) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        
+        const calendlyUrl = href.includes("embed_domain") 
+          ? href 
+          : href + (href.includes("?") ? "&" : "?") + "embed_domain=mediafast.com&embed_type=PopupText";
+        
+        // Create a temporary trigger element with the required data attributes
+        const tempTrigger = document.createElement("button");
+        tempTrigger.setAttribute("data-bs-toggle", "modal");
+        tempTrigger.setAttribute("data-bs-target", "#mediaModal");
+        tempTrigger.setAttribute("data-type", "calendly");
+        tempTrigger.setAttribute("data-calendly-url", calendlyUrl);
+        tempTrigger.setAttribute("data-title", "Schedule a Free Consultation");
+        tempTrigger.setAttribute("data-description", "Get one-on-one guidance from a MediaFast expert. No obligation, just answers.");
+        tempTrigger.style.display = "none";
+        document.body.appendChild(tempTrigger);
+        
+        // Trigger the click to open the modal
+        tempTrigger.click();
+        
+        // Clean up
+        setTimeout(() => {
+          document.body.removeChild(tempTrigger);
+        }, 100);
+      });
+    }
   });
 });
 

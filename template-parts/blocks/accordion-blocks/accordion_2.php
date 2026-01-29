@@ -20,32 +20,21 @@ if (have_rows('stats_list')) {
 <!-- Accordion Section -->
 <section class="component--accordion-2 py-5">
     <div class="container">
-        <div class="row gy-4">
-            <!-- Left Column: Heading / Description / Stats -->
-            <div class="col-12 col-lg-5">
+        <!-- Heading and Description at Top -->
+        <div class="row mb-4">
+            <div class="col-12">
                 <?php if ($heading) : ?>
-                    <h2 class="text-secondary mb-2 fw-700"><?php echo wp_kses_post($heading); ?></h2>
+                    <h2 class="text-secondary mb-2 fw-700 text-center"><?php echo wp_kses_post($heading); ?></h2>
                 <?php endif; ?>
                 <?php if ($description) : ?>
-                    <p class="text-body mb-4"><?php echo $description; ?></p>
+                    <p class="text-body text-center mb-4"><?php echo $description; ?></p>
                 <?php endif; ?>
-
-                <?php if (!empty($stats)) : ?>
-                    <div class="stats pt-5">
-                        <div class="d-flex align-items-center text-secondary fw-600 mb-2">
-                            <span class="stats-rotator h3 fw-700"
-                                  data-stats='<?php echo wp_json_encode($stats); ?>'>
-                                <i class="fa-solid fa-chart-line me-2"></i>
-                                <span class="stats-text"><?php echo esc_html($stats[0]); ?></span>
-                            </span>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                
             </div>
+        </div>
 
-            <!-- Right Column: Accordion -->
-            <div class="col-12 col-lg-7">
+        <!-- Accordion - Full Width -->
+        <div class="row">
+            <div class="col-12">
                 <?php if (have_rows('accordion_repeater')) : ?>
                     <div class="accordion component-accordion" id="<?php echo esc_attr($accordion_id); ?>">
                         <?php
@@ -86,8 +75,7 @@ if (have_rows('stats_list')) {
         <!-- Bottom CTA -->
         <div class="row justify-content-start justify-content-md-center mt-5">
             <div class="col-auto">
-                <div class="d-flex align-items-center gap-2 text-start">
-                    <i class="bi bi-phone text-secondary fs-5"></i>
+                <div class="text-start">
                     <span class="accordion-2-below-text text-secondary fw-500">
                         <?php echo wp_kses_post($bottom_description); ?>
                     </span>

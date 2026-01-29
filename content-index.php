@@ -15,7 +15,7 @@ $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 	<article id="post-<?php the_ID(); ?>">
 		<div class="blog-box d-md-flex d-block flex-row h-100 border-radius-6px overflow-hidden box-shadow-extra-large my-3">
 			<div class="blog-image responsive-image-width contain-background" style="background-image: url('<?php echo esc_url($thumb_url ?: 'https://placehold.co/800x923'); ?>'); height:400px;">
-				<a href="<?php the_permalink(); ?>" class="blog-post-image-overlay"></a>
+				<a href="<?php the_permalink(); ?>" class="blog-post-image-overlay" aria-label="<?php echo esc_attr(sprintf(__('Read more about %s', 'mediafast'), get_the_title())); ?>"></a>
 			</div>
 			<div class="blog-content responsive-image-width pt-50px pb-40px ps-40px pe-40px xl-p-30px bg-white d-flex flex-column justify-content-center align-items-center align-items-md-start last-paragraph-no-margin text-center text-md-start">
 				<?php

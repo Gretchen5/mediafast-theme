@@ -14,7 +14,7 @@ $background_color = $fields['background_color'] ?? '';
     <div class="container">
         <div class="row d-flex <?php echo esc_attr($alignment); ?> gap-3 justify-content-center align-items-center">
             <div class="col-12 col-lg-5">
-                <h2 class="text-primary lh-1 pb-3"><?php echo $heading; ?></h2>
+                <h2 class="text-secondary lh-1 pb-3"><?php echo $heading; ?></h2>
                 <?php echo $description; ?>
                 <?php if ($cta_button) : ?>
                     <a href="<?php echo esc_url($cta_button['url']); ?>" class="btn btn-primary mt-3"><?php echo $cta_button['title']; ?></a>

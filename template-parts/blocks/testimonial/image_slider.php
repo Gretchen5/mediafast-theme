@@ -52,8 +52,8 @@ $images = get_field('image_slider');
                             <div class="swiper-pagination"></div>
                             
                             <!-- Navigation -->
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev" aria-label="Previous image" role="button" tabindex="0"></div>
+                            <div class="swiper-button-next" aria-label="Next image" role="button" tabindex="0"></div>
                         </div>
                     </div>
                 </div>

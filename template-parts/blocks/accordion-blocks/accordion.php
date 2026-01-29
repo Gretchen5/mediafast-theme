@@ -22,7 +22,7 @@ $accordion_id = uniqid('accordion_');
                     </div>
                 <?php endif; ?>
 
-                <div class="accordion" id="<?php echo esc_attr($accordion_id); ?>" role="tablist" aria-multiselectable="true">
+                <div class="accordion" id="<?php echo esc_attr($accordion_id); ?>" role="group" aria-label="<?php echo esc_attr($heading ?: 'Accordion'); ?>">
                     <?php if (have_rows('accordion_repeater')) : $i = 1;
                         while (have_rows('accordion_repeater')) :
                             the_row();

@@ -29,7 +29,7 @@ $padding = get_field('padding');
                         ?>
                             <div class="each-video-multiple-videos col-10 col-md-5 d-flex flex-column align-items-start justify-content-end">
                                 <div class="video-wrapper">
-                                    <iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="100%" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" class="shadow rounded bg-white"></iframe>
+                                    <iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="100%" title="<?php echo esc_attr($video_title ?: 'Video content'); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" class="shadow rounded bg-white"></iframe>
                                 </div>
                             </div>
                         <?php } ?>

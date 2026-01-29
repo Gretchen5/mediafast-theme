@@ -13,7 +13,7 @@ $accordion_id     = 'accordion-' . uniqid();
             <div class="content-column col-12 col-md-6">
                 <div class="content-pane h-100 p-4 p-md-5 text-white d-flex flex-column">
                     <?php if ($heading) : ?>
-                        <h2 class="fw-600 mb-4 lh-sm"><?php echo wp_kses_post($heading); ?></h2>
+                        <h2 class="fw-600 mb-4 lh-sm text-white"><?php echo wp_kses_post($heading); ?></h2>
                     <?php endif; ?>
 
                     <?php if (have_rows('accordion_repeater')) : ?>

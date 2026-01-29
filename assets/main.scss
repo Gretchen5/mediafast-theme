@@ -252,7 +252,7 @@ img {
       opacity 0.22s ease,
       transform 0.4s ease;
     .menu-item a {
-      text-decoration: none;
+      text-decoration: none !important;
       padding-bottom: 5px;
     }
   }
@@ -261,15 +261,22 @@ img {
     transform: translateY(0);
   }
   .nav-link {
-    text-decoration: none;
+    text-decoration: none !important;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      text-decoration: none !important;
+    }
     &:hover {
       border-bottom-color: $cyan;
     }
   }
   .nav-link.active {
     border-bottom-color: $cyan;
+    text-decoration: none !important;
   }
 }
 .nav-link:focus {
@@ -704,6 +711,25 @@ body {
 
 .bg-light-blue {
   background-color: #88abe82e;
+  
+  // Ensure sufficient contrast for text on light blue background
+  // WCAG AA requires 4.5:1 for normal text, 3:1 for large text
+  color: $gray-800; // Dark gray for better contrast
+  
+  .text-dk-gold,
+  .text-secondary,
+  .text-body,
+  p,
+  span:not(.text-white):not(.text-light),
+  h1, h2, h3, h4, h5, h6 {
+    color: $gray-800 !important; // Dark gray for better contrast
+  }
+  
+  // Keep white text white if explicitly set
+  .text-white,
+  span.text-white {
+    color: $white !important;
+  }
 }
 
 hr {
@@ -786,6 +812,20 @@ h4,
 
 .text-dk-gold {
   color: $dk-gold;
+}
+
+// Fix contrast for text-dk-gold on light backgrounds
+// WCAG AA requires 4.5:1 contrast ratio for normal text
+// #757575 on white = ~4.6:1 (borderline), using #495057 = ~7.1:1 (better)
+.component--recent-posts .text-dk-gold {
+  color: $gray-700 !important; // Darker for better contrast (was #757575, now #495057)
+}
+
+// Also fix text-dk-gold on any light background sections
+.bg-lt-gray .text-dk-gold,
+.bg-white .text-dk-gold,
+.bg-light-blue .text-dk-gold {
+  color: $gray-700 !important;
 }
 
 .text-gold {
@@ -1146,6 +1186,13 @@ a {
   text-decoration: underline;
   &:hover {
     color: $dk-gold;
+  }
+  
+  // Exclude navigation links from underline
+  &.nav-link,
+  .navbar-nav &,
+  .nav & {
+    text-decoration: none !important;
   }
 }
 

@@ -83,8 +83,8 @@ if (! empty($posts)) : ?>
             </div>
 
             <!-- Localized Navigation -->
-            <div class="testimonial-swiper-button-prev swiper-button-prev"></div>
-            <div class="testimonial-swiper-button-next swiper-button-next"></div>
+            <div class="testimonial-swiper-button-prev swiper-button-prev" aria-label="Previous testimonial" role="button" tabindex="0"></div>
+            <div class="testimonial-swiper-button-next swiper-button-next" aria-label="Next testimonial" role="button" tabindex="0"></div>
 
             <!-- Localized Pagination -->
             <div class="testimonial-swiper-pagination swiper-pagination mt-75"></div>

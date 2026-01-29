@@ -1,5 +1,5 @@
 .card-col-circle {
-  max-width: 350px;
+  max-width: 250px;
 }
 
 .card-icon {
@@ -101,9 +101,9 @@
 
 // Circle Cards
 .circle-card {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  width: 250px;
+  height: 180px;
+  border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: ease-in-out 0.4s;

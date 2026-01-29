@@ -38,7 +38,7 @@
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    class="google-map-link">
-                                    View on Google Map
+                                    View on Google Maps
                                 </a>
                             <?php endif; ?>
                         </div>

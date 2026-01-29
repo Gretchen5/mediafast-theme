@@ -20,7 +20,7 @@ $padding = get_field('padding');
         <?php if ($section_description) : ?>
             <?php echo $section_description; ?>
         <?php endif; ?>
-        <div class="row g-4 justify-content-center">
+        <div class="row g-2 justify-content-center">
             <?php
             if (have_rows('card_repeater')) :
 
@@ -31,16 +31,13 @@ $padding = get_field('padding');
                     $card_background_color = get_sub_field('card_background_color');
 
             ?>
-                    <div class="col card-col card-col-circle">
-                        <div class="card circle-card shadow <?php echo $card_border . ' ' . $card_background_color; ?> p-4 d-flex flex-column justify-content-center align-items-center">
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <div class="col card-col card-col-circle d-flex justify-content-center align-items-stretch">
+                        <div class="card circle-card shadow <?php echo $card_border . ' ' . $card_background_color; ?> p-2 d-flex flex-column justify-content-center align-items-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-stretch h-100">
                                 <?php if ($card_heading_link) : ?>
                                     <h3 class="card-title text-center"><a class="<?php echo $card_heading_color; ?> circle-card-heading-link" href="<?php echo esc_url($card_heading_link['url']); ?>" target="<?php echo $card_heading_link['target']; ?>"><?php echo $card_heading_link['title']; ?></a></h3>
                                 <?php else: ?>
                                     <h3 class="card-title text-center <?php echo $card_heading_color; ?>"><?php echo $card_heading; ?></h3>
-                                <?php endif; ?>
-                                <?php if ($card_hr) : ?>
-                                    <hr class="<?php echo $card_hr; ?> w-75">
                                 <?php endif; ?>
                                 <div class="description-container">
                                     <?php if ($card_description) : ?>

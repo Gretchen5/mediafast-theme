@@ -56,7 +56,7 @@ $recent_posts = new WP_Query($args);
                         <article class="post-display-card h-100" data-animate>
                             <?php if (has_post_thumbnail()) : ?>
                                 <div class="post-display-card__image">
-                                    <a href="<?php the_permalink(); ?>" class="d-block">
+                                    <a href="<?php the_permalink(); ?>" class="d-block" aria-label="<?php echo esc_attr(sprintf(__('Read more about %s', 'mediafast'), get_the_title())); ?>">
                                         <?php the_post_thumbnail('post-display-thumbnail', array(
                                             'class' => 'img-fluid w-100',
                                             'loading' => 'lazy'

@@ -52,8 +52,8 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 							?>
 					</a>
 
-					<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-						<span class="navbar-toggler-icon"></span>
+					<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="<?php esc_attr_e('Toggle navigation menu', 'mediafast'); ?>">
+						<span class="navbar-toggler-icon" aria-hidden="true"></span>
 					</button>
 
 					<!-- <div id="navbar" class="collapse navbar-collapse">
@@ -101,6 +101,7 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 									'container'      => '',
 									'fallback_cb'    => 'WP_Bootstrap_Navwalker::fallback',
 									'walker'         => new WP_Bootstrap_Navwalker(),
+									'items_wrap'     => '<ul role="menubar" class="%2$s">%3$s</ul>',
 								)
 							);
 
