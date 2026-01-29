@@ -381,12 +381,24 @@ img {
 
 .navbar-brand {
   img {
-    height: 20px;
-    @media screen and (min-width: 600px) {
-      height: 24px;
+    height: auto; // Let height scale naturally
+    max-width: 350px; // Default: larger on mobile (menu collapsed)
+    width: auto; // Maintain aspect ratio
+    object-fit: contain; // Ensure proper scaling
+    
+    // Very small screens (430px and below): reduce size
+    @media screen and (max-width: 430px) {
+      max-width: 280px;
     }
-    @media screen and (min-width: 992px) {
-      height: 25px;
+    
+    // Medium screens (1200px - 1261px): menu expanded, need smaller logo
+    @media screen and (min-width: 1200px) and (max-width: 1260px) {
+      max-width: 220px;
+    }
+    
+    // Large screens (1261px+): menu expanded but more space available
+    @media screen and (min-width: 1261px) {
+      max-width: 350px;
     }
   }
 }
@@ -2768,5 +2780,7 @@ ul.wp-block-list li {
 
 // Footer Logo
 .logo-container img {
-  max-width: 350px;
+  max-width: 250px; // Reduced from 350px to prevent wrapping
+  width: auto; // Maintain aspect ratio
+  height: auto; // Prevent warping
 }

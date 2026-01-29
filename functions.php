@@ -670,7 +670,124 @@ add_action('after_setup_theme', function () {
 	add_image_size('post-card-thumb', 600, 400, true);
 	add_image_size('post-featured', 1200, 700, true);
 	add_image_size('post-display-thumbnail', 400, 208, true); // 1.92:1 aspect ratio for post display cards
+	
+	// Additional optimized sizes for ACF images
+	add_image_size('acf-large', 1200, 1200, false); // Max 1200px, maintain aspect ratio
+	add_image_size('acf-medium', 800, 800, false); // Max 800px, maintain aspect ratio
+	add_image_size('acf-small', 400, 400, false); // Max 400px, maintain aspect ratio
+	add_image_size('acf-card', 600, 400, true); // Card images, cropped
+	add_image_size('acf-hero', 1920, 1080, false); // Hero images, maintain aspect ratio
 });
+
+/**
+ * Get optimized image from URL (for Customizer logos, etc.)
+ * Attempts to find attachment ID from URL, falls back to direct URL
+ * 
+ * @param string $image_url Image URL
+ * @param string $size WordPress image size name (default: 'acf-small')
+ * @param array $attr Additional attributes for the img tag
+ * @return string HTML img tag with srcset or fallback to simple img tag
+ */
+function mediafast_get_optimized_image_from_url($image_url, $size = 'acf-small', $attr = array()) {
+	if (empty($image_url)) {
+		return '';
+	}
+	
+	// Try to find attachment ID from URL
+	$attachment_id = attachment_url_to_postid($image_url);
+	
+	if ($attachment_id && wp_attachment_is_image($attachment_id)) {
+		$default_attr = array(
+			'loading' => 'eager', // Logo should load immediately
+			'class' => 'img-fluid'
+		);
+		$attr = array_merge($default_attr, $attr);
+		return wp_get_attachment_image($attachment_id, $size, false, $attr);
+	}
+	
+	// Fallback: Use URL directly with optimization attributes
+	$class = isset($attr['class']) ? esc_attr($attr['class']) : 'img-fluid';
+	$loading = isset($attr['loading']) ? esc_attr($attr['loading']) : 'eager';
+	$alt = isset($attr['alt']) ? esc_attr($attr['alt']) : '';
+	
+	return sprintf(
+		'<img src="%s" alt="%s" class="%s" loading="%s" />',
+		esc_url($image_url),
+		$alt,
+		$class,
+		$loading
+	);
+}
+
+/**
+ * Get optimized image from ACF field with responsive srcset support
+ * 
+ * @param array|int|string $acf_image ACF image field (array with ID/url) or attachment ID
+ * @param string $size WordPress image size name (default: 'acf-large')
+ * @param array $attr Additional attributes for the img tag
+ * @return string HTML img tag with srcset or fallback to simple img tag
+ */
+function mediafast_get_optimized_image($acf_image, $size = 'acf-large', $attr = array()) {
+	if (empty($acf_image)) {
+		return '';
+	}
+	
+	$attachment_id = null;
+	
+	// Handle ACF array format
+	if (is_array($acf_image)) {
+		// ACF can return 'ID' or 'id' key
+		if (isset($acf_image['ID'])) {
+			$attachment_id = (int) $acf_image['ID'];
+		} elseif (isset($acf_image['id'])) {
+			$attachment_id = (int) $acf_image['id'];
+		}
+	} elseif (is_numeric($acf_image)) {
+		// Direct attachment ID
+		$attachment_id = (int) $acf_image;
+	}
+	
+	// If we have an attachment ID, use WordPress's optimized image function
+	if ($attachment_id && wp_attachment_is_image($attachment_id)) {
+		// Merge default attributes
+		$default_attr = array(
+			'loading' => 'lazy',
+			'class' => 'img-fluid'
+		);
+		$attr = array_merge($default_attr, $attr);
+		
+		// wp_get_attachment_image automatically generates srcset for responsive images
+		return wp_get_attachment_image($attachment_id, $size, false, $attr);
+	}
+	
+	// Fallback: Use URL directly (for external images or non-WordPress attachments)
+	$url = '';
+	$alt = '';
+	
+	if (is_array($acf_image)) {
+		$url = isset($acf_image['url']) ? $acf_image['url'] : '';
+		$alt = isset($acf_image['alt']) ? $acf_image['alt'] : '';
+	} elseif (is_string($acf_image)) {
+		$url = $acf_image;
+	}
+	
+	if (empty($url)) {
+		return '';
+	}
+	
+	// Build attributes string
+	$class = isset($attr['class']) ? esc_attr($attr['class']) : 'img-fluid';
+	$loading = isset($attr['loading']) ? esc_attr($attr['loading']) : 'lazy';
+	$alt_attr = !empty($alt) ? esc_attr($alt) : '';
+	
+	return sprintf(
+		'<img src="%s" alt="%s" class="%s" loading="%s" />',
+		esc_url($url),
+		$alt_attr,
+		$class,
+		$loading
+	);
+}
 
 // Add Bootstrap Icons Inline to Card Components
 

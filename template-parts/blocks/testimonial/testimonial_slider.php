@@ -61,7 +61,7 @@ if (! empty($posts)) : ?>
                         <!-- Headshot -->
                         <?php if (has_post_thumbnail($post->ID)) : ?>
                         <div class="testimonial-headshot mb-3">
-                            <?php echo get_the_post_thumbnail($post->ID, 'medium'); ?>
+                            <?php echo get_the_post_thumbnail($post->ID, 'acf-medium', array('loading' => 'lazy', 'class' => 'img-fluid')); ?>
                         </div>
                         <?php endif; ?>
 

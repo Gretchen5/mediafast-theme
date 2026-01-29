@@ -21,8 +21,8 @@ $background_color = $fields['background_color'] ?? '';
                 <?php endif; ?>
             </div>
             <div class="col-12 col-lg-6">
-                <?php if (!empty($image) && isset($image['url'])) : ?>
-                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? ''); ?>" class="img-fluid" loading="lazy" />
+                <?php if (!empty($image)) : ?>
+                    <?php echo mediafast_get_optimized_image($image, 'acf-large', array('class' => 'img-fluid')); ?>
                 <?php endif; ?>
             </div>
         </div>

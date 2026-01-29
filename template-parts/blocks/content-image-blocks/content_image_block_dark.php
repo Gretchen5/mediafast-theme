@@ -3,7 +3,17 @@ $image            = get_field('image');
 $heading          = get_field('heading');
 $vertical_padding = get_field('vertical_padding') ?: '';
 $background_color = get_field('background_color') ?: 'bg-secondary';
-$background_url   = $image['url'] ?? '';
+// Get optimized image URL for background
+$background_url = '';
+if (!empty($image)) {
+    if (is_array($image) && isset($image['ID'])) {
+        $attachment_id = (int) $image['ID'];
+        $image_data = wp_get_attachment_image_src($attachment_id, 'acf-large');
+        $background_url = $image_data ? $image_data[0] : ($image['url'] ?? '');
+    } elseif (is_array($image) && isset($image['url'])) {
+        $background_url = $image['url'];
+    }
+}
 $accordion_id     = 'accordion-' . uniqid();
 ?>
 

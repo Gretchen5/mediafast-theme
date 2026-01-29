@@ -36,7 +36,9 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                 ?>
                         <div class="col">
                             <div class="card <?php echo $card_border . ' ' . $card_background_color; ?> h-100">
-                                <img width="100" src="<?php echo esc_url($card_image['url']); ?>" class="p-3 mx-auto" alt="<?php echo esc_attr($card_image['alt']); ?>" loading="lazy" />
+                                <div class="p-3 mx-auto">
+                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('class' => 'w-100', 'style' => 'max-width: 100px;')); ?>
+                                </div>
                                 <div class="card-body d-flex flex-column justify-content-center text-center">
                                     <?php if ($card_heading) : ?>
                                         <h3 class="card-title text-center <?php echo $card_heading_color . ' ' . $card_heading_padding_top . ' ' . $card_heading_padding_bottom; ?>"><?php echo $card_heading; ?></h3>
@@ -60,7 +62,7 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
             </div>
             <div class="col-12 col-lg-5 text-center my-4 d-flex flex-column justify-content-center align-items-center">
                 <?php if ($central_image) : ?>
-                    <img width="400" src="<?php echo esc_url($central_image['url']); ?>" class="img-fluid shadow" alt="<?php echo esc_attr($central_image['alt']); ?>" loading="lazy" />
+                    <?php echo mediafast_get_optimized_image($central_image, 'acf-large', array('class' => 'img-fluid shadow')); ?>
                 <?php endif; ?>
                 <?php if ($section_cta_button) : ?>
                     <div class="cta-button-container text-center pt-3">
@@ -82,7 +84,9 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                 ?>
                         <div class="col">
                             <div class="card <?php echo $card_border . ' ' . $card_background_color; ?> h-100">
-                                <img width="100" src="<?php echo esc_url($card_image['url']); ?>" class="p-3 mx-auto" alt="<?php echo esc_attr($card_image['alt']); ?>" loading="lazy" />
+                                <div class="p-3 mx-auto">
+                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('class' => 'w-100', 'style' => 'max-width: 100px;')); ?>
+                                </div>
                                 <div class="card-body d-flex flex-column justify-content-center">
                                     <?php if ($card_heading) : ?>
                                         <h3 class="card-title text-center <?php echo $card_heading_color . ' ' . $card_heading_padding_top . ' ' . $card_heading_padding_bottom; ?>"><?php echo $card_heading; ?></h3>

@@ -32,10 +32,7 @@ $heading = get_field('heading') ?: '';
                         <article class="team-card text-center w-100 pt-3" data-animate>
                             <?php if ($bio_image) : ?>
                                 <div class="team-card__image">
-                                    <img src="<?php echo esc_url($bio_image['url']); ?>"
-                                         alt="<?php echo esc_attr($bio_image['alt'] ?: $name_text); ?>"
-                                         class="img-fluid"
-                                         loading="lazy" />
+                                    <?php echo mediafast_get_optimized_image($bio_image, 'acf-medium', array('class' => 'img-fluid', 'alt' => $bio_image['alt'] ?: $name_text)); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="team-card__content pt-2">

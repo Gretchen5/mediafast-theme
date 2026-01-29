@@ -5,9 +5,16 @@ $video_mp4      = is_array($video_mp4_raw) ? ($video_mp4_raw['url'] ?? '') : (st
 $video_mp4      = $video_mp4 ? set_url_scheme($video_mp4, 'https') : '';
 $poster_raw     = get_field('poster_image');
 $poster_image   = '';
+$poster_image_id = null;
 if ($poster_raw) {
-	$poster_image = is_array($poster_raw) ? ($poster_raw['url'] ?? '') : (string) $poster_raw;
-	$poster_image = $poster_image ? set_url_scheme($poster_image, 'https') : '';
+	if (is_array($poster_raw) && isset($poster_raw['ID'])) {
+		$poster_image_id = (int) $poster_raw['ID'];
+		$poster_data = wp_get_attachment_image_src($poster_image_id, 'acf-hero');
+		$poster_image = $poster_data ? set_url_scheme($poster_data[0], 'https') : '';
+	} else {
+		$poster_image = is_array($poster_raw) ? ($poster_raw['url'] ?? '') : (string) $poster_raw;
+		$poster_image = $poster_image ? set_url_scheme($poster_image, 'https') : '';
+	}
 }
 $heading        = get_field('heading');
 $subheading     = get_field('subheading');
@@ -200,11 +207,7 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
 
             <?php if ($card_image): ?>
                 <div class="home-feature-card__image-container">
-                    <img 
-                        src="<?php echo esc_url($card_image['url']); ?>" 
-                        alt="<?php echo esc_attr($card_image['alt']); ?>"
-                        class="home-feature-card__image img-fluid"
-                    >
+                    <?php echo mediafast_get_optimized_image($card_image, 'acf-card', array('class' => 'home-feature-card__image img-fluid')); ?>
                 </div>
             <?php endif; ?>
 
@@ -261,11 +264,15 @@ endif; ?>
 
             <!-- IMAGE -->
             <div class="col-10 col-md-5 col-lg-4 mx-auto d-flex justify-content-center">
-                <img 
-                    src="<?php echo $about_image; ?>" 
-                    class="img-fluid"
-                    alt="About MediaFast"
-                >
+                <?php 
+                // Handle both ACF array and direct URL string
+                if (is_array($about_image)) {
+                    echo mediafast_get_optimized_image($about_image, 'acf-large', array('class' => 'img-fluid', 'alt' => 'About MediaFast'));
+                } elseif (!empty($about_image)) {
+                    // Fallback for direct URL string
+                    echo '<img src="' . esc_url($about_image) . '" class="img-fluid" alt="About MediaFast" loading="lazy" />';
+                }
+                ?>
             </div>
 
             <!-- CONTENT COLUMN -->

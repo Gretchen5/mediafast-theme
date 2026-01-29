@@ -37,12 +37,7 @@ $images = get_field('image_slider');
                                 <?php foreach ($images as $image) : ?>
                                     <div class="swiper-slide">
                                         <div class="image-swiper-slide">
-                                            <img 
-                                                src="<?php echo esc_url($image['url']); ?>"
-                                                alt="<?php echo esc_attr($image['alt'] ?: 'Slider image'); ?>"
-                                                class="img-fluid bg-white"
-                                                loading="lazy"
-                                            >
+                                            <?php echo mediafast_get_optimized_image($image, 'acf-large', array('class' => 'img-fluid bg-white', 'alt' => $image['alt'] ?: 'Slider image')); ?>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>

@@ -76,7 +76,7 @@
 							endif; ?>
 							<?php if ($footer_logo_woman) : ?>
 								<div class="logo-container col-md-6 col-12 pt-4">
-									<img width="150" src="<?php echo esc_url($footer_logo_woman['url']); ?>" alt="<?php echo esc_attr($footer_logo_woman['alt']); ?>" loading="lazy" />
+									<?php echo mediafast_get_optimized_image($footer_logo_woman, 'acf-small', array('style' => 'max-width: 150px;', 'loading' => 'lazy')); ?>
 								</div>
 							<?php endif; ?>
 						</div>

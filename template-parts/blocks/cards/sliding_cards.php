@@ -59,12 +59,7 @@ $bg_class = $background_color ? '' : 'bg-lt-gray';
                                                 <?php if ($image) : ?>
                                                     <div class="col-12 col-md-6 sliding-card__image">
                                                         <div class="sliding-card__image-wrapper h-100">
-                                                            <img 
-                                                                src="<?php echo esc_url($image['url']); ?>" 
-                                                                alt="<?php echo esc_attr($image['alt'] ?: $card_heading); ?>"
-                                                                class="img-fluid"
-                                                                loading="lazy"
-                                                            >
+                                                            <?php echo mediafast_get_optimized_image($image, 'acf-large', array('class' => 'img-fluid', 'alt' => $image['alt'] ?: $card_heading)); ?>
                                                         </div>
                                                     </div>
                                                 <?php endif; ?>
