@@ -239,6 +239,39 @@ img {
 
 /* Header */
 
+// Skip to main content link - should only be visible when focused (keyboard navigation)
+.visually-hidden-focusable {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  
+  // Show when focused (keyboard navigation)
+  &:focus,
+  &:focus-within {
+    position: fixed !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    z-index: 9999 !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0.5rem 1rem !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    background-color: #fff !important;
+    color: #000 !important;
+    text-decoration: underline !important;
+    border: 2px solid #000 !important;
+  }
+}
+
 #header {
   z-index: 100;
   position: relative;
@@ -550,6 +583,52 @@ img {
 }
 
 /* Posts */
+
+// Blog archive - Card layout (3 columns)
+// Using Bootstrap card component with image on top, content below
+// Remove list styles from blog index page
+.blog-side-image,
+.blog-wrapper {
+  ul,
+  li {
+    list-style: none !important;
+    padding-left: 0 !important;
+  }
+}
+
+// Blog card styles
+.card {
+  transition: transform 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+  
+  .card-img-top {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  &:hover .card-img-top {
+    transform: scale(1.05);
+  }
+}
+
+// Blog card image container with border
+// Featured images: 1800px × 938px (aspect ratio: 1.92:1)
+.blog-card-image {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem 0.375rem 0 0;
+  overflow: hidden;
+  display: block;
+  
+  .blog-post-thumbnail {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1800 / 938; // Maintain 1800:938 ratio
+    object-fit: contain;
+  }
+}
 
 .sticky {
   .card {
@@ -1254,15 +1333,118 @@ ul.wp-block-list li {
   list-style: disc;
 }
 
-.blog-post-single-image-container .post-thumbnail img {
-  width: 100%;
-  max-width: 900px;
-  max-height: 500px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  object-fit: contain;
-  border-radius: 8px;
+.blog-post-single-image-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: visible !important;
+  
+  .post-thumbnail {
+    width: auto !important;
+    max-width: 700px;
+    display: block;
+    overflow: visible !important;
+    
+    img {
+      width: auto !important;
+      max-width: 700px !important;
+      height: auto !important;
+      display: block;
+      object-fit: contain !important;
+      object-position: center !important;
+      border-radius: 8px;
+    }
+  }
+}
+
+// Single post videos - limit width on large screens, full width on medium and below
+// Use modern aspect-ratio property to avoid padding-bottom spacing issues
+.single .entry-content {
+  // Target WordPress embed containers and ensure proper aspect ratio
+  figure.wp-block-embed,
+  .wp-block-embed__wrapper,
+  .wp-embed,
+  .embed-responsive {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important; // Modern approach - no extra spacing
+    overflow: hidden !important;
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important; // Remove any default padding
+    
+    // Fallback for older browsers
+    @supports not (aspect-ratio: 16 / 9) {
+      height: 0 !important;
+      padding-bottom: 56.25% !important; // 16:9 aspect ratio
+      padding-top: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    
+    @media (min-width: 992px) {
+      max-width: 700px !important;
+    }
+    
+    iframe {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border: 0 !important;
+      max-width: 100% !important;
+      display: block !important;
+    }
+  }
+  
+  // Handle wp-block-embed that might have figure wrapper
+  figure.wp-block-embed {
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important;
+    
+    .wp-block-embed__wrapper {
+      position: relative !important;
+      width: 100% !important;
+      aspect-ratio: 16 / 9 !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      
+      // Fallback for older browsers
+      @supports not (aspect-ratio: 16 / 9) {
+        height: 0 !important;
+        padding-bottom: 56.25% !important;
+        padding-top: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+  
+  // Direct iframes (not wrapped in embed containers)
+  > iframe,
+  > .wp-video > iframe {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    
+    @media (min-width: 992px) {
+      max-width: 700px;
+    }
+  }
+  
+  // Video elements
+  video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    
+    @media (min-width: 992px) {
+      max-width: 700px;
+    }
+  }
 }
 
 // Contact Us Page & Contact Popup Forms

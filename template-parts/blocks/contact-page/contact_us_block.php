@@ -14,7 +14,9 @@
                     <div class="row align-items-center justify-content-center">
                         <?php if ($office_image) : ?>
                             <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
-                                <?php echo mediafast_get_optimized_image($office_image, 'acf-large', array('class' => 'w-100', 'alt' => $office_name ?: 'Office location')); ?>
+                                <img src="<?php echo esc_url($office_image['url']); ?>" 
+                                     alt="<?php echo esc_attr($office_name ?: 'Office location'); ?>" 
+                                     class="w-100" />
                             </div>
                         <?php endif; ?>
 

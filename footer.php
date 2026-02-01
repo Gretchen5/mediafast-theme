@@ -187,14 +187,6 @@
 			wp_footer();
 			?>
 
-			</body>
+		</body>
 
-			</html>
-
-			<div class="magic-cursor">
-				<div class="cursor-dot-outline"></div>
-				<div class="cursor-dot"></div>
-			</div>
-			</body>
-
-			</html>
+	</html>

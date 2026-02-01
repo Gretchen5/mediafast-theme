@@ -36,9 +36,11 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                 ?>
                         <div class="col">
                             <div class="card <?php echo $card_border . ' ' . $card_background_color; ?> h-100">
+                                <?php if ($card_image) : ?>
                                 <div class="p-3 mx-auto">
-                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('class' => 'w-100', 'style' => 'max-width: 100px;')); ?>
+                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('width' => '50', 'style' => 'max-width: 50px;')); ?>
                                 </div>
+                                <?php endif; ?>
                                 <div class="card-body d-flex flex-column justify-content-center text-center">
                                     <?php if ($card_heading) : ?>
                                         <h3 class="card-title text-center <?php echo $card_heading_color . ' ' . $card_heading_padding_top . ' ' . $card_heading_padding_bottom; ?>"><?php echo $card_heading; ?></h3>
@@ -84,10 +86,12 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                 ?>
                         <div class="col">
                             <div class="card <?php echo $card_border . ' ' . $card_background_color; ?> h-100">
+                                <?php if ($card_image) : ?>
                                 <div class="p-3 mx-auto">
-                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('class' => 'w-100', 'style' => 'max-width: 100px;')); ?>
+                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-small', array('width' => '50', 'style' => 'max-width: 50px;')); ?>
                                 </div>
-                                <div class="card-body d-flex flex-column justify-content-center">
+                                <?php endif; ?>
+                                <div class="card-body d-flex flex-column justify-content-center px-0">
                                     <?php if ($card_heading) : ?>
                                         <h3 class="card-title text-center <?php echo $card_heading_color . ' ' . $card_heading_padding_top . ' ' . $card_heading_padding_bottom; ?>"><?php echo $card_heading; ?></h3>
                                     <?php endif; ?>

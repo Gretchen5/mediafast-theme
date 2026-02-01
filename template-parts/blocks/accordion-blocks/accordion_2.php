@@ -34,7 +34,7 @@ if (have_rows('stats_list')) {
 
         <!-- Accordion - Full Width -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-md-10 mx-auto">
                 <?php if (have_rows('accordion_repeater')) : ?>
                     <div class="accordion component-accordion" id="<?php echo esc_attr($accordion_id); ?>">
                         <?php

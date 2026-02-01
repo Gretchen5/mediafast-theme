@@ -1,5 +1,17 @@
 # MediaFast WordPress Theme - Performance Optimization Rules
 
+## Bootstrap Usage Priority
+
+1. **Use Bootstrap Classes First**
+   - Always prioritize Bootstrap utility classes over custom CSS
+   - Use Bootstrap's flexbox, spacing, sizing, and layout utilities before creating custom styles
+   - Leverage Bootstrap's responsive utilities and grid system
+
+2. **Avoid Duplicating Bootstrap Styles**
+   - Do not recreate styles in custom stylesheets that Bootstrap already provides
+   - If Bootstrap has a class for the desired style, use it instead of writing custom CSS
+   - Only add custom styles when Bootstrap doesn't provide the needed functionality
+
 ## Core Performance Principles
 
 1. **Minimize HTTP Requests**

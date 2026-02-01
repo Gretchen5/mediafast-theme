@@ -46,7 +46,9 @@ if ($count_posts->publish > 1) :
 			<?php endif; ?>
 		</ul>
 	</nav>
-<?php endif;
+<?php endif; ?>
 
-
+			</div><!-- /.col-12 -->
+		</div><!-- /.row -->
+<?php
 get_footer();

@@ -368,9 +368,9 @@ if (! function_exists('mediafast_article_posted_on')) {
 		printf(
 			wp_kses_post(__('<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author-meta vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'mediafast')),
 			esc_url(get_permalink()),
-			esc_attr(get_the_date() . ' - ' . get_the_time()),
+			esc_attr(get_the_date()),
 			esc_attr(get_the_date('c')),
-			esc_html(get_the_date() . ' - ' . get_the_time()),
+			esc_html(get_the_date()),
 			esc_url(get_author_posts_url((int) get_the_author_meta('ID'))),
 			sprintf(esc_attr__('View all posts by %s', 'mediafast'), get_the_author()),
 			get_the_author()
@@ -668,7 +668,7 @@ require_once get_template_directory() . '/inc/acf-blocks.php';
 // Ensure all blog images are rendered the same size 
 add_action('after_setup_theme', function () {
 	add_image_size('post-card-thumb', 600, 400, true);
-	add_image_size('post-featured', 1200, 700, true);
+	add_image_size('post-featured', 1800, 938, true); // 1800×938 aspect ratio (1.92:1)
 	add_image_size('post-display-thumbnail', 400, 208, true); // 1.92:1 aspect ratio for post display cards
 	
 	// Additional optimized sizes for ACF images
@@ -749,6 +749,35 @@ function mediafast_get_optimized_image($acf_image, $size = 'acf-large', $attr = 
 	
 	// If we have an attachment ID, use WordPress's optimized image function
 	if ($attachment_id && wp_attachment_is_image($attachment_id)) {
+		// Check if the requested size exists
+		$image_data = wp_get_attachment_image_src($attachment_id, $size);
+		
+		// If size doesn't exist or returns invalid data, use the ACF URL directly
+		if (!$image_data || empty($image_data[0]) || $image_data[1] <= 1 || $image_data[2] <= 1) {
+			// Size doesn't exist or is broken, use ACF URL directly
+			if (is_array($acf_image) && isset($acf_image['url'])) {
+				$url = $acf_image['url'];
+				$alt = isset($acf_image['alt']) ? esc_attr($acf_image['alt']) : '';
+				$class = isset($attr['class']) ? esc_attr($attr['class']) : 'img-fluid';
+				$loading = isset($attr['loading']) ? esc_attr($attr['loading']) : 'lazy';
+				$style = isset($attr['style']) ? esc_attr($attr['style']) : '';
+				$style_attr = $style ? sprintf(' style="%s"', $style) : '';
+				$width = isset($attr['width']) ? sprintf(' width="%s"', esc_attr($attr['width'])) : '';
+				
+				return sprintf(
+					'<img src="%s" alt="%s" class="%s" loading="%s"%s%s />',
+					esc_url($url),
+					$alt,
+					$class,
+					$loading,
+					$width,
+					$style_attr
+				);
+			}
+			// Fallback to thumbnail if ACF URL not available
+			$size = 'thumbnail';
+		}
+		
 		// Merge default attributes
 		$default_attr = array(
 			'loading' => 'lazy',
@@ -757,6 +786,7 @@ function mediafast_get_optimized_image($acf_image, $size = 'acf-large', $attr = 
 		$attr = array_merge($default_attr, $attr);
 		
 		// wp_get_attachment_image automatically generates srcset for responsive images
+		// Note: wp_get_attachment_image supports style attribute
 		return wp_get_attachment_image($attachment_id, $size, false, $attr);
 	}
 	
@@ -779,13 +809,20 @@ function mediafast_get_optimized_image($acf_image, $size = 'acf-large', $attr = 
 	$class = isset($attr['class']) ? esc_attr($attr['class']) : 'img-fluid';
 	$loading = isset($attr['loading']) ? esc_attr($attr['loading']) : 'lazy';
 	$alt_attr = !empty($alt) ? esc_attr($alt) : '';
+	$style = isset($attr['style']) ? esc_attr($attr['style']) : '';
+	$width = isset($attr['width']) ? sprintf(' width="%s"', esc_attr($attr['width'])) : '';
+	
+	// Build style attribute if present
+	$style_attr = $style ? sprintf(' style="%s"', $style) : '';
 	
 	return sprintf(
-		'<img src="%s" alt="%s" class="%s" loading="%s" />',
+		'<img src="%s" alt="%s" class="%s" loading="%s"%s%s />',
 		esc_url($url),
 		$alt_attr,
 		$class,
-		$loading
+		$loading,
+		$width,
+		$style_attr
 	);
 }
 
@@ -978,7 +1015,7 @@ function custom_posts_per_page($query)
 	}
 
 	if ($query->is_home() || $query->is_post_type_archive('post')) {
-		$query->set('posts_per_page', 8);
+		$query->set('posts_per_page', 15);
 		return;
 	}
 

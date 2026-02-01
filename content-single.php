@@ -6,12 +6,22 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="container pt-5 mt-5">
+	<div class="container pt-5">
 		<div class="row flex-column align-items-center mb-4">
 			<div class="image-container col-md-10 col-12 blog-post-single-image-container">
 				<?php
 				if (has_post_thumbnail()) {
-					echo '<div class="post-thumbnail">' . get_the_post_thumbnail(get_the_ID(), 'xlarge') . '</div>';
+					// Check if the new post-featured size (1800x938) exists, otherwise use 'full' size
+					// This handles cases where thumbnails haven't been regenerated yet
+					$post_featured = wp_get_attachment_image_src(get_post_thumbnail_id(), 'post-featured');
+					$image_size = 'post-featured';
+					
+					// If the size doesn't exist or is the old 1200x700 size, use 'full' instead
+					if (!$post_featured || ($post_featured[1] == 1200 && $post_featured[2] == 700)) {
+						$image_size = 'full';
+					}
+					
+					echo '<div class="post-thumbnail">' . get_the_post_thumbnail(get_the_ID(), $image_size, array('class' => 'img-fluid')) . '</div>';
 				}
 
 				?>

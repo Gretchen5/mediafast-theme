@@ -7,31 +7,56 @@
 
 <?php
 $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-
+$categories = get_the_category();
+$cat_name = !empty($categories) ? $categories[0]->name : '';
+$cat_url = !empty($categories) ? get_category_link($categories[0]->term_id) : '';
+$post_date = get_the_date('j F Y');
 ?>
 
 <!-- start blog item -->
-<li class="grid-item m-4 m-md-0">
-	<article id="post-<?php the_ID(); ?>">
-		<div class="blog-box d-md-flex d-block flex-row h-100 border-radius-6px overflow-hidden box-shadow-extra-large my-3">
-			<div class="blog-image responsive-image-width contain-background" style="background-image: url('<?php echo esc_url($thumb_url ?: 'https://placehold.co/800x923'); ?>'); height:400px;">
-				<a href="<?php the_permalink(); ?>" class="blog-post-image-overlay" aria-label="<?php echo esc_attr(sprintf(__('Read more about %s', 'mediafast'), get_the_title())); ?>"></a>
-			</div>
-			<div class="blog-content responsive-image-width pt-50px pb-40px ps-40px pe-40px xl-p-30px bg-white d-flex flex-column justify-content-center align-items-center align-items-md-start last-paragraph-no-margin text-center text-md-start">
-				<?php
-				$categories = get_the_category();
-				if (! empty($categories)) :
-					$cat     = $categories[0]; // first category
-					$cat_url = get_category_link($cat->term_id);
-					$cat_name = $cat->name;
-				?>
-					<a href="<?php echo esc_url($cat_url); ?>"
-						class="categories-btn bg-success text-white text-uppercase fw-500 mb-30px text-decoration-none">
-						<?php echo esc_html($cat_name); ?>
-					</a>
+<div class="col-12 col-md-6 col-lg-4">
+	<article id="post-<?php the_ID(); ?>" class="h-100">
+		<div class="card h-100 border-0">
+			<a href="<?php the_permalink(); ?>" class="position-relative d-block overflow-hidden blog-card-image" aria-label="<?php echo esc_attr(sprintf(__('Read more about %s', 'mediafast'), get_the_title())); ?>">
+				<?php if ($thumb_url) : ?>
+					<?php the_post_thumbnail('large', array('class' => 'card-img-top w-100 blog-post-thumbnail', 'loading' => 'lazy')); ?>
+				<?php else : ?>
+					<?php
+					// Featured image dimensions: 1800px × 938px (ratio: 1.92:1)
+					// Using aspect-ratio to maintain proper proportions
+					?>
+					<img src="https://placehold.co/1800x938/6c757d/ffffff?text=No+Image" alt="<?php echo esc_attr(get_the_title()); ?>" class="card-img-top w-100 blog-post-thumbnail" loading="lazy" />
 				<?php endif; ?>
-				<a href="<?php the_permalink(); ?>" class="card-title text-dark-gray text-underline-hover text-dark-gray-hover mb-5px fw-600 fs-18 lh-28"><?php the_title(); ?></a>
-				<p>
+			</a>
+			
+			<div class="card-body bg-white d-flex flex-column">
+				<?php if ($cat_name || $post_date) : ?>
+					<div class="mb-2">
+						<?php if ($cat_name && $cat_url) : ?>
+							<a href="<?php echo esc_url($cat_url); ?>" class="text-decoration-none text-uppercase fw-bold" style="color: #6c757d; font-size: 0.75rem; letter-spacing: 0.5px;">
+								<?php echo esc_html($cat_name); ?>
+							</a>
+						<?php elseif ($cat_name) : ?>
+							<span class="text-uppercase fw-bold" style="color: #6c757d; font-size: 0.75rem; letter-spacing: 0.5px;">
+								<?php echo esc_html($cat_name); ?>
+							</span>
+						<?php endif; ?>
+						<?php if ($cat_name && $post_date) : ?>
+							<span class="mx-1" style="color: #6c757d;">•</span>
+						<?php endif; ?>
+						<?php if ($post_date) : ?>
+							<span style="color: #6c757d; font-size: 0.75rem;"><?php echo esc_html(strtoupper($post_date)); ?></span>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+				
+				<h3 class="card-title mb-3">
+					<a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark fw-bold" style="font-size: 1.25rem; line-height: 1.4;">
+						<?php the_title(); ?>
+					</a>
+				</h3>
+				
+				<p class="card-text text-muted mb-3 flex-grow-1" style="font-size: 0.9rem; line-height: 1.6;">
 					<?php
 					if (has_excerpt()) {
 						echo esc_html(get_the_excerpt());
@@ -41,11 +66,11 @@ $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 					}
 					?>
 				</p>
-				<div class="mt-15px"><span class="separator bg-dark-gray"></span>
-					<p class="text-dark-gray text-dark-gray-hover d-inline-block fs-15 fw-500 fw-500 text-center text-md-start"><?php the_author(); ?></p>
-				</div>
+				<a href="<?php the_permalink(); ?>" class="btn btn-primary text-decoration-none mt-auto">
+					<?php esc_html_e('Read More', 'mediafast'); ?>
+				</a>
 			</div>
 		</div>
 	</article><!-- /#post-<?php the_ID(); ?> -->
-</li>
+</div>
 <!-- end blog item -->

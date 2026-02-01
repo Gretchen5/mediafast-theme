@@ -28,7 +28,7 @@ if (have_posts()) :
 	?>
 
 	<section class="component--hero archive-loop">
-		<div class="background-image py-150" style="<?php echo $background_image . '' . $background_position; ?>">
+		<div class="background-image py-75" style="<?php echo $background_image . '' . $background_position; ?>">
 			<div class="overlay" style="--overlay-opacity: <?php echo esc_attr($overlay_selection); ?>"></div>
 			<div class="content-container container position-relative z-2 pt-150">
 				<div class="row">
@@ -131,22 +131,22 @@ if (have_posts()) :
 
 	</section>
 
-	<ul class="blog-side-image blog-wrapper grid-loading grid grid-2col xxl-grid-2col xl-grid-2col lg-grid-2col md-grid-1col sm-grid-1col xs-grid-1col gutter-extra-large pt-5 grid-auto-rows-1">
-		<li class="grid-sizer"></li>
+	<div class="container py-5">
+		<div class="row g-5">
+			<?php
+			while (have_posts()) :
+				the_post();
 
-		<?php
-		while (have_posts()) :
-			the_post();
-
-			/**
-			 * Include the Post-Format-specific template for the content.
-			 * If you want to overload this in a child theme then include a file
-			 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-			 */
-			get_template_part('content', 'index'); // Post format: content-index.php
-		endwhile;
-		?>
-	</ul>
+				/**
+				 * Include the Post-Format-specific template for the content.
+				 * If you want to overload this in a child theme then include a file
+				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+				 */
+				get_template_part('content', 'index'); // Post format: content-index.php
+			endwhile;
+			?>
+		</div>
+	</div>
 <?php
 endif;
 
@@ -166,7 +166,7 @@ $pages = paginate_links(array(
 
 if (is_array($pages)) :
 ?>
-	<nav class="custom-pagination pt-5">
+	<nav class="custom-pagination pt-5" style="border-bottom: 1px solid #757575; padding-bottom: 2rem;">
 		<ul class="pagination justify-content-center">
 			<?php foreach ($pages as $page) : ?>
 				<li class="page-item"><?php echo $page; ?></li>

@@ -13,8 +13,6 @@ $page_id = get_option( 'page_for_posts' );
 	<div class="col-md-12">
 		<?php
 			echo apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
-
-			edit_post_link( __( 'Edit', 'mediafast' ), '<span class="edit-link">', '</span>', $page_id );
 		?>
 	</div><!-- /.col -->
 	<div class="col-md-12">
@@ -24,4 +22,5 @@ $page_id = get_option( 'page_for_posts' );
 	</div><!-- /.col -->
 </div><!-- /.row -->
 <?php
+edit_post_link( __( 'Edit', 'mediafast' ), '<span class="edit-link">', '</span>', $page_id );
 get_footer();
