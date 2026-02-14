@@ -171,7 +171,7 @@
                 "text-white": "White",
                 "has-cyan-color": "Blue",
                 "has-teal-color": "Teal",
-                "has-gold-text-color": "Gold"
+                "has-gray-text-color": "Gray"
             },
             "default_value": false,
             "return_format": "value",
@@ -204,7 +204,7 @@
                 "text-white": "White",
                 "has-cyan-color": "Blue",
                 "has-teal-color": "Teal",
-                "has-gold-text-color": "Gold"
+                "has-gray-text-color": "Gray"
             },
             "default_value": false,
             "return_format": "value",

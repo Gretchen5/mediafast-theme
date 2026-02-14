@@ -44,6 +44,47 @@
     background: #f8f9fa; /* light background */
     color: $gray-600; /* keep your text color */
   }
+
+// Bootstrap pagination styles for single post navigation
+// Match the .page-numbers style exactly - especially for prev/next arrows
+.custom-pagination .page-link {
+  display: inline-block !important;
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  text-align: center !important;
+  border-radius: 50% !important; // Ensure circular shape
+  color: $gray-600 !important; // Match inactive page numbers
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  border: 0 !important; // Remove Bootstrap's default border
+  background: transparent !important; // No background by default
+  font-size: 1.5rem !important; // Match .page-numbers.prev/.next font size
+  padding: 0 !important; // Remove Bootstrap's default padding
+  margin: 0 !important; // Remove any default margins
+  
+  &:hover {
+    box-shadow: 0 0 6px rgba(0,0,0,0.2) !important;
+    background: #f8f9fa !important; // Light background on hover
+    color: $gray-600 !important; // Keep gray color on hover
+  }
+  
+  &:focus {
+    box-shadow: 0 0 6px rgba(0,0,0,0.2) !important;
+    outline: none !important; // Remove default focus outline
+    background: transparent !important;
+  }
+  
+  &:active {
+    box-shadow: 0 0 6px rgba(0,0,0,0.2) !important;
+  }
+  
+  // Ensure the arrow characters display correctly
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
   
  .text-underline-hover {
     text-decoration: none;

@@ -45,7 +45,7 @@ $pages = paginate_links(array(
 
 if (is_array($pages)) :
 ?>
-	<nav class="custom-pagination">
+	<nav class="custom-pagination pt-5" style="border-bottom: 1px solid #757575; padding-bottom: 2rem;">
 		<ul class="pagination justify-content-center">
 			<?php foreach ($pages as $page) : ?>
 				<li class="page-item"><?php echo $page; ?></li>

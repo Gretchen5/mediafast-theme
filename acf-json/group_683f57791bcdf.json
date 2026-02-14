@@ -236,7 +236,7 @@
                         "fa-solid fa-circle-check": "Check in circle",
                         "fa-solid fa-check": "Check mark",
                         "fa-solid fa-envelopes-bulk": "Clutter mail",
-                        "fa-regular fa-truck": "Delivery truck",
+                        "fa-solid fa-truck": "Delivery truck",
                         "fa-solid fa-dove": "Dove",
                         "fa-solid fa-file-arrow-up": "File upload",
                         "fa-solid fa-eye": "Focus",
@@ -590,5 +590,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1759701367
+    "display_title": "",
+    "modified": 1770965888
 }

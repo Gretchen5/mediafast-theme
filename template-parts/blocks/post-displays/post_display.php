@@ -39,7 +39,7 @@ $recent_posts = new WP_Query($args);
         <!-- Section Header -->
         <div class="row justify-content-center mb-5">
             <div class="col-lg-7 text-center">
-                <span class="fs-17 d-inline-block fw-500 text-uppercase text-dk-gold ls-1px mb-2">
+                <span class="fs-17 d-inline-block fw-500 text-uppercase text-dk-gray ls-1px mb-2">
                     Best Practices, Testimonials, Case Studies and Videos
                 </span>
                 <?php if ($section_heading) : ?>
@@ -66,7 +66,7 @@ $recent_posts = new WP_Query($args);
                             <?php endif; ?>
 
                             <div class="post-display-card__content">
-                                <div class="post-display-card__date has-lt-gold-text-color text-uppercase fw-500 mb-2">
+                                <div class="post-display-card__date has-lt-gray-text-color text-uppercase fw-500 mb-2">
                                     <?php echo get_the_date('F j, Y'); ?>
                                 </div>
                                 <h3 class="post-display-card__title h5 mb-3">
@@ -74,7 +74,14 @@ $recent_posts = new WP_Query($args);
                                         <?php the_title(); ?>
                                     </a>
                                 </h3>
-                                <a href="<?php the_permalink(); ?>" class="post-display-card__link btn btn-link text-white p-0">
+                                <p class="post-display-card__excerpt text-white mb-3">
+                                    <?php
+                                    $content = get_the_content();
+                                    $excerpt = wp_strip_all_tags($content);
+                                    echo esc_html(wp_trim_words($excerpt, 25, '...'));
+                                    ?>
+                                </p>
+                                <a href="<?php the_permalink(); ?>" class="post-display-card__link btn btn-link text-white p-0 fw-600">
                                     Continue reading
                                 </a>
                             </div>

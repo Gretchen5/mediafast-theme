@@ -292,7 +292,7 @@
                 "id": ""
             },
             "choices": {
-                "bg-gold": "Gold",
+                "bg-gray": "Gray",
                 "bg-success": "Teal",
                 "bg-primary": "Dark Gray",
                 "bg-secondary": "Dark Blue",

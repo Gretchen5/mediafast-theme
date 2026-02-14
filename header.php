@@ -28,7 +28,7 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 
 	<div id="wrapper">
 	<header>
-			<nav id="header" class="navbar navbar-expand-xl py-3 border-bottom border-color-gold border-4 <?php
+			<nav id="header" class="navbar navbar-expand-xl py-3 border-bottom border-color-gray border-4 <?php
 				echo esc_attr($navbar_scheme);
 
 				if (isset($navbar_position) && 'fixed_top' === $navbar_position) {

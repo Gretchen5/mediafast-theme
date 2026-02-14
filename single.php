@@ -27,7 +27,7 @@ if ($count_posts->publish > 1) :
 	$next_post = get_next_post();
 	$prev_post = get_previous_post();
 ?>
-	<nav class="custom-pagination pt-5">
+	<nav class="custom-pagination pt-5" style="border-bottom: 1px solid #757575; padding-bottom: 2rem;">
 		<ul class="pagination justify-content-center">
 			<?php if ($prev_post) : ?>
 				<li class="page-item">

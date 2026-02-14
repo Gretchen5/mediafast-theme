@@ -199,6 +199,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Case Studies Slider - Only initialize if element exists
+document.addEventListener("DOMContentLoaded", () => {
+  const caseStudiesSwiperEl = document.querySelector(".case-studies-swiper");
+  if (caseStudiesSwiperEl) {
+    new Swiper(".case-studies-swiper", {
+      modules: [Pagination, Autoplay],
+      loop: true,
+      spaceBetween: 7.5,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".case-studies-swiper-pagination",
+        clickable: true,
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        576: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 3,
+        },
+        1200: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  }
+});
+
 // Animations
 import "./reveal.js";
 import "animate.css";

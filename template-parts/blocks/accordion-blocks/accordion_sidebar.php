@@ -66,7 +66,7 @@ $tabs            = have_rows('tabs_repeater');
                                         $content = get_sub_field('content');
                                     ?>
                                         <?php if ($heading) : ?>
-                                            <h3 class="pane-heading text-dk-gold fw-600 my-3"><?php echo wp_kses_post($heading); ?></h3>
+                                            <h3 class="pane-heading text-dk-gray fw-600 my-3"><?php echo wp_kses_post($heading); ?></h3>
                                         <?php endif; ?>
                                         <?php if ($content) : ?>
                                             <div class="pane-body text-body">

@@ -329,43 +329,6 @@
             "placeholder": "",
             "create_options": 0,
             "save_options": 0
-        },
-        {
-            "key": "field_684368124cf52",
-            "label": "Overlay Selection",
-            "name": "overlay_selection",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "0": "no overlay",
-                "0.1": "10%",
-                "0.2": "20%",
-                "0.3": "30%",
-                "0.4": "40%",
-                "0.5": "50%",
-                "0.6": "60%",
-                "0.7": "70%",
-                "0.8": "80%",
-                "0.9": "90%"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
         }
     ],
     "location": [
@@ -408,5 +371,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762885790
+    "modified": 1770174558
 }

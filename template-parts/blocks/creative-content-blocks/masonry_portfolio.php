@@ -8,7 +8,7 @@ $background_color = get_field('background_color');
 ?>
 
 <!-- Portfolio Section Start -->
-<div id="portfolio" class="section section-padding ag-masonary-wrapper py-75 bg-lt-gray">
+<div id="portfolio" class="section section-padding ag-masonary-wrapper py-75 <?php echo $background_color; ?>">
     <div class="container">
         <div class="row flex-column align-items-center">
 
@@ -86,7 +86,7 @@ $background_color = get_field('background_color');
         </div>
     </div>
     <?php if ($cta_button) { ?>
-        <div class="cta-button-container d-flex justify-content-center pt-5 pb-90 bg-gray">
+        <div class="cta-button-container d-flex justify-content-center pt-5 pb-90">
 
             <a class="btn btn-primary" align-items-center href="<?php echo $cta_button['url']; ?>" target="<?php echo $cta_button['target']; ?>"><?php echo $cta_button['title']; ?></a>
 

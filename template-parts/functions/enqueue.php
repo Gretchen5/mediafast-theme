@@ -46,9 +46,9 @@ if (! function_exists('mediafast_enqueue_assets')) {
         // Note: jQuery is already enqueued in functions.php (mediafast_enqueue_scripts)
         // Don't duplicate jQuery here.
 
-        // template-tiles.js: Load only on page-slug-templates-and-graphic-design.
+        // template-tiles.js: Load only on pages that use the template block.
         // Template Block adds inline data via wp_add_inline_script when that block renders.
-        if (is_page('templates-and-graphic-design')) {
+        if (is_page(array('templates-and-graphic-design', 'cd-and-dvd-templates'))) {
             wp_enqueue_script(
                 'custom-template-tiles',
                 get_template_directory_uri() . '/assets/template-tiles.js',

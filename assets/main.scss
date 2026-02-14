@@ -57,9 +57,9 @@ $dk-teal: #17536b;
 // $cyan: #027dad;
 $cyan: #01719d;
 $dk-cyan: #267798;
-$gold: #757575;
-$lt-gold: #adb5bd;
-$dk-gold: #757575;
+$gray: #757575;
+$lt-gray: #adb5bd;
+$dk-gray: #757575;
 
 $primary: $cyan;
 $secondary: $blue;
@@ -99,14 +99,18 @@ $base: $gray-900;
   background-color: $cyan;
 }
 
-.has-gold-text-color {
-  color: $dk-gold;
+.has-dk-gray-background-color {
+  background-color: $dk-gray;
 }
-.has-lt-gold-text-color {
-  color: $lt-gold;
+
+.has-gray-text-color {
+  color: $dk-gray;
 }
-.has-gold-background-background-color {
-  background-color: $dk-gold;
+.has-lt-gray-text-color {
+  color: $lt-gray;
+}
+.has-gray-background-background-color {
+  background-color: $dk-gray;
 }
 
 .has-tan-background-background-color {
@@ -439,6 +443,7 @@ img {
 .menu-phone-link a {
   color: $primary;
   font-weight: 600;
+  font-size: 0.875rem; // 14px - reduced from default
 }
 
 // #header {
@@ -606,6 +611,13 @@ img {
   
   .card-img-top {
     transition: transform 0.3s ease-in-out;
+    
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
   }
   
   &:hover .card-img-top {
@@ -796,8 +808,8 @@ body {
 .bg-dk-teal {
   background-color: $dk-teal;
 }
-.bg-gold {
-  background-color: $dk-gold;
+.bg-gray {
+  background-color: $dk-gray;
 }
 
 .bg-light-blue {
@@ -807,7 +819,7 @@ body {
   // WCAG AA requires 4.5:1 for normal text, 3:1 for large text
   color: $gray-800; // Dark gray for better contrast
   
-  .text-dk-gold,
+  .text-dk-gray,
   .text-secondary,
   .text-body,
   p,
@@ -827,8 +839,8 @@ hr {
   opacity: 1;
 }
 
-.border-gold {
-  border: 2px solid $dk-gold !important;
+.border-gray {
+  border: 2px solid $dk-gray !important;
 }
 
 .border-radius-40 {
@@ -898,29 +910,29 @@ h3,
 h4,
 .h4 {
   font-size: 1.2rem;
-  color: $dk-gold;
+  color: $dk-gray;
 }
 
-.text-dk-gold {
-  color: $dk-gold;
+.text-dk-gray {
+  color: $dk-gray;
 }
 
-// Fix contrast for text-dk-gold on light backgrounds
+// Fix contrast for text-dk-gray on light backgrounds
 // WCAG AA requires 4.5:1 contrast ratio for normal text
 // #757575 on white = ~4.6:1 (borderline), using #495057 = ~7.1:1 (better)
-.component--recent-posts .text-dk-gold {
+.component--recent-posts .text-dk-gray {
   color: $gray-700 !important; // Darker for better contrast (was #757575, now #495057)
 }
 
-// Also fix text-dk-gold on any light background sections
-.bg-lt-gray .text-dk-gold,
-.bg-white .text-dk-gold,
-.bg-light-blue .text-dk-gold {
+// Also fix text-dk-gray on any light background sections
+.bg-lt-gray .text-dk-gray,
+.bg-white .text-dk-gray,
+.bg-light-blue .text-dk-gray {
   color: $gray-700 !important;
 }
 
-.text-gold {
-  color: $dk-gold;
+.text-gray {
+  color: $dk-gray;
 }
 
 .text-cyan {
@@ -1116,7 +1128,7 @@ small {
   color: $cyan;
   font-weight: 600;
   &:hover {
-    color: $dk-gold;
+    color: $dk-gray;
   }
 }
 
@@ -1136,7 +1148,7 @@ figure.rounded img {
     display: block;
     text-decoration: none;
     &:hover {
-      color: $lt-gold !important;
+      color: $lt-gray !important;
       text-decoration: underline;
     }
   }
@@ -1247,7 +1259,7 @@ figure.rounded img {
 }
 
 #footer .menu-item.current-menu-item > a[aria-current="page"] {
-  color: $lt-gold;
+  color: $lt-gray;
   text-decoration: underline;
 }
 
@@ -1276,7 +1288,7 @@ a {
   font-weight: 600;
   text-decoration: underline;
   &:hover {
-    color: $dk-gold;
+    color: $dk-gray;
   }
   
   // Exclude navigation links from underline

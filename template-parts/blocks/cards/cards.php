@@ -15,6 +15,42 @@ $card_subheading_color = get_field('card_subheading_color') ? get_field('card_su
 $card_heading_padding_top = get_field('card_heading_padding-top') ? get_field('card_heading_padding_top') : '';
 $card_heading_padding_bottom = get_field('card_heading_padding-bottom') ? get_field('card_heading_padding_bottom') : '';
 $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
+
+// New fields
+$card_image_size = get_field('card_image_size') ?: '100';
+// Select fields return "1" for On, "0" for Off
+$card_shadow_field = get_field('card_shadow');
+// Explicitly check: if field is '0' (Off), set to false. Otherwise default to true (On)
+$card_shadow = ($card_shadow_field === '0' || $card_shadow_field === 0) ? false : true;
+
+$card_border_radius_enable_field = get_field('card_border_radius_enable');
+// Explicitly check: if field is '0' (Off), set to false. Otherwise default to true (On)
+$card_border_radius_enable = ($card_border_radius_enable_field === '0' || $card_border_radius_enable_field === 0) ? false : true;
+
+$card_border_radius_size = get_field('card_border_radius_size') ?: '2.5';
+$card_column_width = get_field('card_column_width') ?: 'auto';
+
+// Calculate column classes based on card count and setting
+$card_count = 0;
+$cards_data = get_field('card_repeater');
+if ($cards_data) {
+    $card_count = count($cards_data);
+}
+
+// Determine column class
+if ($card_column_width === 'auto') {
+    // Auto: 3 columns for 3 cards, 4 columns for 4+ cards
+    if ($card_count === 3) {
+        $col_class = 'col-10 col-md-6 col-lg-4';
+    } elseif ($card_count >= 4) {
+        $col_class = 'col-10 col-md-6 col-lg-3';
+    } else {
+        $col_class = 'col-10 col-md-6 col-lg-4'; // Default
+    }
+} else {
+    // Use specified column width
+    $col_class = 'col-10 col-md-6 ' . $card_column_width;
+}
 ?>
 
 <section class="component--cards <?php echo esc_attr($vertical_padding); ?>">
@@ -23,12 +59,12 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
             <h2 class="text-center mb-4 <?php echo esc_attr($section_heading_color); ?>"><?php echo $section_heading; ?></h2>
         <?php endif; ?>
         <?php if ($section_subheading) : ?>
-            <p class="text-center mb-4 fw-600 fs-20 <?php echo esc_attr($section_subheading_color); ?>"><?php echo $section_subheading; ?></p>
+            <h3 class="text-center mb-4  <?php echo esc_attr($section_subheading_color); ?>"><?php echo $section_subheading; ?></h3>
         <?php endif; ?>
         <?php if ($section_description) : ?>
             <div class="my-4"><?php echo $section_description; ?></div>
         <?php endif; ?>
-        <div class="row g-4 pt-4 justify-content-center">
+        <div class="row g-2 pt-4 justify-content-center align-items-stretch">
             <?php
             if (have_rows('card_repeater')) :
 
@@ -43,18 +79,39 @@ $card_hr = get_field('card_hr') ? get_field('card_hr') : '';
                     $card_icon_color = get_sub_field('card_icon_color') ? get_sub_field('card_icon_color') : '';
 
             ?>
-                    <div class="col-10 col-md-6 col-lg-4 card-col">
-                        <div class="card shadow <?php echo $card_border . ' ' . $card_background_color; ?> h-100 border-radius-40 px-3">
+                    <div class="<?php echo esc_attr($col_class); ?> card-col d-flex">
+                        <?php
+                        // Build card classes
+                        $card_classes = array('card', 'w-100', 'd-flex', 'flex-column', 'px-3');
+                        if ($card_shadow) {
+                            $card_classes[] = 'shadow';
+                        }
+                        if ($card_border_radius_enable) {
+                            $card_classes[] = 'card-with-radius';
+                        }
+                        $card_classes[] = $card_border;
+                        $card_classes[] = $card_background_color;
+                        ?>
+                        <div class="<?php echo esc_attr(implode(' ', array_filter($card_classes))); ?>" 
+                             <?php if ($card_border_radius_enable) : ?>
+                             style="border-radius: <?php echo esc_attr($card_border_radius_size); ?>rem;"
+                             <?php endif; ?>>
                             <?php if ($card_image) : ?>
-                                <div class="card-img-top p-3">
-                                    <?php echo mediafast_get_optimized_image($card_image, 'acf-card', array('class' => 'w-100')); ?>
+                                <div class="card-img-top p-3 d-flex justify-content-center align-items-center">
+                                    <?php 
+                                    $image_style = 'width: ' . esc_attr($card_image_size) . '%; max-width: 100%; height: auto;';
+                                    echo mediafast_get_optimized_image($card_image, 'acf-card', array(
+                                        'class' => 'card-image',
+                                        'style' => $image_style
+                                    )); 
+                                    ?>
                                 </div>
                             <?php elseif ($card_icon) : ?>
                                 <div class="card-icon text-center p-3 <?php echo $card_icon_color; ?>">
                                     <?php echo get_inline_icon($card_icon); ?>
                                 </div>
                             <?php endif; ?>
-                            <div class="card-body d-flex flex-column justify-content-start px-2">
+                            <div class="card-body d-flex flex-column flex-grow-1 px-2">
                                 <?php if ($card_heading) : ?>
                                     <h3 class="card-title text-center <?php echo $card_heading_color . ' ' . $card_heading_padding_top . ' ' . $card_heading_padding_bottom; ?>"><?php echo $card_heading; ?></h3>
                                 <?php endif; ?>

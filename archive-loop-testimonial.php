@@ -131,48 +131,130 @@ if (have_posts()) :
 
 	</section>
 
+	<?php
+	// Multiple Videos Section
+	$mv_heading = get_field('heading_multiple_videos_testimonials', 'option');
+	$mv_description = get_field('description_multiple_videos_testimonials', 'option');
+	?>
+
+	<?php if ($mv_heading || have_rows('video_repeater_multiple_videos_testimonials', 'option')) : ?>
+		<section class="component--multiple-videos background-position-center background-repeat py-75" style="background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/vertical-center-line-bg.svg')">
+			<div class="container">
+				<?php if ($mv_heading) : ?>
+					<div class="heading-container pb-4">
+						<h2 class="text-secondary text-center pb-3"><?php echo $mv_heading; ?></h2>
+						<?php if ($mv_description) : ?>
+							<div class="description-container">
+								<?php echo $mv_description; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+				<div class="row">
+					<div class="col-12">
+						<?php if (have_rows('video_repeater_multiple_videos_testimonials', 'option')) : ?>
+							<div class="video-container row g-5 justify-content-center align-items-center">
+								<?php while (have_rows('video_repeater_multiple_videos_testimonials', 'option')) :
+									the_row();
+									$video_url = get_sub_field('video_url');
+									$video_title = get_sub_field('video_title');
+								?>
+									<div class="each-video-multiple-videos col-10 col-md-5 d-flex flex-column align-items-start justify-content-end">
+										<div class="video-wrapper">
+											<iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="100%" title="<?php echo esc_attr($video_title ?: 'Video content'); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" class="shadow rounded bg-white"></iframe>
+										</div>
+									</div>
+								<?php endwhile; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
+
+	<?php
+	// Query featured testimonials (max 2)
+	$featured_q = new WP_Query([
+		'post_type'      => 'testimonial',
+		'posts_per_page' => 2,
+		'meta_key'       => '_is_featured',
+		'meta_value'     => '1',
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	]);
+
+	$featured_ids = [];
+
+	if ($featured_q->have_posts()) : ?>
+		<section class="testimonials-featured mb-5">
+			<div class="container-fluid">
+				<h2 class="h4 mb-4">Featured Testimonials</h2>
+				<div class="row g-4">
+					<?php while ($featured_q->have_posts()) : $featured_q->the_post();
+						$featured_ids[] = get_the_ID();
+						get_template_part('content', 'index-testimonial');
+					endwhile; ?>
+				</div>
+			</div>
+		</section>
+	<?php endif;
+
+	wp_reset_postdata();
+
+	// Main testimonials list (excluding featured)
+	$testimonials_q = new WP_Query([
+		'post_type'      => 'testimonial',
+		'posts_per_page' => get_option('posts_per_page', 15),
+		'post__not_in'   => $featured_ids,
+		'paged'          => get_query_var('paged') ? get_query_var('paged') : 1,
+	]);
+	?>
+
 	<div class="testimonial-archive">
 		<div class="container-fluid">
 			<div class="row g-4">
 				<?php
-				while (have_posts()) :
-					the_post();
-
-					/**
-					 * Include the Post-Format-specific template for the content.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part('content', 'index-testimonial'); // Post format: content-index.php
-				endwhile;
+				if ($testimonials_q->have_posts()) :
+					while ($testimonials_q->have_posts()) : $testimonials_q->the_post();
+						get_template_part('content', 'index-testimonial');
+					endwhile;
+				endif;
 				?>
 			</div>
 		</div>
 	</div>
+
+	<?php
+	// Reset postdata after main loop
+	wp_reset_postdata();
+
+	// Pagination for custom query
+	if (isset($testimonials_q) && $testimonials_q->max_num_pages > 1) {
+		$big = 999999999; // need an unlikely integer
+
+		$pages = paginate_links(array(
+			'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+			'format'    => '?paged=%#%',
+			'current'   => max(1, get_query_var('paged')),
+			'total'     => $testimonials_q->max_num_pages,
+			'type'      => 'array',
+			'prev_text' => '&larr;', // simple left arrow
+			'next_text' => '&rarr;', // simple right arrow
+		));
+
+		if (is_array($pages)) :
+		?>
+			<nav class="custom-pagination pt-5" style="border-bottom: 1px solid #757575; padding-bottom: 2rem;">
+				<ul class="pagination justify-content-center">
+					<?php foreach ($pages as $page) : ?>
+						<li class="page-item"><?php echo $page; ?></li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+		<?php 
+		endif;
+	}
+	?>
 <?php
 endif;
-
-wp_reset_postdata();
-
-$big = 999999999; // need an unlikely integer
-
-$pages = paginate_links(array(
-	'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-	'format'    => '?paged=%#%',
-	'current'   => max(1, get_query_var('paged')),
-	'total'     => $wp_query->max_num_pages,
-	'type'      => 'array',
-	'prev_text' => '&larr;', // simple left arrow
-	'next_text' => '&rarr;', // simple right arrow
-));
-
-if (is_array($pages)) :
-?>
-	<nav class="custom-pagination">
-		<ul class="pagination justify-content-center">
-			<?php foreach ($pages as $page) : ?>
-				<li class="page-item"><?php echo $page; ?></li>
-			<?php endforeach; ?>
-		</ul>
-	</nav>
-<?php endif; ?>

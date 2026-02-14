@@ -10,7 +10,7 @@ $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 ?>
 
 <!-- start testimonial item -->
-<div class="col-12 col-md-6">
+<div class="col-12 col-md-6 col-lg-4">
 	<article id="post-<?php the_ID(); ?>" class="testimonial-archive__card">
 		<?php if ($thumb_url) : ?>
 			<div class="testimonial-archive__image">
@@ -36,6 +36,12 @@ $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
 					echo esc_html(wp_trim_words($content, 25, '…'));
 				}
 				?>
+			</div>
+			
+			<div class="testimonial-archive__read-more">
+				<a href="<?php the_permalink(); ?>" class="btn btn-primary">
+					<?php esc_html_e('Read More', 'mediafast'); ?>
+				</a>
 			</div>
 		</div>
 	</article>

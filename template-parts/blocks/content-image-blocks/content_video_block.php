@@ -32,7 +32,7 @@ $vertical_padding = $fields['vertical_padding'] ?? '';
                     <h2 class="text-secondary text-center"><?php echo $heading; ?></h2>
                 <?php } ?>
                 <?php if ($subheading) { ?>
-                    <h3 class="text-dk-gold text-center pb-3"><?php echo $subheading; ?></h3>
+                    <h3 class="text-dk-gray text-center pb-3"><?php echo $subheading; ?></h3>
                 <?php } ?>
                 <?php if ($description) { ?>
                     <?php echo $description; ?>

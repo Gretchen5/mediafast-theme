@@ -21,11 +21,11 @@ $padding = get_field('padding');
         <div class="row">
             <div class="col-12">
                 <?php if (have_rows('video_repeater')) { ?>
-                    <div class="video-container row g-4 justify-content-center align-items-center">
+                    <div class="video-container row g-5 justify-content-center align-items-center">
                         <?php while (have_rows('video_repeater')) {
                             the_row();
                             $video_url = get_sub_field('video_url');
-                            $video_title = get_sub_field('video_title')
+                            $video_title = get_sub_field('video_title');
                         ?>
                             <div class="each-video-multiple-videos col-10 col-md-5 d-flex flex-column align-items-start justify-content-end">
                                 <div class="video-wrapper">

@@ -272,7 +272,11 @@
                         "megaphone": "Megaphone",
                         "patch-question": "Patch question",
                         "question": "Question",
-                        "search-icon": "Search icon"
+                        "mediafast-lt-blue-logo": "Mediafast lt blue logo",
+                        "mediafast_logo_white": "Mediafast_logo_white",
+                        "rocket-icon": "Rocket icon",
+                        "search-icon": "Search icon",
+                        "vertical-center-line-bg": "Vertical center line bg"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -301,7 +305,7 @@
                         "id": ""
                     },
                     "choices": {
-                        "text-gold": "Gold",
+                        "text-gray": "Gray",
                         "text-success": "Teal",
                         "text-primary": "Dark Gray",
                         "text-secondary": "Dark Blue",
@@ -526,7 +530,7 @@
                 "text-secondary": "Dark Blue",
                 "text-success": "Teal",
                 "text-info": "Dark Gray",
-                "text-dk-gold": "Gold"
+                "text-dk-gray": "Gray"
             },
             "default_value": false,
             "return_format": "value",
@@ -560,7 +564,7 @@
                 "text-secondary": "Dark Blue",
                 "text-success": "Teal",
                 "text-info": "Dark Gray",
-                "text-dk-gold": "Gold"
+                "text-dk-gray": "Gray"
             },
             "default_value": false,
             "return_format": "value",
@@ -594,7 +598,7 @@
                 "text-secondary": "Dark Blue",
                 "text-success": "Teal",
                 "text-info": "Dark Gray",
-                "text-dk-gold": "Gold"
+                "text-dk-gray": "Gray"
             },
             "default_value": false,
             "return_format": "value",
@@ -628,7 +632,7 @@
                 "text-secondary": "Dark Blue",
                 "text-success": "Teal",
                 "text-info": "Dark Gray",
-                "text-dk-gold": "Gold"
+                "text-dk-gray": "Gray"
             },
             "default_value": false,
             "return_format": "value",
@@ -661,9 +665,176 @@
                 "border-1 border-gray-600": "Dark Gray Border",
                 "border-1 border-cyan": "Cyan Border",
                 "border-1 border-secondary": "Dark Blue Border",
-                "border-gold": "Gold Border"
+                "border-gray": "Gray Border"
             },
             "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_682bd3d98dc69",
+            "label": "Card Image Size",
+            "name": "card_image_size",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Control the width of the card image",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "50": "50%",
+                "60": "60%",
+                "70": "70%",
+                "75": "75%",
+                "80": "80%",
+                "90": "90%",
+                "100": "100%"
+            },
+            "default_value": "100",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_682bd3e98dc6a",
+            "label": "Card Shadow",
+            "name": "card_shadow",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Enable or disable card shadow",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "On",
+                "0": "Off"
+            },
+            "default_value": "1",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_682bd3f98dc6b",
+            "label": "Card Border Radius",
+            "name": "card_border_radius_enable",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Enable or disable border radius on cards",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "On",
+                "0": "Off"
+            },
+            "default_value": "1",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_682bd4098dc6c",
+            "label": "Border Radius Size",
+            "name": "card_border_radius_size",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Size of the border radius",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_682bd3f98dc6b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "0": "0px (none)",
+                "0.25": "0.25rem (4px)",
+                "0.5": "0.5rem (8px)",
+                "0.75": "0.75rem (12px)",
+                "1": "1rem (16px)",
+                "1.5": "1.5rem (24px)",
+                "2": "2rem (32px)",
+                "2.5": "2.5rem (40px)",
+                "3": "3rem (48px)"
+            },
+            "default_value": "2.5",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_682bd4198dc6d",
+            "label": "Card Column Width",
+            "name": "card_column_width",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Control the width of card columns. Auto adjusts based on number of cards.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "auto": "Auto (responsive)",
+                "col-lg-3": "4 columns (col-lg-3)",
+                "col-lg-4": "3 columns (col-lg-4)",
+                "col-lg-6": "2 columns (col-lg-6)"
+            },
+            "default_value": "auto",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -822,5 +993,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753308107
+    "display_title": "",
+    "modified": 1770521171
 }

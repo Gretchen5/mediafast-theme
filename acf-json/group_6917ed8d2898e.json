@@ -117,6 +117,32 @@
             "selected": 0
         },
         {
+            "key": "field_698ee5fb631db",
+            "label": "Background Image",
+            "name": "background_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_6917ee0e97b69",
             "label": "Vertical Padding",
             "name": "vertical_padding",
@@ -157,5 +183,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763176119
+    "modified": 1770972708
 }

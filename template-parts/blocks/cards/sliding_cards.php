@@ -13,7 +13,7 @@ $bg_class = $background_color ? '' : 'bg-lt-gray';
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-11 text-center">
                     <?php if ($subheading) : ?>
-                        <span class="d-inline-block fw-500 text-uppercase mb-2 text-gold"><?php echo esc_html($subheading); ?></span>
+                        <span class="d-inline-block fw-500 text-uppercase mb-2 text-gray"><?php echo esc_html($subheading); ?></span>
                     <?php endif; ?>
                     <?php if ($heading) : ?>
                         <h2 class="text-secondary mb-0"><?php echo wp_kses_post($heading); ?></h2>

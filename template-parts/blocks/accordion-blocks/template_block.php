@@ -172,12 +172,12 @@ wp_add_inline_script('custom-template-tiles', $inline, 'before');
     <div class="container">
         <div class="row">
             <div class="col-12">
-
-                <header class="template-header text-center pb-3">
-                    <h2 class="text-secondary pt-4" id="<?php echo esc_attr($block_id); ?>-title"><?php echo $section_title; ?></h2>
-                    <p><?php echo $section_description; ?></p>
-                </header>
-
+                <?php if ($section_title) : ?>
+                    <header class="template-header text-center pb-3">
+                        <h2 class="text-secondary pt-4" id="<?php echo esc_attr($block_id); ?>-title"><?php echo $section_title; ?></h2>
+                        <p><?php echo $section_description; ?></p>
+                    </header>
+                <?php endif; ?>
                 <nav class="template-tabs py-4" aria-label="Template categories"></nav>
                 <nav class="template-breadcrumb" aria-label="breadcrumb"></nav>
                 <h3 class="template-level-title text-center text-primary" aria-live="polite"></h3>

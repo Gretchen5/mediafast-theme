@@ -280,7 +280,7 @@
             },
             "choices": {
                 "text-secondary": "Dark Blue",
-                "text-gold": "Gold",
+                "text-gray": "Gray",
                 "text-success": "Teal",
                 "text-primary": "Dark Gray",
                 "text-cyan": "Light Blue",

@@ -2,6 +2,30 @@
   max-width: 250px;
 }
 
+// Dynamic circle cards layout
+.circle-cards-container {
+  // 5 cards: 3 on top, 2 on bottom (stretched)
+  &.circle-cards-5 {
+    @media (min-width: 992px) {
+      // First 3 cards (top row) - already handled by col-lg-4
+      // Last 2 cards (bottom row) - stretch to fill width
+      .card-col-circle:nth-child(n+4) {
+        max-width: none;
+        flex: 0 0 auto;
+      }
+    }
+  }
+  
+  // 8 cards: 4 on top, 4 on bottom
+  &.circle-cards-8 {
+    @media (min-width: 992px) {
+      .card-col-circle {
+        width: 300px; 
+      }
+    }
+  }
+}
+
 .card-icon {
   color: #007bff;
   svg {
@@ -11,8 +35,8 @@
   }
 }
 
-.card-icon.text-gold {
-  color: $gold;
+.card-icon.text-gray {
+  color: $gray;
 }
 .card-icon.text-success {
   color: $success;
@@ -40,6 +64,70 @@
   color: $cyan;
   font-weight: 600;
   text-decoration: underline;
+}
+
+// Cards component styling
+.component--cards {
+  // Ensure row stretches all columns to equal height
+  .row {
+    align-items: stretch;
+  }
+  
+  // Make card columns flex containers to enable equal heights
+  .card-col {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  // Ensure cards fill the column height
+  .card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .card-img-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; // Don't shrink the image area
+    
+    .card-image {
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+  }
+  
+  // Card body should stretch to fill remaining space
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  // Description/button container should push button to bottom
+  .description-button-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  
+  .card-with-radius {
+    overflow: hidden;
+  }
+  
+  // Remove default Bootstrap card border-radius when not using card-with-radius class
+  .card:not(.card-with-radius) {
+    border-radius: 0 !important;
+  }
+  
+  // Remove shadow when shadow class is not present
+  .card:not(.shadow) {
+    box-shadow: none !important;
+  }
 }
 
 // Flip Cards
@@ -101,12 +189,20 @@
 
 // Circle Cards
 .circle-card {
-  width: 250px;
-  height: 180px;
+  min-width: 100%;
+  min-height: 150px;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: ease-in-out 0.4s;
+  
+  // Allow cards to stretch when in 5-card layout
+  .circle-cards-5 .card-col-circle:nth-child(n+4) & {
+    @media (min-width: 992px) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 .circle-card:hover {
@@ -457,7 +553,7 @@
   &__icon {
     i {
       font-size: 3.5rem;
-      color: $dk-gold; // Gold color for icons
+      color: $dk-gray; // Gray color for icons
       line-height: 1;
     }
   }

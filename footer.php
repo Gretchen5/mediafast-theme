@@ -18,6 +18,8 @@
 			$wysiwyg = get_field('wysiwyg', 'option') ? get_field('wysiwyg', 'option') : '';
 			$vertical_padding = get_field('vertical_padding', 'option') ? get_field('vertical_padding', 'option') : '';
 
+			$calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafast.com&embed_type=PopupText';
+
 			?>
 
 			<section class="cta_button-block <?php echo esc_attr($vertical_padding); ?>">
@@ -33,11 +35,31 @@
 								<div class="button-cta-container d-flex flex-wrap justify-content-center">
 									<?php while (have_rows('cta_button_repeater', 'option')) : the_row();
 										$cta_button = get_sub_field('cta_button') ? get_sub_field('cta_button') : '';
+										// Check for button type field (if it exists), otherwise detect from URL or default to 'link'
+										$cta_button_type = get_sub_field('cta_button_type');
+										if (empty($cta_button_type) && !empty($cta_button['url'])) {
+											// Auto-detect Calendly URLs if type field doesn't exist
+											$cta_button_type = (strpos($cta_button['url'], 'calendly.com') !== false) ? 'calendly' : 'link';
+										}
+										$cta_button_type = $cta_button_type ?: 'link';
 									?>
 										<?php if ($cta_button) : ?>
-											<a class="btn btn-primary m-2" href="<?php echo esc_url($cta_button['url']); ?>" target="<?php echo esc_attr($cta_button['target']); ?>">
-												<?php echo $cta_button['title']; ?>
-											</a>
+											<?php if ($cta_button_type === 'calendly') : ?>
+												<button type="button"
+													class="btn btn-primary m-2"
+													data-bs-toggle="modal"
+													data-bs-target="#mediaModal"
+													data-type="calendly"
+													data-calendly-url="<?php echo esc_url($calendly_url); ?>"
+													data-title="Schedule a Free Consultation"
+													data-description="Get one-on-one guidance from a MediaFast expert. No obligation, just answers.">
+													<?php echo $cta_button['title']; ?>
+												</button>
+											<?php else : ?>
+												<a class="btn btn-primary m-2" href="<?php echo esc_url($cta_button['url']); ?>" target="<?php echo esc_attr($cta_button['target']); ?>">
+													<?php echo $cta_button['title']; ?>
+												</a>
+											<?php endif; ?>
 										<?php endif; ?>
 									<?php endwhile; ?>
 								</div>

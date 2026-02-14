@@ -976,21 +976,6 @@ add_action('after_setup_theme', function () {
 			'color' => '#027dad',
 		],
 		[
-			'name'  => __('Gold', 'mediafast'),
-			'slug'  => 'gold',
-			'color' => '#bc9846',
-		],
-		[
-			'name'  => __('Gold (Text)', 'mediafast'),
-			'slug'  => 'gold-text',
-			'color' => '#8B7032'
-		],
-		[
-			'name'  => __('Gold (Background)', 'mediafast'),
-			'slug'  => 'gold-background',
-			'color' => '#bc9846',
-		],
-		[
 			'name'  => __('Tan Background', 'mediafast'),
 			'slug'  => 'tan-background',
 			'color' => '#f4f1ed',
@@ -1056,6 +1041,41 @@ function mediafast_invalidate_query_transients($post_id)
 	}
 }
 add_action('save_post', 'mediafast_invalidate_query_transients');
+
+/**
+ * Add Featured checkbox meta box for Testimonials CPT
+ */
+add_action('add_meta_boxes', function () {
+    add_meta_box(
+        'testimonial_featured',
+        'Featured',
+        function ($post) {
+            wp_nonce_field('testimonial_featured_nonce', 'testimonial_featured_nonce_field');
+            $val = get_post_meta($post->ID, '_is_featured', true);
+            ?>
+            <label>
+                <input type="checkbox" name="testimonial_is_featured" value="1" <?php checked($val, '1'); ?> />
+                Show this testimonial in the Featured section
+            </label>
+            <?php
+        },
+        'testimonial',
+        'side',
+        'high'
+    );
+});
+
+add_action('save_post_testimonial', function ($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    if (!isset($_POST['testimonial_featured_nonce_field']) ||
+        !wp_verify_nonce($_POST['testimonial_featured_nonce_field'], 'testimonial_featured_nonce')) {
+        return;
+    }
+
+    $is_featured = isset($_POST['testimonial_is_featured']) ? '1' : '0';
+    update_post_meta($post_id, '_is_featured', $is_featured);
+});
 
 // Hide ACF "Pages Hero" on the taxonomy list page's Add form (keeps it visible on Edit Term)
 add_action('acf/input/admin_head', function () {

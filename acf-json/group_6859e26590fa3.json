@@ -203,7 +203,7 @@
                 "border-1 border-gray-600": "Dark Gray Border",
                 "border-1 border-primary": "Light Blue Border",
                 "border-1 border-secondary": "Dark Blue Border",
-                "border-gold": "Gold Border"
+                "border-gray": "Gray Border"
             },
             "default_value": false,
             "return_format": "value",
@@ -267,7 +267,7 @@
                 "d-none": "None",
                 "border border-white  border-1": "White hr",
                 "border border-gray-100  border-1": "Light Gray hr",
-                "border border-gold  border-1": "Gold hr",
+                "border border-gray  border-1": "Gray hr",
                 "border border-primary border-1": "Light Blue hr",
                 "border border-secondary border-1": "Dark Blue hr"
             },

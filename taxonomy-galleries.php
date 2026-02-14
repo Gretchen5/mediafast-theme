@@ -19,8 +19,8 @@ if (have_posts()) :
 	// Get ACF fields for this term
 	$heading           = get_field('heading', $acf_key);
 	$description       = get_field('description', $acf_key);
-	$background_image = get_field('background_image', 'option') ? 'background-image: url(' . get_field('background_image', 'option') . ');' : '';
-	$background_position = get_field('background_position', 'option') ? 'background-position: ' . get_field('background_position', 'option') . ';' : '';
+	$background_image = get_field('background_image', $acf_key) ? 'background-image: url(' . get_field('background_image', $acf_key) . ');' : '';
+	$background_position = get_field('background_position', $acf_key) ? 'background-position: ' . get_field('background_position', $acf_key) . ';' : '';
 	$overlay_selection = get_field('overlay_selection', $acf_key);
 
 	$cta_button_1      = get_field('cta_button_1', $acf_key);

@@ -15,7 +15,7 @@ $padding = get_field('padding');
                 <h2 class="text-center mb-4"><?php echo $section_heading; ?></h2>
             <?php endif; ?>
             <?php if ($section_subheading) : ?>
-                <h3 class="text-center mb-4"><?php echo $section_subheading; ?></h3>
+                <h3 class="text-center mb-4 text-primary"><?php echo $section_subheading; ?></h3>
             <?php endif; ?>
             <?php if ($section_description) : ?>
                 <div class="text-center mb-4"><?php echo $section_description; ?></div>

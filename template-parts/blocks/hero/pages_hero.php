@@ -1,7 +1,6 @@
 <?php
 $background_image = get_field('background_image') ? 'background-image: url(' . get_field('background_image') . ');' : '';
 $background_position = get_field('background_position') ? 'background-position: ' . get_field('background_position') . ';' : '';
-$overlay_selection = get_field('overlay_selection');
 $heading = get_field('heading');
 $description = get_field('description');
 $cta_button_1 = get_field('cta_button_1');
@@ -20,7 +19,7 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
 
 <section class="component--hero">
     <div class="background-image py-75" style="<?php echo $background_image . '' . $background_position; ?>">
-        <div class="overlay" style="--overlay-opacity: <?php echo esc_attr($overlay_selection); ?>"></div>
+        <div class="overlay"></div>
         <div class="content-container container position-relative z-2 pt-150">
             <div class="row">
                 <div class="col-12 col-lg-8">

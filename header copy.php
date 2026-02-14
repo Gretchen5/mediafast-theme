@@ -38,7 +38,7 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 
 				// Add border classes only if NOT home/front page
 				if (!is_front_page()) {
-					echo ' border-bottom border-color-gold border-4';
+					echo ' border-bottom border-color-gray border-4';
 				} else {
 					echo ' home';
 				}

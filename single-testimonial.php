@@ -20,35 +20,50 @@ if (empty($post)) {
 	$post = get_queried_object();
 }
 
-// Previous testimonial (newer date)
-$prev_post = get_posts([
-	'post_type'      => 'testimonial',
-	'posts_per_page' => 1,
-	'orderby'        => 'date',
-	'order'          => 'DESC',
-	'post_status'    => 'publish',
-	'date_query'     => [
-		['after' => get_the_date('Y-m-d H:i:s', $post)],
-	],
-]);
+// Get previous and next testimonials across ALL categories (not filtered by taxonomy)
+// Use a direct database query to bypass any taxonomy filters
 
-// Next testimonial (older date)
-$next_post = get_posts([
-	'post_type'      => 'testimonial',
-	'posts_per_page' => 1,
-	'orderby'        => 'date',
-	'order'          => 'ASC',
-	'post_status'    => 'publish',
-	'date_query'     => [
-		['before' => get_the_date('Y-m-d H:i:s', $post)],
-	],
-]);
+// Get previous and next testimonials across ALL categories (not filtered by taxonomy)
+// Get all testimonials and find adjacent posts by position
 
-$prev_post = ! empty($prev_post) ? $prev_post[0] : null;
-$next_post = ! empty($next_post) ? $next_post[0] : null;
+global $wpdb;
+$current_post_id = $post->ID;
+
+// Get all published testimonials ordered by date (newest first)
+$all_testimonials = $wpdb->get_results($wpdb->prepare(
+	"SELECT ID, post_date FROM {$wpdb->posts} 
+	WHERE post_type = 'testimonial' 
+	AND post_status = 'publish' 
+	ORDER BY post_date DESC, ID DESC"
+));
+
+// Find current post's position
+$current_index = false;
+foreach ($all_testimonials as $index => $testimonial) {
+	if ($testimonial->ID == $current_post_id) {
+		$current_index = $index;
+		break;
+	}
+}
+
+// Get previous (newer) and next (older) posts
+$prev_post = null;
+$next_post = null;
+
+if ($current_index !== false) {
+	// Previous post (newer date) - index - 1
+	if (isset($all_testimonials[$current_index - 1])) {
+		$prev_post = get_post($all_testimonials[$current_index - 1]->ID);
+	}
+	
+	// Next post (older date) - index + 1
+	if (isset($all_testimonials[$current_index + 1])) {
+		$next_post = get_post($all_testimonials[$current_index + 1]->ID);
+	}
+}
 ?>
 
-<nav class="custom-pagination testimonials pt-5">
+<nav class="custom-pagination testimonials pt-5" style="border-bottom: 1px solid #757575; padding-bottom: 2rem;">
 	<ul class="pagination justify-content-center">
 		<?php if ($prev_post) : ?>
 			<li class="page-item">
@@ -68,5 +83,7 @@ $next_post = ! empty($next_post) ? $next_post[0] : null;
 	</ul>
 </nav>
 
+			</div><!-- /.col-12 -->
+		</div><!-- /.row -->
 <?php
 get_footer();
