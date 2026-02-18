@@ -1,0 +1,249 @@
+{
+    "key": "group_sch_01",
+    "title": "Schema Settings",
+    "fields": [
+        {
+            "key": "field_sch_01",
+            "label": "Enable Schema",
+            "name": "schema_enable",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable structured data (JSON-LD) for this page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_sch_02",
+            "label": "Schema Type",
+            "name": "schema_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Select the type of schema markup to output",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sch_01",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "service": "Service",
+                "faq": "FAQ Page"
+            },
+            "default_value": "service",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_sch_03",
+            "label": "Schema Name",
+            "name": "schema_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Name of the service or page (defaults to page title if empty)",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sch_01",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_sch_04",
+            "label": "Schema Description",
+            "name": "schema_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Description for the schema (defaults to excerpt or content if empty)",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sch_01",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_sch_08",
+            "label": "Service Type (Optional)",
+            "name": "schema_service_type",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Optional override. If blank, we'll use the page title.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sch_01",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_sch_02",
+                        "operator": "==",
+                        "value": "service"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_sch_05",
+            "label": "FAQ Items",
+            "name": "schema_faq_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add questions and answers for FAQ schema",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_sch_01",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add FAQ Item",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_sch_06",
+                    "label": "Question",
+                    "name": "question",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_sch_05"
+                },
+                {
+                    "key": "field_sch_07",
+                    "label": "Answer",
+                    "name": "answer",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_sch_05"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1771112003
+}

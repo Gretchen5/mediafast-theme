@@ -16,15 +16,37 @@ $vertical_padding = $fields['vertical_padding'] ?? '';
         <div class="content-video-block-flex-container d-flex flex-column-reverse gap-4 justify-content-center align-items-center">
             <div class="video-container col-12 col-md-6">
                 <div class="video-player cvb-video-player">
-                    <iframe
-                        width="100%"
-                        src="<?php echo esc_url($video_link); ?>"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
+                    <?php
+                    // Extract YouTube video ID from URL
+                    $video_id = null;
+                    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube-nocookie\.com\/embed\/)([^"&?\/\s]{11})/', $video_link, $matches)) {
+                        $video_id = $matches[1];
+                    } elseif (preg_match('/^([a-zA-Z0-9_-]{11})$/', $video_link)) {
+                        $video_id = $video_link;
+                    }
+                    
+                    if ($video_id) :
+                        // Use lite YouTube embed placeholder
+                    ?>
+                        <div class="js-lite-youtube cvb-video-player" 
+                             data-video-url="<?php echo esc_url($video_link); ?>"
+                             data-video-title="<?php echo esc_attr($heading ?: 'Video'); ?>"
+                             style="position: relative; width: 100%; padding-bottom: 56.25%;">
+                        </div>
+                    <?php else : ?>
+                        <?php
+                        // Fallback for non-YouTube videos
+                        ?>
+                        <iframe
+                            width="100%"
+                            src="<?php echo esc_url($video_link); ?>"
+                            title="Video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="content-container col-12">

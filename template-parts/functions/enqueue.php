@@ -58,6 +58,16 @@ if (! function_exists('mediafast_enqueue_assets')) {
             );
         }
 
+        // Lite YouTube Embeds: Load on all pages (lightweight, improves performance)
+        // Note: This is also imported in main.js, but enqueueing separately ensures it loads
+        wp_enqueue_script(
+            'lite-youtube',
+            get_template_directory_uri() . '/assets/lite-youtube.js',
+            array(), // No dependencies
+            $theme_version,
+            true // Load in footer
+        );
+
     }
     add_action('wp_enqueue_scripts', 'mediafast_enqueue_assets');
 }

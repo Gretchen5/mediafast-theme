@@ -81,7 +81,7 @@ $recent_posts = new WP_Query($args);
                                     echo esc_html(wp_trim_words($excerpt, 25, '...'));
                                     ?>
                                 </p>
-                                <a href="<?php the_permalink(); ?>" class="post-display-card__link btn btn-link text-white p-0 fw-600">
+                                <a href="<?php the_permalink(); ?>" class="post-display-card__link btn btn-link text-white p-0 fw-600" aria-label="Read more about <?php echo esc_attr( wp_trim_words( get_the_title(), 8 ) ); ?>">
                                     Continue reading
                                 </a>
                             </div>

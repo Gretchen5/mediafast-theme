@@ -29,7 +29,29 @@ $padding = get_field('padding');
                         ?>
                             <div class="each-video-multiple-videos col-10 col-md-5 d-flex flex-column align-items-start justify-content-end">
                                 <div class="video-wrapper">
-                                    <iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="100%" title="<?php echo esc_attr($video_title ?: 'Video content'); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" class="shadow rounded bg-white"></iframe>
+                                    <?php
+                                    // Extract YouTube video ID from URL
+                                    $video_id = null;
+                                    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube-nocookie\.com\/embed\/)([^"&?\/\s]{11})/', $video_url, $matches)) {
+                                        $video_id = $matches[1];
+                                    } elseif (preg_match('/^([a-zA-Z0-9_-]{11})$/', $video_url)) {
+                                        $video_id = $video_url;
+                                    }
+                                    
+                                    if ($video_id) :
+                                        // Use lite YouTube embed placeholder
+                                    ?>
+                                        <div class="js-lite-youtube shadow rounded bg-white" 
+                                             data-video-url="<?php echo esc_url($video_url); ?>"
+                                             data-video-title="<?php echo esc_attr($video_title ?: 'Video content'); ?>"
+                                             style="position: relative; width: 100%; padding-bottom: 56.25%;">
+                                        </div>
+                                    <?php else : ?>
+                                        <?php
+                                        // Fallback for non-YouTube videos
+                                        ?>
+                                        <iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="100%" title="<?php echo esc_attr($video_title ?: 'Video content'); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" class="shadow rounded bg-white"></iframe>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php } ?>

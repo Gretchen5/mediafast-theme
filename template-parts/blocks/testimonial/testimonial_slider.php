@@ -41,6 +41,8 @@ if (! empty($posts)) : ?>
                 foreach ($posts as $cached_post) : 
                     $post = $cached_post;
                     setup_postdata($post);
+                    $title = get_the_title();
+$label = wp_trim_words($title, 8);
                 ?>
                 <div class="swiper-slide testimonial-swiper-slide">
 
@@ -71,8 +73,8 @@ if (! empty($posts)) : ?>
                             <?php echo wp_trim_words(get_post_field('post_content', $post->ID), 40, '...'); ?>
                         </p>
 
-                        <a href="<?php echo esc_url(get_permalink($post->ID)); ?>" class="btn btn-primary testimonial-read-more mt-3">
-                            Read More
+                        <a href="<?php echo esc_url(get_permalink($post->ID)); ?>" class="btn btn-primary testimonial-read-more mt-3" aria-label="Read more testimonial: <?php echo esc_attr($label); ?>">
+                            View Testimonial
                         </a>
 
                     </div>

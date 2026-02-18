@@ -1,5 +1,6 @@
 // Webpack Imports
 import * as bootstrap from "bootstrap";
+// Note: lite-youtube.js is enqueued separately in template-parts/functions/enqueue.php
 
 (function () {
   "use strict";
@@ -29,25 +30,20 @@ import * as bootstrap from "bootstrap";
 // Sliders
 
 import Swiper from "swiper";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-
-Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
 
 // Home Hero Slider - Only initialize if element exists
 document.addEventListener("DOMContentLoaded", () => {
   const heroSwiperEl = document.querySelector(".home-hero-swiper");
   if (heroSwiperEl) {
     new Swiper(".home-hero-swiper", {
-      modules: [Navigation, Pagination, Autoplay, EffectFade],
+      modules: [Navigation, Pagination, Autoplay],
       slidesPerView: 1,
       loop: true,
-      effect: "fade",
-      fadeEffect: { crossFade: true },
       autoplay: {
         delay: 2000,
       },
@@ -74,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const testimonialSwiperEl = document.querySelector(".testimonial-swiper");
   if (testimonialSwiperEl) {
     new Swiper(".testimonial-swiper", {
+      modules: [Navigation, Pagination, Autoplay],
       slidesPerView: 3,
       loopedSlides: 20,
       spaceBetween: 30,
@@ -93,10 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navigation: {
         nextEl: ".testimonial-swiper-button-next",
         prevEl: ".testimonial-swiper-button-prev",
-      },
-      scrollbar: {
-        el: ".testimonial-swiper-scrollbar",
-        draggable: true,
       },
       breakpoints: {
         0: { slidesPerView: 1 },
@@ -166,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const slidingCardsEl = document.querySelector(".sliding-cards-slider");
   if (slidingCardsEl) {
     const slidingCards = new Swiper(".sliding-cards-slider", {
-      modules: [Pagination, Autoplay],
+      modules: [Navigation, Pagination, Autoplay],
       loop: true,
       slidesPerView: 'auto', // Use auto to respect CSS-defined widths
       spaceBetween: 15,
@@ -204,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const caseStudiesSwiperEl = document.querySelector(".case-studies-swiper");
   if (caseStudiesSwiperEl) {
     new Swiper(".case-studies-swiper", {
-      modules: [Pagination, Autoplay],
+      modules: [Navigation, Pagination, Autoplay],
       loop: true,
       spaceBetween: 7.5,
       autoplay: {
@@ -476,3 +469,5 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 });
+
+

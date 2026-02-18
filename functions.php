@@ -623,8 +623,9 @@ function mediafast_scripts_loader()
 	$theme_version = wp_get_theme()->get('Version');
 
 	// 1. Styles.
-	wp_enqueue_style('style', get_theme_file_uri('style.css'), array(), $theme_version, 'all');
-	wp_enqueue_style('main', get_theme_file_uri('build/main.css'), array(), $theme_version, 'all'); // main.scss: Compiled Framework source + custom styles.
+	// Note: style.css is NOT enqueued - it's header-only for WordPress theme detection.
+	// All CSS is in main.scss, compiled to build/main.css
+	wp_enqueue_style('main', get_theme_file_uri('build/main.css'), array(), $theme_version, 'all'); // main.scss: Compiled Framework source + custom styles (includes WordPress core alignment/gallery styles).
 
 	if (is_rtl()) {
 		wp_enqueue_style('rtl', get_theme_file_uri('build/rtl.css'), array(), $theme_version, 'all');
@@ -1090,5 +1091,193 @@ add_action('acf/input/admin_head', function () {
     </style>';
 });
 
+// ACF JSON Syncing with ACF PRO in Dashboard
+
+add_filter('acf/settings/save_json', function ($path) {
+	return get_stylesheet_directory() . '/acf-json';
+  });
+  
+  add_filter('acf/settings/load_json', function ($paths) {
+	// Replace all paths so ACF only loads from this theme folder
+	return [ get_stylesheet_directory() . '/acf-json' ];
+  });
+  
+/**
+ * Output Schema Markup (JSON-LD)
+ * 
+ * Sitewide LocalBusiness schema - DISABLED (Yoast handles this)
+ * Page-specific schema - outputs on pages when enabled at priority 99
+ */
+// Commented out to avoid duplicate schema with Yoast
+// add_action('wp_head', function() {
+// 	// Sitewide LocalBusiness schema (priority 5 - early)
+// 	get_template_part('template-parts/schema/sitewide-localbusiness');
+// }, 5);
+
+add_action('wp_head', function() {
+	// Page-specific schema (priority 99 - late to avoid conflicts)
+	get_template_part('template-parts/schema/page-schema');
+}, 99);
+
+/**
+ * PART 1: Debug function to log enqueued scripts and styles
+ * Outputs as HTML comments in page source for easy inspection
+ * Remove this after identifying handles
+ */
+if (!is_admin()) {
+	add_action('wp_print_scripts', function() {
+		global $wp_scripts;
+		if ($wp_scripts && !empty($wp_scripts->queue)) {
+			echo "\n<!-- SCRIPTS ENQUEUED:\n";
+			foreach ($wp_scripts->queue as $handle) {
+				if (isset($wp_scripts->registered[$handle])) {
+					$script = $wp_scripts->registered[$handle];
+					$src = $script->src ? $script->src : '(inline/no src)';
+					echo "  handle: {$handle} = {$src}\n";
+				}
+			}
+			echo "-->\n";
+		}
+	}, 999);
+	
+	add_action('wp_print_styles', function() {
+		global $wp_styles;
+		if ($wp_styles && !empty($wp_styles->queue)) {
+			echo "\n<!-- STYLES ENQUEUED:\n";
+			foreach ($wp_styles->queue as $handle) {
+				if (isset($wp_styles->registered[$handle])) {
+					$style = $wp_styles->registered[$handle];
+					$href = $style->src ? $style->src : '(inline/no href)';
+					echo "  handle: {$handle} = {$href}\n";
+				}
+			}
+			echo "-->\n";
+		}
+	}, 999);
+}
+
+/**
+ * PART 3: Remove jQuery Migrate (safe for modern themes)
+ * Only remove on frontend, keep in admin
+ */
+if (!is_admin()) {
+	add_action('wp_default_scripts', function($scripts) {
+		if (isset($scripts->registered['jquery'])) {
+			$jquery = $scripts->registered['jquery'];
+			// Remove jquery-migrate from jquery dependencies
+			$deps = $jquery->deps;
+			$deps = array_diff($deps, array('jquery-migrate'));
+			$scripts->registered['jquery']->deps = $deps;
+		}
+	}, 100);
+}
+
+/**
+ * PART 2: Conditionally dequeue plugin assets
+ * This will be populated after we identify the exact handles
+ */
+if (!is_admin()) {
+	add_action('wp_enqueue_scripts', function() {
+		// A) Contact Form 7 - only load on pages with CF7 forms
+		$has_cf7 = false;
+		
+		// Check if current page is contact page
+		if (is_page('contact')) {
+			$has_cf7 = true;
+		}
+		
+		// Check if current post/page has CF7 shortcode
+		if (!$has_cf7 && (is_singular() || is_page())) {
+			global $post;
+			if ($post && has_shortcode($post->post_content, 'contact-form-7')) {
+				$has_cf7 = true;
+			}
+		}
+		
+		// Check if widget areas have CF7
+		if (!$has_cf7) {
+			$widget_areas = array('sidebar-1', 'footer-1', 'footer-2', 'footer-3');
+			foreach ($widget_areas as $area) {
+				if (is_active_sidebar($area)) {
+					ob_start();
+					dynamic_sidebar($area);
+					$sidebar_content = ob_get_clean();
+					if (has_shortcode($sidebar_content, 'contact-form-7')) {
+						$has_cf7 = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		// Dequeue CF7 if not needed (handles will be identified via debug output)
+		if (!$has_cf7) {
+			// Common CF7 handles - try multiple variations
+			$cf7_handles = array(
+				'contact-form-7',
+				'wpcf7-redirect',
+				'wpcf7-scripts',
+				'wpcf7-style',
+			);
+			foreach ($cf7_handles as $handle) {
+				wp_dequeue_style($handle);
+				wp_dequeue_script($handle);
+				wp_deregister_style($handle);
+				wp_deregister_script($handle);
+			}
+		}
+		
+		// B) Google Business Reviews - only on homepage and testimonials pages
+		$has_reviews = false;
+		if (is_front_page() || is_page('testimonials') || is_post_type_archive('testimonial')) {
+			$has_reviews = true;
+		}
+		
+		// Check for reviews shortcode/widget
+		if (!$has_reviews && (is_singular() || is_page())) {
+			global $post;
+			if ($post) {
+				// Check for common review plugin shortcodes
+				$review_shortcodes = array('google_reviews', 'g-business-reviews', 'wp-google-reviews', 'g-business-reviews-rating');
+				foreach ($review_shortcodes as $shortcode) {
+					if (has_shortcode($post->post_content, $shortcode)) {
+						$has_reviews = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		if (!$has_reviews) {
+			// Common review plugin handles - try multiple variations
+			$review_handles = array(
+				'g-business-reviews-rating',
+				'g-business-reviews-rating-style',
+				'g-business-reviews-rating-script',
+				'google-reviews',
+				'wp-google-reviews',
+			);
+			foreach ($review_handles as $handle) {
+				wp_dequeue_style($handle);
+				wp_dequeue_script($handle);
+				wp_deregister_style($handle);
+				wp_deregister_script($handle);
+			}
+		}
+		
+		// C) i-toolbar bootstrap-icons - dequeue on frontend if not needed
+		// This is typically only needed in admin, so safe to remove on frontend
+		$toolbar_handles = array(
+			'i-toolbar-bootstrap-icons',
+			'i-toolbar-bootstrap-icons-css',
+			'bootstrap-icons',
+		);
+		foreach ($toolbar_handles as $handle) {
+			wp_dequeue_style($handle);
+			wp_deregister_style($handle);
+		}
+		
+	}, 999); // High priority to run after plugins enqueue
+}
 
 
