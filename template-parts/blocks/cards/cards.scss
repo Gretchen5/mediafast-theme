@@ -1,3 +1,4 @@
+// Compiled via assets/main.scss -> build/main.css (run: npm run build)
 .card-col-circle {
   max-width: 250px;
 }
@@ -219,15 +220,8 @@
   }
 }
 
-// PDF section positioning specific to cards-side-by-side component
-// This overlaps with the section above
-.component--cards-side-by-side .pdf-section {
-  position: relative;
-  margin-top: calc(-0.81 * var(--overlap));
-  z-index: 5;
-  @media screen and (min-width: 1200px) {
-    margin-top: calc(-1.5 * var(--overlap));
-  }
+.pdf-cta-link {
+  font-size: 1.3rem;
 }
 
 // Team Cards
@@ -299,18 +293,10 @@
   .row > [class*="col"]:nth-child(20) .team-card { transition-delay: 3000ms; }
 }
 
-// PDF block card uses shared styles from cta-blocks.scss
-// Only component-specific overrides here
-.component--cards-side-by-side .pdf-block-card {
-  margin-bottom: 0; // Remove default margin since positioning is handled by parent
-}
-
 // Side by Side Card Styles
 
 .component--cards-side-by-side {
   position: relative;
-  --overlap: 145px;
-  padding-top: var(--overlap);
 }
 
 .side-by-side-card {
@@ -319,21 +305,19 @@
   align-items: center;
   text-align: center;
   padding: 1.5rem;
-  opacity: 0;
-  transform: translateX(-15px);
+  transform: none;
+
   transition: opacity 0.6s ease, transform 0.6s ease;
-  
-  // Narrower width when in columns (mobile/stacked)
+
   @media (max-width: 991.98px) {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  // Fade in when visible (triggered by existing Intersection Observer in main.js)
   &.animate-in {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   &__icon-wrapper {
@@ -350,8 +334,8 @@
       content: "";
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: -50%;
+      transform: translateX(50%);
       width: 120px;
       height: 60px;
       background-color: #f4f1ed; // Light beige
@@ -401,6 +385,25 @@
   }
 }
 
+// JS-enabled only: start hidden above, slide down into place when .animate-in is added
+/* Only hide items once JS marks them ready */
+
+.js [data-animate].is-ready {
+  opacity: 0;
+  transform: translateY(48px);
+}
+
+.js [data-animate].is-ready.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform, opacity;
+}
+
 // Border styles - target the columns, not the cards
 .component--cards-side-by-side .row > .col {
   // Border between cards on desktop (right border, not on last in row)
@@ -426,19 +429,23 @@
   }
 }
 
-// Stagger animation delays for cards
+// Stagger animation delays for cards (.col and .col-* both match)
+.component--cards-side-by-side .row > .col:nth-child(1) .side-by-side-card,
 .component--cards-side-by-side .row > [class*="col-"]:nth-child(1) .side-by-side-card {
   transition-delay: 0ms;
 }
 
+.component--cards-side-by-side .row > .col:nth-child(2) .side-by-side-card,
 .component--cards-side-by-side .row > [class*="col-"]:nth-child(2) .side-by-side-card {
   transition-delay: 200ms;
 }
 
+.component--cards-side-by-side .row > .col:nth-child(3) .side-by-side-card,
 .component--cards-side-by-side .row > [class*="col-"]:nth-child(3) .side-by-side-card {
   transition-delay: 400ms;
 }
 
+.component--cards-side-by-side .row > .col:nth-child(4) .side-by-side-card,
 .component--cards-side-by-side .row > [class*="col-"]:nth-child(4) .side-by-side-card {
   transition-delay: 600ms;
 }

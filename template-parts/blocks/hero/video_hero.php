@@ -1,4 +1,7 @@
 <?php
+// Toggle: set to true to show <video> on mobile (default false for max LCP performance).
+$enable_mobile_video = false;
+
 // Video Hero Fields
 $video_mp4_raw  = get_field('video_mp4');
 $video_mp4      = is_array($video_mp4_raw) ? ($video_mp4_raw['url'] ?? '') : (string) $video_mp4_raw;
@@ -7,12 +10,17 @@ $poster_raw     = get_field('poster_image');
 $poster_image   = '';
 $poster_image_id = null;
 if ($poster_raw) {
-	if (is_array($poster_raw) && isset($poster_raw['ID'])) {
-		$poster_image_id = (int) $poster_raw['ID'];
-		$poster_data = wp_get_attachment_image_src($poster_image_id, 'acf-hero');
-		$poster_image = $poster_data ? set_url_scheme($poster_data[0], 'https') : '';
+	if (is_array($poster_raw)) {
+		// ACF image array can use 'ID' or 'id'
+		$poster_image_id = isset($poster_raw['ID']) ? (int) $poster_raw['ID'] : (isset($poster_raw['id']) ? (int) $poster_raw['id'] : null);
+		$poster_data = $poster_image_id ? wp_get_attachment_image_src($poster_image_id, 'acf-hero') : false;
+		$poster_image = ($poster_data && ! empty($poster_data[0])) ? set_url_scheme($poster_data[0], 'https') : '';
+		// Fallback to array url if size lookup failed or no ID
+		if (empty($poster_image) && ! empty($poster_raw['url'])) {
+			$poster_image = set_url_scheme($poster_raw['url'], 'https');
+		}
 	} else {
-		$poster_image = is_array($poster_raw) ? ($poster_raw['url'] ?? '') : (string) $poster_raw;
+		$poster_image = (string) $poster_raw;
 		$poster_image = $poster_image ? set_url_scheme($poster_image, 'https') : '';
 	}
 }
@@ -23,8 +31,8 @@ $subheading     = get_field('subheading');
 $cta_button_1 = get_field('cta_button_1');
 $cta_button_2 = get_field('cta_button_2');
 
-$cta_1_type = get_field('cta_button_1_type') ?: 'link';
-$cta_2_type = get_field('cta_button_2_type') ?: 'link';
+$cta_1_type = get_field('cta_1_type') ?: 'link';
+$cta_2_type = get_field('cta_2_type') ?: 'link';
 
 $form_content_1 = get_field('cta_button_1_form');
 $unique_id_1 = uniqid('formModal1_');
@@ -37,39 +45,96 @@ $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafas
 
 <section class="video-hero position-relative overflow-hidden d-flex align-items-center">
 
-    <!-- Background Video -->
-    <?php if ($video_mp4) : ?>
-        <?php
-        // Get caption file if available (ACF field for caption track)
-        $caption_file = get_field('video_caption_file');
-        $caption_file_url = '';
-        if ($caption_file) {
-            $caption_file_url = is_array($caption_file) ? ($caption_file['url'] ?? '') : (string) $caption_file;
-            $caption_file_url = $caption_file_url ? set_url_scheme($caption_file_url, 'https') : '';
-        }
-        ?>
-        <video 
-            class="video-hero-bg position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1"
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            preload="auto"
-            aria-label="Background video showcasing MediaFast services"
-            <?php if ($poster_image) : ?>
-                poster="<?php echo esc_url($poster_image); ?>"
-            <?php endif; ?>
-        >
-            <source src="<?php echo esc_url($video_mp4); ?>" type="video/mp4">
-            <?php if ($caption_file_url) : ?>
-                <track kind="captions" src="<?php echo esc_url($caption_file_url); ?>" srclang="en" label="English" default>
+    <!-- Background: desktop = video; mobile = poster <img> only (no video) unless $enable_mobile_video -->
+    <?php
+    $is_mobile = wp_is_mobile();
+    $show_poster_only = $is_mobile && ! $enable_mobile_video;
+    ?>
+    <?php if ($video_mp4 || $poster_image) : ?>
+        <?php if ($show_poster_only) : ?>
+            <?php
+            // Mobile (max performance): real <img> only, no <video> in DOM. LCP-optimized.
+            if ($poster_image_id && wp_attachment_is_image($poster_image_id)) :
+                echo wp_get_attachment_image(
+                    $poster_image_id,
+                    'large',
+                    false,
+                    array(
+                        'class'        => 'video-hero-poster position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1',
+                        'loading'      => 'eager',
+                        'fetchpriority'=> 'high',
+                        'sizes'        => '100vw',
+                        'alt'          => '',
+                        'decoding'     => 'async',
+                    )
+                );
+            elseif ($poster_image) : ?>
+                <img
+                    src="<?php echo esc_url($poster_image); ?>"
+                    alt=""
+                    class="video-hero-poster position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                    sizes="100vw"
+                >
             <?php else : ?>
-                <!-- Caption track for accessibility compliance -->
-                <!-- Note: This is a background/decorative video. Add ACF field 'video_caption_file' to upload .vtt caption files when available -->
-                <!-- Minimal valid VTT track to satisfy Lighthouse requirement -->
-                <track kind="captions" src="data:text/vtt;base64,V0VCVlRUCg==" srclang="en" label="English">
+                <div class="video-hero-poster video-hero-poster--fallback position-absolute top-0 start-0 w-100 h-100 z-1"></div>
             <?php endif; ?>
-        </video>
+        <?php else : ?>
+            <?php
+            // Desktop (or mobile when $enable_mobile_video): render <video> with poster attribute
+            $caption_file = get_field('video_caption_file');
+            $caption_file_url = '';
+            if ($caption_file) {
+                $caption_file_url = is_array($caption_file) ? ($caption_file['url'] ?? '') : (string) $caption_file;
+                $caption_file_url = $caption_file_url ? set_url_scheme($caption_file_url, 'https') : '';
+            }
+            ?>
+            <?php if ($video_mp4) : ?>
+            <video 
+                class="video-hero-bg position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1"
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                aria-label="Background video showcasing MediaFast services"
+                <?php if ($poster_image) : ?>
+                    poster="<?php echo esc_url($poster_image); ?>"
+                <?php endif; ?>
+            >
+                <source src="<?php echo esc_url($video_mp4); ?>" type="video/mp4">
+                <?php if ($caption_file_url) : ?>
+                    <track kind="captions" src="<?php echo esc_url($caption_file_url); ?>" srclang="en" label="English" default>
+                <?php else : ?>
+                    <track kind="captions" src="data:text/vtt;base64,V0VCVlRUCg==" srclang="en" label="English">
+                <?php endif; ?>
+            </video>
+            <?php elseif ($poster_image) : ?>
+                <?php
+                // Desktop fallback: no video URL, show poster image
+                if ($poster_image_id && wp_attachment_is_image($poster_image_id)) {
+                    echo wp_get_attachment_image(
+                        $poster_image_id,
+                        'acf-hero',
+                        false,
+                        array(
+                            'class'   => 'video-hero-poster position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1',
+                            'loading' => 'eager',
+                            'alt'     => '',
+                        )
+                    );
+                } else { ?>
+                <img
+                    src="<?php echo esc_url($poster_image); ?>"
+                    alt=""
+                    class="video-hero-poster position-absolute w-100 h-100 top-0 start-0 object-fit-cover z-1"
+                    loading="eager"
+                >
+                <?php } ?>
+            <?php endif; ?>
+        <?php endif; ?>
     <?php endif; ?>
 
     <!-- Overlay -->

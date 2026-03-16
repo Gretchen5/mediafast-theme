@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formId = trigger.getAttribute("data-form-id") || "";
 
     let contentHTML = "";
-    if (title) contentHTML += `<h2 class="mb-2">${title}</h2>`;
+    if (title && type !== "form") contentHTML += `<h2 class="mb-2">${title}</h2>`;
     if (desc && type !== "calendly") {
       contentHTML += `<div class="mb-4">${desc}</div>`;
     }
@@ -412,26 +412,59 @@ jQuery(document).ready(function ($) {
   });
 });
 
-// Light Version of AOS
-
+// Swiper from data-slider-options (e.g. content_image_slider block) — replaces plugin plugins.min.js
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll("[data-animate]");
+  const sliders = document.querySelectorAll(".swiper[data-slider-options]");
+  sliders.forEach((el) => {
+    try {
+      const raw = el.getAttribute("data-slider-options");
+      if (!raw) return;
+      let options = JSON.parse(raw);
+      options.modules = options.modules || [Navigation, Pagination, Autoplay];
+      if (!Array.isArray(options.modules)) options.modules = [Navigation, Pagination, Autoplay];
+      if (!options.modules.includes(Navigation)) options.modules.push(Navigation);
+      if (!options.modules.includes(Pagination)) options.modules.push(Pagination);
+      if (!options.modules.includes(Autoplay)) options.modules.push(Autoplay);
+      new Swiper(el, options);
+    } catch (e) {
+      // avoid one bad slider breaking other scripts
+    }
+  });
+});
+
+// Light Version of AOS — [data-animate] gets .animate-in when in view
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.classList.add("js");
+
+  const els = document.querySelectorAll("[data-animate]");
+  if (!els.length) return;
+
+  // Mark ready (hidden) BEFORE observing, so transition is guaranteed
+  els.forEach((el) => {
+    el.classList.remove("animate-in");
+    el.classList.add("is-ready");
+  });
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (!entry.isIntersecting) return;
+
+        // Next frame ensures the hidden state has painted
+        requestAnimationFrame(() => {
           entry.target.classList.add("animate-in");
-          observer.unobserve(entry.target);
-        }
+        });
+
+        observer.unobserve(entry.target);
       });
     },
-    {
-      threshold: 0.1,
-    }
+    { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
   );
 
-  cards.forEach((card) => observer.observe(card));
+  // Observe after one frame so CSS hidden state paints first
+  requestAnimationFrame(() => {
+    els.forEach((el) => observer.observe(el));
+  });
 });
 
 // Stats rotator (lightweight, no theme animations)

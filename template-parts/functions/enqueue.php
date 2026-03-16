@@ -68,6 +68,25 @@ if (! function_exists('mediafast_enqueue_assets')) {
             true // Load in footer
         );
 
+        // Masonry Portfolio: load only when the block is present (built bundle includes Isotope + imagesLoaded)
+        $has_masonry_portfolio = function_exists('has_block') && (has_block('acf/masonry-portfolio') || has_block('acf/masonry_portfolio'));
+        if ($has_masonry_portfolio) {
+            $portfolio_asset = get_theme_file_path('build/portfolio.asset.php');
+            $portfolio_ver = $theme_version;
+            $portfolio_deps = array();
+            if (is_readable($portfolio_asset)) {
+                $asset = include $portfolio_asset;
+                $portfolio_ver = isset($asset['version']) ? $asset['version'] : $theme_version;
+                $portfolio_deps = isset($asset['dependencies']) ? $asset['dependencies'] : array();
+            }
+            wp_enqueue_script(
+                'mediafast-portfolio',
+                get_theme_file_uri('build/portfolio.js'),
+                $portfolio_deps,
+                $portfolio_ver,
+                true
+            );
+        }
     }
     add_action('wp_enqueue_scripts', 'mediafast_enqueue_assets');
 }

@@ -307,35 +307,6 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_689119b94b256",
-            "label": "PDF Intro",
-            "name": "pdf_intro",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_68912cfc64e8d",
-                        "operator": "==",
-                        "value": "Yes"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_689119cd4b257",
             "label": "PDF Link",
             "name": "pdf_link",
@@ -380,5 +351,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763396072
+    "modified": 1773184981
 }

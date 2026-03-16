@@ -14,7 +14,7 @@ $background_color = get_field('background_color');
 
             <div class="col-12">
 
-                <div class="heading-container text-center pb-5">
+                <div class="heading-container text-center pb-3">
                     <h2><?php echo $heading; ?></h2>
                     <p class="subheading col-md-8 mx-auto"><?php echo $subheading; ?></p>
                 </div>

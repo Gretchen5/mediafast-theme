@@ -1,6 +1,26 @@
 <?php
-$background_image = get_field('background_image') ? 'background-image: url(' . get_field('background_image') . ');' : '';
-$background_position = get_field('background_position') ? 'background-position: ' . get_field('background_position') . ';' : '';
+// Background image: support URL (ACF return format) or array; use responsive img for better delivery
+$background_image_raw = get_field('background_image');
+$background_image_url = '';
+$background_image_id  = null;
+if ($background_image_raw) {
+	if (is_array($background_image_raw)) {
+		$background_image_id = isset($background_image_raw['ID']) ? (int) $background_image_raw['ID'] : (isset($background_image_raw['id']) ? (int) $background_image_raw['id'] : null);
+		$background_image_url = $background_image_raw['url'] ?? '';
+	} else {
+		$background_image_url = (string) $background_image_raw;
+		$background_image_id  = $background_image_url ? attachment_url_to_postid($background_image_url) : null;
+		$background_image_id  = $background_image_id && wp_attachment_is_image($background_image_id) ? $background_image_id : null;
+	}
+}
+$background_position        = get_field('background_position') ?: '';
+$background_position_mobile = get_field('background_position_mobile') ?: '';
+
+// Stable scoped class for this block instance — used to target the bg img with media queries
+$hero_img_uid = ($background_position || $background_position_mobile)
+    ? 'hero-bg-' . sanitize_html_class($block['id'] ?? uniqid('hero_'))
+    : '';
+
 $heading = get_field('heading');
 $description = get_field('description');
 $cta_button_1 = get_field('cta_button_1');
@@ -17,12 +37,53 @@ $unique_id_2 = uniqid('formModal2_');
 $calendly_url = 'https://calendly.com/mediafast-team/30min?embed_domain=mediafast.com&embed_type=PopupText';
 ?>
 
+<?php if ($hero_img_uid) : ?>
+<style>
+<?php if ($background_position) : ?>
+.<?php echo $hero_img_uid; ?> { object-position: <?php echo esc_html($background_position); ?>; }
+<?php endif; ?>
+<?php if ($background_position_mobile) : ?>
+@media (max-width: 767.98px) {
+    .<?php echo $hero_img_uid; ?> { object-position: <?php echo esc_html($background_position_mobile); ?>; }
+}
+<?php endif; ?>
+</style>
+<?php endif; ?>
+
 <section class="component--hero">
-    <div class="background-image py-75" style="<?php echo $background_image . '' . $background_position; ?>">
+    <div class="background-image pages-hero__bg-wrapper py-75">
+        <?php if ($background_image_url || $background_image_id) : ?>
+            <?php
+            $img_classes = 'pages-hero__bg-img' . ($hero_img_uid ? ' ' . $hero_img_uid : '');
+            if ($background_image_id) {
+                echo wp_get_attachment_image(
+                    $background_image_id,
+                    'acf-hero',
+                    false,
+                    array(
+                        'class'         => $img_classes,
+                        'loading'       => 'eager',
+                        'fetchpriority' => 'high',
+                        'sizes'         => '(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px',
+                        'alt'           => '',
+                        'decoding'      => 'async',
+                    )
+                );
+            } else { ?>
+                <img
+                    src="<?php echo esc_url($background_image_url); ?>"
+                    alt=""
+                    class="<?php echo esc_attr($img_classes); ?>"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+            <?php } ?>
+        <?php endif; ?>
         <div class="overlay"></div>
-        <div class="content-container container position-relative z-2 pt-150">
+        <div class="content-container container position-relative z-2 pt-100">
             <div class="row">
-                <div class="col-12 col-lg-8">
+                <div class="col-12">
                     <div class="masthead-content container text-white">
                         <h1 class="text-center text-md-start"><?php echo $heading; ?></h1>
                         <p class="text-large text-center text-md-start"><?php echo $description; ?></p>

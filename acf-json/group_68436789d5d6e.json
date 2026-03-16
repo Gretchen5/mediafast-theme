@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68689353d363e",
-            "label": "Content",
+            "label": "Image and Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -296,39 +296,45 @@
         },
         {
             "key": "field_684367a44cf51",
-            "label": "Background Position",
+            "label": "Background Position \u2014 Desktop",
             "name": "background_position",
             "aria-label": "",
-            "type": "select",
-            "instructions": "",
+            "type": "text",
+            "instructions": "CSS object-position: horizontal then vertical. e.g. 50% 30% \u2022 center top \u2022 70% center",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "top center": "top center",
-                "top right": "top right",
-                "top left": "top left",
-                "center": "center",
-                "center right": "center right",
-                "center left": "center left",
-                "bottom right": "bottom right",
-                "bottom left": "bottom left",
-                "bottom center": "bottom center"
+            "default_value": "",
+            "placeholder": "e.g. 50% 30%",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_684367a44cf52",
+            "label": "Background Position \u2014 Mobile",
+            "name": "background_position_mobile",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Overrides desktop value below 768px. e.g. 70% center \u2022 80% top \u2022 center 20%",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
             },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
+            "default_value": "",
+            "placeholder": "e.g. 70% center",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -371,5 +377,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770174558
+    "modified": 1773406993
 }

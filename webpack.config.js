@@ -49,7 +49,10 @@ module.exports = {
 			},
 		},
 		context: path.resolve(__dirname, "assets"),
-		entry: ["./main.js", "./main.scss"],
+		entry: {
+			main: ["./main.js", "./main.scss"],
+			portfolio: "./portfolio.js",
+		},
 		// jQuery support
 		/*externals: {
 			jquery: "jQuery",

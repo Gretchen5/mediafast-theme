@@ -11,7 +11,8 @@
 	},
 	"scripts": {
 		"watch": "wp-scripts start",
-		"build": "wp-scripts build"
+		"build": "wp-scripts build",
+		"build:verify": "npm run build && node -e \"const fs=require('fs'); const c=fs.readFileSync('build/main.css','utf8'); const ok=c.includes('side-by-side-card') && c.includes('translateY(-28px)') && c.includes('.js .side-by-side-card'); process.exit(ok?0:1);\" && echo 'Cards SCSS verified in build/main.css'"
 	},
 	"browserslist": [
 		"last 2 versions"

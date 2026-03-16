@@ -183,7 +183,6 @@ $link-decoration: none;
  */
 
 body {
-  text-wrap: pretty;
   word-break: break-word;
   -webkit-font-smoothing: antialiased;
   &.page-template-page-full {
@@ -191,10 +190,6 @@ body {
       max-width: 100%;
     }
   }
-
-  //   p {
-  //     font-size: 1.5rem;
-  //   }
 
   /* If WP-Adminbar is visible */
   &.admin-bar {

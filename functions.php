@@ -631,14 +631,55 @@ function mediafast_scripts_loader()
 		wp_enqueue_style('rtl', get_theme_file_uri('build/rtl.css'), array(), $theme_version, 'all');
 	}
 
-	// 2. Scripts.
-	wp_enqueue_script('mainjs', get_theme_file_uri('build/main.js'), array(), $theme_version, true);
+	// 2. Scripts. main.js loads after jQuery so plugins and inline scripts that depend on jQuery work.
+	wp_enqueue_script('mainjs', get_theme_file_uri('build/main.js'), array('jquery'), $theme_version, true);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
 }
 add_action('wp_enqueue_scripts', 'mediafast_scripts_loader');
+
+/**
+ * Make theme CSS non-render-blocking (async load) for better LCP on mobile.
+ * Uses preload + onload pattern; noscript ensures styles apply when JS is off.
+ *
+ * @param string $html  The link tag for the enqueued style.
+ * @param string $handle The style's registered handle.
+ * @param string $href  The stylesheet URL.
+ * @param string $media The media attribute.
+ * @return string Modified tag.
+ */
+function mediafast_async_theme_styles($html, $handle, $href, $media) {
+	$async_handles = array('main', 'icon-style', 'theme-responsive', 'finance', 'rtl');
+	if (! in_array($handle, $async_handles, true)) {
+		return $html;
+	}
+	$id_attr = 'id="' . esc_attr($handle) . '-css" ';
+	return '<link ' . $id_attr . 'rel="preload" href="' . esc_url($href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n"
+		. '<noscript><link rel="stylesheet" href="' . esc_url($href) . '"></noscript>';
+}
+add_filter('style_loader_tag', 'mediafast_async_theme_styles', 10, 4);
+
+/**
+ * Defer only scripts that do not have inline or other scripts depending on them.
+ * jQuery is NOT deferred: the theme adds inline "var $ = jQuery" after it, and plugins
+ * (e.g. js.js) expect jQuery to be defined when they run. Deferring jQuery caused
+ * "jQuery is not defined" for jquery-js-after and dependent scripts.
+ *
+ * @param string $tag    The script tag.
+ * @param string $handle The script handle.
+ * @param string $src   The script src.
+ * @return string Modified tag.
+ */
+function mediafast_defer_scripts($tag, $handle, $src) {
+	$defer_handles = array('lite-youtube');
+	if (! in_array($handle, $defer_handles, true)) {
+		return $tag;
+	}
+	return str_replace(' src=', ' defer src=', $tag);
+}
+add_filter('script_loader_tag', 'mediafast_defer_scripts', 10, 3);
 
 /**
  * Add page slug to body class for reliable targeting across environments.

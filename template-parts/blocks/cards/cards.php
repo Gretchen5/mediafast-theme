@@ -41,7 +41,7 @@ if ($cards_data) {
 if ($card_column_width === 'auto') {
     // Auto: 3 columns for 3 cards, 4 columns for 4+ cards
     if ($card_count === 3) {
-        $col_class = 'col-10 col-md-6 col-lg-4';
+        $col_class = 'col-10 col-md-6 col-lg-3';
     } elseif ($card_count >= 4) {
         $col_class = 'col-10 col-md-6 col-lg-3';
     } else {
@@ -54,7 +54,7 @@ if ($card_column_width === 'auto') {
 ?>
 
 <section class="component--cards <?php echo esc_attr($vertical_padding); ?>">
-    <div class="container">
+    <div class="container-fluid">
         <?php if ($section_heading) : ?>
             <h2 class="text-center mb-4 <?php echo esc_attr($section_heading_color); ?>"><?php echo $section_heading; ?></h2>
         <?php endif; ?>
@@ -64,7 +64,7 @@ if ($card_column_width === 'auto') {
         <?php if ($section_description) : ?>
             <div class="my-4"><?php echo $section_description; ?></div>
         <?php endif; ?>
-        <div class="row g-2 pt-4 justify-content-center align-items-stretch">
+        <div class="row gap-2 pt-4 justify-content-center align-items-stretch">
             <?php
             if (have_rows('card_repeater')) :
 
@@ -82,7 +82,7 @@ if ($card_column_width === 'auto') {
                     <div class="<?php echo esc_attr($col_class); ?> card-col d-flex">
                         <?php
                         // Build card classes
-                        $card_classes = array('card', 'w-100', 'd-flex', 'flex-column', 'px-3');
+                        $card_classes = array('card', 'w-100', 'd-flex', 'flex-column', 'px-3', 'my-2');
                         if ($card_shadow) {
                             $card_classes[] = 'shadow';
                         }

@@ -57,35 +57,6 @@
             "selected": 0
         },
         {
-            "key": "field_68cf7e60d2ad0",
-            "label": "PDF Overlay",
-            "name": "pdf_overlay",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "no-overlay": "No Top Overlay",
-                "pdf-overlay": "Top Overlay"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
             "key": "field_68cf7baad1632",
             "label": "PDF Intro",
             "name": "pdf_intro",
@@ -159,5 +130,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1759701396
+    "display_title": "",
+    "modified": 1773185169
 }
