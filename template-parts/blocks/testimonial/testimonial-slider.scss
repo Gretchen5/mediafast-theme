@@ -304,6 +304,10 @@
 // Responsive adjustments
 @media (max-width: 767.98px) {
   .image-slider {
-    padding-bottom: 2.5rem;
+    padding-bottom: 0; // no extra space needed without dots
+
+    .swiper-pagination {
+      display: none;
+    }
   }
 }

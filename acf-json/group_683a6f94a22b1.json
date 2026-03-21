@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68814f5faf718",
-            "label": "Add Content and Images",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -163,7 +163,7 @@
                 "text-white": "White",
                 "has-cyan-color": "Blue",
                 "has-teal-color": "Teal",
-                "has-gray-text-color": "Gray"
+                "has-gold-text-color": "Gold"
             },
             "default_value": false,
             "return_format": "value",
@@ -196,53 +196,7 @@
                 "text-white": "White",
                 "has-cyan-color": "Blue",
                 "has-teal-color": "Teal",
-                "has-gray-text-color": "Gray"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_68814fb18249c",
-            "label": "Vertical Padding",
-            "name": "vertical_padding",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "py-0": "no padding",
-                "py-100": "py-100",
-                "py-50": "py-50",
-                "py-75": "py-75",
-                "py-5": "py-5",
-                "py-4": "py-4",
-                "py-3": "py-3",
-                "pt-100": "pt-100",
-                "pt-50": "pt-50",
-                "pt-75": "pt-75",
-                "pt-5": "pt-5",
-                "pt-4": "pt-4",
-                "pt-3": "pt-3",
-                "pb-100": "pb-100",
-                "pb-50": "pb-50",
-                "pb-75": "pb-75",
-                "pb-5": "pb-5",
-                "pb-4": "pb-4",
-                "pb-3": "pb-3"
+                "has-gold-text-color": "Gold"
             },
             "default_value": false,
             "return_format": "value",
@@ -261,7 +215,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/image-slider"
+                "value": "acf/image-slider"
             }
         ]
     ],
@@ -275,5 +229,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762631655
+    "modified": 1774064766
 }

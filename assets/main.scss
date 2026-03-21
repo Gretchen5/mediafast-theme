@@ -70,14 +70,12 @@ $base: $gray-900;
 .text-body {
   color: $gray-900;
 }
-
 .has-primary-color {
   color: $primary;
 }
 .has-primary-background-color {
   background-color: $primary;
 }
-
 .has-secondary-color {
   color: $secondary;
 }
@@ -91,7 +89,6 @@ $base: $gray-900;
 .has-teal-background-color {
   background-color: $success;
 }
-
 .has-cyan-color {
   color: $cyan;
 }
@@ -214,7 +211,6 @@ body {
 img {
   vertical-align: middle;
 }
-
 /**
  * WordPress customization
  */
@@ -348,16 +344,46 @@ img {
   /* Submenu links */
   .offcanvas .dropdown-item {
     font-size: 1.1rem;
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem 0.75rem;
     color: #fff;
+    border-radius: 4px;
   }
 
-  .offcanvas .dropdown-item:hover {
-    color: #d7e6ff;
+  // Hover: white text + subtle overlay. #fff gives maximum contrast on the
+  // navy background and is consistent with all other offcanvas link colors.
+  .offcanvas .dropdown-item:hover,
+  .offcanvas .dropdown-item:focus {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
   }
 
   .offcanvas #menu-primary-menu-1 .menu-item .nav-link.show {
     color: #fff;
+  }
+
+  // Override Bootstrap's .navbar-nav .nav-link.active / .nav-link.show
+  // which sets near-black text. Scope to .offcanvas so desktop is unaffected.
+  .offcanvas .navbar-nav .nav-link.active,
+  .offcanvas .navbar-nav .nav-link.show {
+    color: #fff !important;
+  }
+
+  // Active / current dropdown items inside the offcanvas.
+  // Bootstrap sets white bg + $primary text via CSS variables — override both
+  // the property and the variable so neither path wins.
+  .offcanvas .dropdown-item.active,
+  .offcanvas .dropdown-item:active {
+    --bs-dropdown-link-active-bg: rgba(255, 255, 255, 0.15);
+    --bs-dropdown-link-active-color: #fff;
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  // Hover on active item — slightly brighter overlay, text stays white.
+  .offcanvas .dropdown-item.active:hover,
+  .offcanvas .dropdown-item:active:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.22) !important;
   }
 
   .offcanvas .btn-close {
@@ -1300,9 +1326,12 @@ a {
   margin-left: 1.5rem;
 }
 
+// Desktop dropdown active state: white text on brand primary bg.
+// Offcanvas overrides below use a translucent overlay instead.
 .dropdown-item.active,
 .dropdown-item:active {
   color: #fff !important;
+  background-color: $primary !important;
 }
 
 .hidden-on-mobile {
@@ -2950,20 +2979,34 @@ ul.wp-block-list li {
 
 
 .video-responsive-width {
+  // Width constraint only — WordPress's .wp-has-aspect-ratio handles
+  // the 16:9 ratio via padding-top on .wp-block-embed__wrapper.
+  // Do NOT set aspect-ratio, height, or object-fit here: they conflict
+  // with the padding-bottom trick and break the iframe height on mobile.
   width: 60%;
+  max-width: 100%;
   margin: 0 auto;
-  height: auto;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  object-position: center;
   border-radius: 10px;
+  overflow: hidden; // clips the iframe to the border-radius
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  &:hover {
-    transform: scale(1.05);
+
+  // Ensure the iframe fills the wrapper that WordPress creates.
+  .wp-block-embed__wrapper {
+    position: relative;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border: 0;
+    }
   }
+
   @media screen and (max-width: 767px) {
     width: 100%;
+    box-shadow: none;
   }
 }
 
@@ -3219,4 +3262,83 @@ a img.aligncenter {
 	top: 5px;
 	width: auto;
 	z-index: 100000;
+}
+
+// ---------------------------------------------------------------------------
+// Shared modal — #mediaModal
+// ---------------------------------------------------------------------------
+#mediaModal {
+  // Keep the modal title visible above scrollable content on all screen sizes.
+  // position: relative on the header + position: absolute on btn-close lets the
+  // title center against the full header width, not the remaining flex space.
+  .modal-header {
+    position: relative;
+    align-items: center;
+    padding-top: 1.5rem;
+
+    .modal-title {
+      color: $secondary;
+      text-align: center;
+      width: 100%;
+      padding: 0;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+
+  // When the WP admin bar is visible (logged-in users only), offset the modal
+  // so it doesn't slide under the fixed 46px bar on mobile / 32px on desktop.
+  @at-root .admin-bar & {
+    @media (max-width: 782px) {
+      .modal-dialog {
+        margin-top: 46px !important;
+      }
+    }
+    @media (min-width: 783px) {
+      .modal-dialog {
+        margin-top: 32px;
+      }
+    }
+  }
+
+  // Calendly iframe: let it be tall enough to show the booking form fully.
+  .calendly-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 800px;
+    border: 0;
+  }
+
+  // On mobile: pin the modal to the top of the viewport so the title is never
+  // clipped. modal-dialog-centered would vertically center a taller-than-viewport
+  // modal, pushing the top (and title) off-screen.
+  @media (max-width: 767.98px) {
+    .modal-dialog {
+      margin: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      height: 100% !important;
+      align-items: flex-start !important; // override modal-dialog-centered
+    }
+
+    .modal-content {
+      height: 100%;
+      border-radius: 0;
+      border: 0;
+    }
+
+    .modal-body {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      flex: 1 1 auto;
+    }
+
+    .calendly-wrapper iframe {
+      height: 600px;
+    }
+  }
 }

@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68af418cf34f7",
-            "label": "Add Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -268,7 +268,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/sliding-cards"
+                "value": "acf/sliding-cards"
             }
         ]
     ],
@@ -281,5 +281,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756318137
+    "modified": 1774064766
 }

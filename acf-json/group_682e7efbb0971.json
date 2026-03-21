@@ -3,7 +3,25 @@
     "title": "Testimonial Slider",
     "fields": [
         {
-            "key": "field_682e807d56a31",
+            "key": "field_437c4be96332e",
+            "label": "TESTIMONIAL SLIDER",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69be193eadcf3",
             "label": "TESTIMONIAL SLIDER",
             "name": "",
             "aria-label": "",
@@ -16,9 +34,27 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Displays all the testimonials in a slider from the Custom Post Type \"Testimonials\"",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_abe163b8ea329",
+            "label": "Add\/Edit Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_682e7efc23380",
@@ -61,6 +97,24 @@
             "rows": "",
             "placeholder": "",
             "new_lines": ""
+        },
+        {
+            "key": "field_8a4cf6b5b15a8",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -81,5 +135,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1747878084
+    "display_title": "",
+    "modified": 1774066039
 }

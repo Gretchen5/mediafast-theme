@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_68b649a40fe72",
-            "label": "TEAM CARDS",
+            "label": "CARDS TEAM",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,8 +21,8 @@
             "selected": 0
         },
         {
-            "key": "field_68b649b30fe73",
-            "label": "TEAM CARDS",
+            "key": "field_69be16e30d04b",
+            "label": "CARDS TEAM",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68b649c20fe74",
-            "label": "Add Content",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -131,7 +131,7 @@
                     "label": "Team Member Name",
                     "name": "team_member_name",
                     "aria-label": "",
-                    "type": "link",
+                    "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -140,8 +140,12 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
+                    "default_value": "",
+                    "maxlength": "",
                     "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
                     "parent_repeater": "field_68b638ca92a69"
                 },
                 {
@@ -167,6 +171,24 @@
                     "parent_repeater": "field_68b638ca92a69"
                 }
             ]
+        },
+        {
+            "key": "field_d4aa82dd5e636",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -187,5 +209,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756776912
+    "display_title": "",
+    "modified": 1774065406
 }

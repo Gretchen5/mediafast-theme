@@ -17,16 +17,8 @@ $heading = get_field('heading') ?: '';
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center">
                 <?php while (have_rows('card_repeater')) : the_row();
                     $bio_image        = get_sub_field('bio_image');
-                    $team_member_name = get_sub_field('team_member_name');
+                    $name_text        = get_sub_field('team_member_name') ?: '';
                     $position         = get_sub_field('position');
-
-                    // Normalize name (text or link array)
-                    $name_text = '';
-                    if (is_array($team_member_name)) {
-                        $name_text = $team_member_name['title'] ?? ($team_member_name['url'] ?? '');
-                    } else {
-                        $name_text = $team_member_name;
-                    }
                 ?>
                     <div class="col d-flex">
                         <article class="team-card text-center w-100 pt-3" data-animate>

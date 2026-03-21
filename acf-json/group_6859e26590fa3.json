@@ -40,7 +40,7 @@
         },
         {
             "key": "field_686892d11e039",
-            "label": "Heading Section",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -118,24 +118,6 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0
-        },
-        {
-            "key": "field_6859f31e0fc3c",
-            "label": "Styles",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
         },
         {
             "key": "field_6859f3050fc3b",
@@ -467,6 +449,24 @@
                     "parent_repeater": "field_6859e484d405e"
                 }
             ]
+        },
+        {
+            "key": "field_6859f31e0fc3c",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -474,7 +474,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cirlce-cards"
+                "value": "acf/cirlce-cards"
             }
         ]
     ],
@@ -487,5 +487,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1751683840
+    "modified": 1774064766
 }

@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_68688f843afcd",
-            "label": "CTA BUTTON BLCOK",
+            "label": "CTA BUTTON BLOCK",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -40,7 +40,7 @@
         },
         {
             "key": "field_686890ac3afce",
-            "label": "Add Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -189,7 +189,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cta-button-block"
+                "value": "acf/cta-button-block"
             }
         ]
     ],
@@ -202,5 +202,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757720562
+    "modified": 1774064766
 }

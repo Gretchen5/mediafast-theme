@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_682bec8331c8e",
-            "label": "CARD SECTION",
+            "label": "CARDS",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,8 +21,8 @@
             "selected": 0
         },
         {
-            "key": "field_682cf55a31e97",
-            "label": "CARD SECTION",
+            "key": "field_69be1ae5694ce",
+            "label": "CARDS",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -34,13 +34,13 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Add 2, 3, 4, 8, or 9 cards",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
             "key": "field_68689254ec61d",
-            "label": "Heading Section",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -701,7 +701,7 @@
                 "90": "90%",
                 "100": "100%"
             },
-            "default_value": "100",
+            "default_value": 100,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -730,7 +730,7 @@
                 "1": "On",
                 "0": "Off"
             },
-            "default_value": "1",
+            "default_value": 1,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -759,7 +759,7 @@
                 "1": "On",
                 "0": "Off"
             },
-            "default_value": "1",
+            "default_value": 1,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -994,5 +994,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770521171
+    "modified": 1774066452
 }

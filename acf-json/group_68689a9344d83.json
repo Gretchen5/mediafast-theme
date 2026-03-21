@@ -104,7 +104,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "<div class=\"text-center py-5\">Add Google Review Shortcode<\/div>",
+            "default_value": "<div class=\"text-center py-5\">Add Google Review Shortcode</div>",
             "allow_in_bindings": 0,
             "tabs": "all",
             "toolbar": "full",
@@ -276,5 +276,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771108698
+    "modified": 1774064766
 }

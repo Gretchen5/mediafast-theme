@@ -4,12 +4,11 @@ $section_heading = get_field('section_heading');
 $description = get_field('description');
 $heading_color = get_field('heading_color') ?: 'text-secondary';
 $text_color = get_field('text_color') ?: 'text-body';
-$vertical_padding = get_field('vertical_padding') ?: '';
 $images = get_field('image_slider');
 ?>
 
 <!-- Image Slider Section -->
-<section class="component--image-slider-section bg-lt-gray <?php echo esc_attr($vertical_padding); ?>">
+<section class="component--image-slider-section bg-lt-gray">
     <?php if ($section_heading || $description) : ?>
         <div class="container text-center">
             <?php if ($section_heading) : ?>

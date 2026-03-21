@@ -46,7 +46,8 @@
             },
             "choices": {
                 "service": "Service",
-                "faq": "FAQ Page"
+                "faq": "FAQ Page",
+                "product": "Product"
             },
             "default_value": "service",
             "return_format": "value",
@@ -245,5 +246,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771112003
+    "modified": 1774064766
 }

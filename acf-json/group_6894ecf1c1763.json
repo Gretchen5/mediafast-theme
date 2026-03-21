@@ -3,6 +3,58 @@
     "title": "Content Image Slider",
     "fields": [
         {
+            "key": "field_7ea90703cec6e",
+            "label": "CONTENT IMAGE SLIDER",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_ce9f0e62f3a54",
+            "label": "CONTENT IMAGE SLIDER",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "CONTENT IMAGE SLIDER",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_19ed6f0176721",
+            "label": "Add/Edit Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_6894ecf2d5610",
             "label": "Background Image",
             "name": "background_image",
@@ -27,6 +79,23 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_31140680f4326",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -34,7 +103,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/content-image-slider"
+                "value": "acf/content-image-slider"
             }
         ]
     ],
@@ -47,5 +116,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1754590558
+    "modified": 1774064766
 }

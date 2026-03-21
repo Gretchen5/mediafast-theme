@@ -258,8 +258,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const image = trigger.getAttribute("data-image") || "";
     const formId = trigger.getAttribute("data-form-id") || "";
 
+    // Set title in the modal-header so it stays visible above scrollable content.
+    const modalLabel = document.getElementById("mediaModalLabel");
+    if (modalLabel) modalLabel.textContent = type !== "form" ? title : "";
+
     let contentHTML = "";
-    if (title && type !== "form") contentHTML += `<h2 class="mb-2">${title}</h2>`;
     if (desc && type !== "calendly") {
       contentHTML += `<div class="mb-4">${desc}</div>`;
     }
@@ -502,5 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 });
+
+
 
 

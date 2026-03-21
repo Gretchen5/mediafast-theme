@@ -40,7 +40,7 @@
         },
         {
             "key": "field_6848781d20728",
-            "label": "Accordion Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -147,7 +147,7 @@
         },
         {
             "key": "field_6848780420727",
-            "label": "Accordion Styles",
+            "label": "Styles",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -304,7 +304,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/accordion"
+                "value": "acf/accordion"
             }
         ]
     ],
@@ -317,5 +317,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753302614
+    "modified": 1774064766
 }

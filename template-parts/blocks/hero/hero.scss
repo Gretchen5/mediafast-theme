@@ -20,6 +20,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    min-height: clamp(400px, 37vw, 1070px);
   }
 
   .pages-hero__bg-wrapper {

@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68fa9fb584fe3",
-            "label": "Add \/ Edit Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -104,7 +104,7 @@
             "name": "tmpl_cat_1",
             "aria-label": "",
             "type": "repeater",
-            "instructions": "Level 1 categories (e.g., Video Brochure, Video Box, POP \/ Buttons)",
+            "instructions": "Level 1 categories (e.g., Video Brochure, Video Box, POP / Buttons)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -472,6 +472,23 @@
                     ]
                 }
             ]
+        },
+        {
+            "key": "field_1aed6bba4bf3c",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -479,7 +496,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/template-block"
+                "value": "acf/template-block"
             }
         ]
     ],
@@ -493,5 +510,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1768359295
+    "modified": 1774064766
 }

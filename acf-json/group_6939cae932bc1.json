@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6939cae936551",
-            "label": "HOME PAGE HERO",
+            "label": "SLIDER HERO",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -22,7 +22,7 @@
         },
         {
             "key": "field_6939cae9368f8",
-            "label": "HOME PAGE HERO",
+            "label": "SLIDER HERO",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -34,13 +34,13 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Add your custom hero video",
+            "message": "SLIDER HERO",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
             "key": "field_6939cae936ce3",
-            "label": "Hero Slider",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -457,6 +457,23 @@
             },
             "return_format": "array",
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_8ff0b9907e5a0",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -464,7 +481,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/slider-hero"
+                "value": "acf/slider-hero"
             }
         ]
     ],
@@ -478,5 +495,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765600470
+    "modified": 1774064766
 }

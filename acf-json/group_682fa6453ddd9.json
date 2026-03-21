@@ -3,8 +3,26 @@
     "title": "Cards Central Image",
     "fields": [
         {
-            "key": "field_682fa64541027",
-            "label": "CARD CENTRAL IMAGE",
+            "key": "field_fb095c4fda693",
+            "label": "CARDS CENTRAL IMAGE",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69be199ebd0f3",
+            "label": "CARDS CENTRAL IMAGE",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -16,13 +34,13 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Four cards around a central image.",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
             "key": "field_682fa6454137f",
-            "label": "Card Section",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -143,24 +161,6 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
-        },
-        {
-            "key": "field_682fa645426f9",
-            "label": "Styles for All Cards",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
         },
         {
             "key": "field_682fa64542ad9",
@@ -600,6 +600,24 @@
                     "parent_repeater": "field_682fa7252c0ec"
                 }
             ]
+        },
+        {
+            "key": "field_682fa645426f9",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -620,5 +638,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1747954810
+    "display_title": "",
+    "modified": 1774066171
 }

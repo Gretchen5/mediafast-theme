@@ -17,8 +17,8 @@ $accordion_id = uniqid('accordion_');
                 <?php endif; ?>
 
                 <?php if ($searchbar == 'true') : ?>
-                    <div id="<?php echo esc_attr($accordion_id . '_search_bar_container'); ?>">
-                        <input class="px-4" type="search" id="<?php echo esc_attr($accordion_id . '_search_bar'); ?>" placeholder="Search" />
+                    <div id="<?php echo esc_attr($accordion_id . '_search_bar_container'); ?>" class="accordion-search-container">
+                        <input class="accordion-search-input" type="search" id="<?php echo esc_attr($accordion_id . '_search_bar'); ?>" placeholder="Search" />
                     </div>
                 <?php endif; ?>
 

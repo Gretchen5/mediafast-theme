@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6859f8bda5e4f",
-            "label": "MULTIPLE VIDEO SECTION",
+            "label": "MULTIPLE VIDEOS",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,8 +21,8 @@
             "selected": 0
         },
         {
-            "key": "field_68815edf6d4d0",
-            "label": "MULTIPLE VIDEO SECTION",
+            "key": "field_69be1785eabe1",
+            "label": "MULTIPLE VIDEOS",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68815ef36d4d1",
-            "label": "Add Content",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -313,5 +313,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753574410
+    "display_title": "",
+    "modified": 1774065563
 }

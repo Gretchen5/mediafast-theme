@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68af4bada135b",
-            "label": "Accordion Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -211,6 +211,23 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0
+        },
+        {
+            "key": "field_75b0b0102b44e",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -218,7 +235,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/accordion-2"
+                "value": "acf/accordion-2"
             }
         ]
     ],
@@ -232,5 +249,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765943179
+    "modified": 1774064766
 }

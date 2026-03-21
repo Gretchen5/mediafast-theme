@@ -3,8 +3,26 @@
     "title": "Post Display",
     "fields": [
         {
-            "key": "field_682cf426cefd4",
-            "label": "POST DISPLAY SECTION",
+            "key": "field_e99be78e1246a",
+            "label": "POST DISPLAY",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69be1911d3bf4",
+            "label": "POST DISPLAY",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -16,9 +34,27 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Automatically adds the three most recent posts. If you choose a category, it will add the most recent posts from that category.",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_0c0fb4cad6e99",
+            "label": "Add\/Edit Content",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_682ce6b293b37",
@@ -183,6 +219,24 @@
             "multiple": 0,
             "allow_null": 0,
             "bidirectional_target": []
+        },
+        {
+            "key": "field_cc3a4035fd82e",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -203,5 +257,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1750717203
+    "display_title": "",
+    "modified": 1774065955
 }

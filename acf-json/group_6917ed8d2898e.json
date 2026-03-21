@@ -40,7 +40,7 @@
         },
         {
             "key": "field_6917edcb97b65",
-            "label": "Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -169,7 +169,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/case-studies-display"
+                "value": "acf/case-studies-display"
             }
         ]
     ],
@@ -183,5 +183,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770972708
+    "modified": 1774064766
 }

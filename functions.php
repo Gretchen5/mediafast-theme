@@ -1155,6 +1155,10 @@ add_filter('acf/settings/save_json', function ($path) {
 // 	get_template_part('template-parts/schema/sitewide-localbusiness');
 // }, 5);
 
+// Video schema — registers save_post hook for YouTube API pre-caching.
+// Functions defined here are used by page-schema.php on wp_head.
+require_once get_template_directory() . '/template-parts/schema/video-schema.php';
+
 add_action('wp_head', function() {
 	// Page-specific schema (priority 99 - late to avoid conflicts)
 	get_template_part('template-parts/schema/page-schema');
@@ -1321,4 +1325,53 @@ if (!is_admin()) {
 	}, 999); // High priority to run after plugins enqueue
 }
 
+// =============================================================================
+// Tawk.to Live Chat
+//
+// Loaded in wp_footer (priority 99) so it never blocks initial page rendering.
+// The script itself is async — it inserts a new <script async> tag at runtime.
+// Only runs on production to avoid polluting chat history with dev/staging traffic.
+//
+// To disable: comment out the add_action line below.
+// To switch environments: set WP_ENVIRONMENT_TYPE in wp-config.php, or update
+// the $production_host fallback to match the live domain.
+// =============================================================================
+if ( ! function_exists( 'mediafast_tawkto_chat' ) ) {
+	function mediafast_tawkto_chat() {
+		// Never load in wp-admin.
+		if ( is_admin() ) {
+			return;
+		}
 
+		// Primary: use WordPress native environment type (WP 5.5+).
+		// Set via: define( 'WP_ENVIRONMENT_TYPE', 'production' ); in wp-config.php
+		// Valid values: 'production', 'staging', 'development', 'local'
+		$env = function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : '';
+
+		// Fallback: treat as production if the live domain is in the site URL.
+		if ( $env === '' ) {
+			$env = ( strpos( home_url(), 'mediafast.com' ) !== false ) ? 'production' : 'development';
+		}
+
+		if ( $env !== 'production' ) {
+			return;
+		}
+
+		?>
+		<script type="text/javascript">
+		var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+		(function () {
+			var s1 = document.createElement('script'),
+				s0 = document.getElementsByTagName('script')[0];
+			s1.async = true;
+			s1.src = 'https://embed.tawk.to/63b87720c2f1ac1e202c1d52/1gm492lf9';
+			s1.charset = 'UTF-8';
+			s1.setAttribute('crossorigin', '*');
+			s0.parentNode.insertBefore(s1, s0);
+		})();
+		</script>
+		<?php
+	}
+}
+
+add_action( 'wp_footer', 'mediafast_tawkto_chat', 99 );

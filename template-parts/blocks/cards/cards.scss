@@ -232,14 +232,12 @@
     align-items: center;
     width: 100%;
     opacity: 0;
-    transform: translateY(100px) rotateX(50deg);
-    transform-origin: top center;
-    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-    perspective: 1200px;
+    transform: translateY(22px);
+    transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 
     &.animate-in {
       opacity: 1;
-      transform: translateY(0) rotateX(0deg);
+      transform: translateY(0);
     }
 
     &__image {
@@ -270,27 +268,12 @@
     }
   }
 
-  // Stagger animation delays (120ms increments per card)
-  .row > [class*="col"]:nth-child(1) .team-card { transition-delay: 0ms; }
-  .row > [class*="col"]:nth-child(2) .team-card { transition-delay: 120ms; }
-  .row > [class*="col"]:nth-child(3) .team-card { transition-delay: 240ms; }
-  .row > [class*="col"]:nth-child(4) .team-card { transition-delay: 360ms; }
-  .row > [class*="col"]:nth-child(5) .team-card { transition-delay: 480ms; }
-  .row > [class*="col"]:nth-child(6) .team-card { transition-delay: 600ms; }
-  .row > [class*="col"]:nth-child(7) .team-card { transition-delay: 720ms; }
-  .row > [class*="col"]:nth-child(8) .team-card { transition-delay: 840ms; }
-  .row > [class*="col"]:nth-child(9) .team-card { transition-delay: 960ms; }
-  .row > [class*="col"]:nth-child(10) .team-card { transition-delay: 1080ms; }
-  .row > [class*="col"]:nth-child(11) .team-card { transition-delay: 1200ms; }
-  .row > [class*="col"]:nth-child(12) .team-card { transition-delay: 1320ms; }
-  .row > [class*="col"]:nth-child(13) .team-card { transition-delay: 1400ms; }
-  .row > [class*="col"]:nth-child(14) .team-card { transition-delay: 1500ms; }
-  .row > [class*="col"]:nth-child(15) .team-card { transition-delay: 1600ms; }
-  .row > [class*="col"]:nth-child(16) .team-card { transition-delay: 1700ms; }
-  .row > [class*="col"]:nth-child(17) .team-card { transition-delay: 1800ms; }
-  .row > [class*="col"]:nth-child(18) .team-card { transition-delay: 1900ms; }
-  .row > [class*="col"]:nth-child(19) .team-card { transition-delay: 2000ms; }
-  .row > [class*="col"]:nth-child(20) .team-card { transition-delay: 3000ms; }
+  // Stagger: cycles every 4 cards so rows below the fold don't compound delays.
+  // Max wait is 180ms — every card is fully visible within 625ms of scrolling in.
+  .row > [class*="col"]:nth-child(4n+1) .team-card { transition-delay: 0ms; }
+  .row > [class*="col"]:nth-child(4n+2) .team-card { transition-delay: 60ms; }
+  .row > [class*="col"]:nth-child(4n+3) .team-card { transition-delay: 120ms; }
+  .row > [class*="col"]:nth-child(4n+4) .team-card { transition-delay: 180ms; }
 }
 
 // Side by Side Card Styles

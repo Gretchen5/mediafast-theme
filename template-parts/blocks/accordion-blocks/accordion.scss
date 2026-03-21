@@ -1,24 +1,41 @@
-// search input
-#accordion_search_bar_container {
-    position: relative;
-    &:after { 
-      content: url('images/search-icon.svg');
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      right: 10px;
-      bottom: 10px; 
-    }  
-    #accordion_search_bar {
-      display: block;
-      margin: 10px auto;
-      width: 100%;
-      padding: 7px 10px;
-      border: 1px solid #eaeaea;
-      border-radius: 25px;
-      outline: 0;
-    }
+// Search bar — sits above the accordion with breathing room below
+.accordion-search-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  &::after {
+    content: url('images/search-icon.svg');
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
+}
+
+.accordion-search-input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1.25rem; // right padding keeps text clear of icon
+  border: 1px solid #d0d5dd;
+  border-radius: 25px;
+  outline: 0;
+  font-size: 1rem;
+  color: inherit;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+
+  &::placeholder {
+    color: $gray-500;
+  }
+}
 
 
   // Accordion with Nav Tabs

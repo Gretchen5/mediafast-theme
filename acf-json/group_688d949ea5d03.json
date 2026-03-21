@@ -40,7 +40,7 @@
         },
         {
             "key": "field_688d9694a0631",
-            "label": "Add Cards",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -264,7 +264,7 @@
         },
         {
             "key": "field_689119a34b255",
-            "label": "Overlap Section",
+            "label": "Styles",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -337,7 +337,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cards-side-by-side"
+                "value": "acf/cards-side-by-side"
             }
         ]
     ],
@@ -351,5 +351,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773184981
+    "modified": 1774064766
 }

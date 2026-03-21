@@ -40,7 +40,7 @@
         },
         {
             "key": "field_68cf7ef580f47",
-            "label": "Add Content",
+            "label": "Add/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -110,6 +110,23 @@
             },
             "return_format": "array",
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_461636148bf5e",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -117,7 +134,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/pdf-block"
+                "value": "acf/pdf-block"
             }
         ]
     ],
@@ -131,5 +148,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773185169
+    "modified": 1774064766
 }

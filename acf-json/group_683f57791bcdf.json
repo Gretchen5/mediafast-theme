@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_68689196e91b9",
-            "label": "FLIP CARD SECTION",
+            "label": "FLIP CARDS",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,8 +21,8 @@
             "selected": 0
         },
         {
-            "key": "field_683f6bd5d6325",
-            "label": "FLIP CARD SECTION",
+            "key": "field_69be1a55fde03",
+            "label": "FLIP CARDS",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -34,13 +34,13 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Add 3, 6, or 9 cards",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
             "key": "field_68689200e91bc",
-            "label": "Heading Section",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -591,5 +591,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770965888
+    "modified": 1774066294
 }

@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6893f5b9fd832",
-            "label": "HOME PAGE HERO",
+            "label": "VIDEO HERO",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,8 +21,8 @@
             "selected": 0
         },
         {
-            "key": "field_682cf5d92283a",
-            "label": "HOME PAGE HERO",
+            "key": "field_69be18dca61ff",
+            "label": "VIDEO HERO",
             "name": "",
             "aria-label": "",
             "type": "message",
@@ -34,13 +34,13 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Add your custom hero video",
+            "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
             "key": "field_6939cb689bdcc",
-            "label": "Masthead Content",
+            "label": "Add\/Edit Content",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -594,6 +594,24 @@
             },
             "return_format": "array",
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_1cc1eadc8e1b9",
+            "label": "Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         }
     ],
     "location": [
@@ -615,5 +633,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765603319
+    "modified": 1774065917
 }

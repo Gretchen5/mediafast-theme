@@ -12,124 +12,127 @@ $section_description = get_field('section_description') ?: '';
 $cats_lvl1     = get_field('tmpl_cat_1') ?: [];
 
 // Helper function: safely get URL from ACF file/image
-function tmpl_safe_url($acf_field)
-{
-    if (!$acf_field) return '';
-    if (is_array($acf_field) && !empty($acf_field['url'])) return esc_url($acf_field['url']);
-    if (is_string($acf_field)) return esc_url($acf_field);
-    return '';
+if ( ! function_exists( 'tmpl_safe_url' ) ) {
+    function tmpl_safe_url($acf_field)
+    {
+        if (!$acf_field) return '';
+        if (is_array($acf_field) && !empty($acf_field['url'])) return esc_url($acf_field['url']);
+        if (is_string($acf_field)) return esc_url($acf_field);
+        return '';
+    }
 }
 
 // Build Level 4 (PDFs)
-function tmpl_build_lvl4($rows)
-{
-    $out = [];
-    if (empty($rows)) return $out;
+if ( ! function_exists( 'tmpl_build_lvl4' ) ) {
+    function tmpl_build_lvl4($rows)
+    {
+        $out = [];
+        if (empty($rows)) return $out;
 
-    foreach ($rows as $row) {
-        $title = $row['title_4'] ?? '';
-        $img   = !empty($row['image_4']) ? tmpl_safe_url($row['image_4']) : '';
-        $file  = $row['pdf_file'] ?? null;
-        $url   = $file ? tmpl_safe_url($file) : '';
+        foreach ($rows as $row) {
+            $title = $row['title_4'] ?? '';
+            $img   = !empty($row['image_4']) ? tmpl_safe_url($row['image_4']) : '';
+            $file  = $row['pdf_file'] ?? null;
+            $url   = $file ? tmpl_safe_url($file) : '';
 
-        // Handles "No PDF" toggle or empty link
-        $no_pdf = !empty($row['no_pdf_note']) || empty($url);
-
-        // Start the item with just a title
-        $item = ['title' => $title];
-
-        // Add optional image if available
-        if ($img) {
-            $item['image'] = $img;
-        }
-
-        // Add PDF URL only if it exists
-        if (!$no_pdf && $url) {
-            $item['url'] = $url;
-            $item['type'] = 'pdf';
-        } else {
-            $item['type'] = 'placeholder';
-        }
-
-        $out[] = $item;
-    }
-
-    return $out;
-}
-
-
-// Build Level 3
-function tmpl_build_lvl3($rows)
-{
-    $out = [];
-    if (empty($rows)) return $out;
-    foreach ($rows as $row) {
-        $title = $row['title_3'] ?? '';
-        $img   = tmpl_safe_url($row['image_3'] ?? '');
-        $lvl4  = tmpl_build_lvl4($row['tmpl_cat_4'] ?? []);
-        
-        $item = [
-            'title' => $title,
-            'image' => $img
-        ];
-        
-        // If there are children (level 4), use them
-        if (!empty($lvl4)) {
-            $item['children'] = $lvl4;
-        } else {
-            // No children, check if there's a PDF at this level
-            $file = $row['pdf_file'] ?? null;
-            $url  = $file ? tmpl_safe_url($file) : '';
+            // Handles "No PDF" toggle or empty link
             $no_pdf = !empty($row['no_pdf_note']) || empty($url);
-            
+
+            // Start the item with just a title
+            $item = ['title' => $title];
+
+            // Add optional image if available
+            if ($img) {
+                $item['image'] = $img;
+            }
+
+            // Add PDF URL only if it exists
             if (!$no_pdf && $url) {
                 $item['url'] = $url;
                 $item['type'] = 'pdf';
             } else {
                 $item['type'] = 'placeholder';
             }
+
+            $out[] = $item;
         }
-        
-        $out[] = $item;
+
+        return $out;
     }
-    return $out;
+}
+
+// Build Level 3
+if ( ! function_exists( 'tmpl_build_lvl3' ) ) {
+    function tmpl_build_lvl3($rows)
+    {
+        $out = [];
+        if (empty($rows)) return $out;
+        foreach ($rows as $row) {
+            $title = $row['title_3'] ?? '';
+            $img   = tmpl_safe_url($row['image_3'] ?? '');
+            $lvl4  = tmpl_build_lvl4($row['tmpl_cat_4'] ?? []);
+
+            $item = [
+                'title' => $title,
+                'image' => $img
+            ];
+
+            if (!empty($lvl4)) {
+                $item['children'] = $lvl4;
+            } else {
+                $file = $row['pdf_file'] ?? null;
+                $url  = $file ? tmpl_safe_url($file) : '';
+                $no_pdf = !empty($row['no_pdf_note']) || empty($url);
+
+                if (!$no_pdf && $url) {
+                    $item['url'] = $url;
+                    $item['type'] = 'pdf';
+                } else {
+                    $item['type'] = 'placeholder';
+                }
+            }
+
+            $out[] = $item;
+        }
+        return $out;
+    }
 }
 
 // Build Level 2
-function tmpl_build_lvl2($rows)
-{
-    $out = [];
-    if (empty($rows)) return $out;
-    foreach ($rows as $row) {
-        $title = $row['title_2'] ?? '';
-        $img   = tmpl_safe_url($row['image_2'] ?? '');
-        $lvl3  = tmpl_build_lvl3($row['tmpl_cat_3'] ?? []);
-        
-        $item = [
-            'title' => $title,
-            'image' => $img
-        ];
-        
-        // If there are children (level 3), use them
-        if (!empty($lvl3)) {
-            $item['children'] = $lvl3;
-        } else {
-            // No children, check if there's a PDF at this level
-            $file = $row['pdf_file'] ?? null;
-            $url  = $file ? tmpl_safe_url($file) : '';
-            $no_pdf = !empty($row['no_pdf_note']) || empty($url);
-            
-            if (!$no_pdf && $url) {
-                $item['url'] = $url;
-                $item['type'] = 'pdf';
+if ( ! function_exists( 'tmpl_build_lvl2' ) ) {
+    function tmpl_build_lvl2($rows)
+    {
+        $out = [];
+        if (empty($rows)) return $out;
+        foreach ($rows as $row) {
+            $title = $row['title_2'] ?? '';
+            $img   = tmpl_safe_url($row['image_2'] ?? '');
+            $lvl3  = tmpl_build_lvl3($row['tmpl_cat_3'] ?? []);
+
+            $item = [
+                'title' => $title,
+                'image' => $img
+            ];
+
+            if (!empty($lvl3)) {
+                $item['children'] = $lvl3;
             } else {
-                $item['type'] = 'placeholder';
+                $file = $row['pdf_file'] ?? null;
+                $url  = $file ? tmpl_safe_url($file) : '';
+                $no_pdf = !empty($row['no_pdf_note']) || empty($url);
+
+                if (!$no_pdf && $url) {
+                    $item['url'] = $url;
+                    $item['type'] = 'pdf';
+                } else {
+                    $item['type'] = 'placeholder';
+                }
             }
+
+            $out[] = $item;
         }
-        
-        $out[] = $item;
+        return $out;
     }
-    return $out;
 }
 
 // Build Level 1
