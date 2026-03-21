@@ -470,6 +470,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Search overlay
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle  = document.getElementById("searchToggle");
+  const overlay = document.getElementById("searchOverlay");
+  const closeBtn = document.getElementById("searchOverlayClose");
+  const input   = document.getElementById("searchOverlayInput");
+
+  if (!toggle || !overlay) return;
+
+  function openSearch() {
+    overlay.hidden = false;
+    overlay.offsetHeight; // force reflow so CSS transition fires
+    overlay.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    if (input) input.focus();
+  }
+
+  function closeSearch() {
+    overlay.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    toggle.focus();
+    setTimeout(() => { overlay.hidden = true; }, 260);
+  }
+
+  toggle.addEventListener("click", openSearch);
+  if (closeBtn) closeBtn.addEventListener("click", closeSearch);
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) closeSearch();
+  });
+
+  // Close on backdrop click (click outside the inner panel)
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeSearch();
+  });
+});
+
 // Stats rotator (lightweight, no theme animations)
 document.addEventListener("DOMContentLoaded", () => {
   const rotators = document.querySelectorAll(".stats-rotator[data-stats]");
@@ -505,7 +545,3 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 });
-
-
-
-

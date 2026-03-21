@@ -67,82 +67,78 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
 							?>
 					</a>
 
-					<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="<?php esc_attr_e('Toggle navigation menu', 'mediafast'); ?>">
-						<span class="navbar-toggler-icon" aria-hidden="true"></span>
-					</button>
+		<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="<?php esc_attr_e('Toggle navigation menu', 'mediafast'); ?>">
+			<span class="navbar-toggler-icon" aria-hidden="true"></span>
+		</button>
 
-					<!-- <div id="navbar" class="collapse navbar-collapse">
-						<?php
-						// Loading WordPress Custom Menu (theme_location).
-						wp_nav_menu(
-							array(
-								'menu_class'     => 'navbar-nav ms-auto text-end',
-								'container'      => '',
-								'fallback_cb'    => 'WP_Bootstrap_Navwalker::fallback',
-								'walker'         => new WP_Bootstrap_Navwalker(),
-								'theme_location' => 'main-menu',
-							)
-						);
-
-						if ('1' === $search_enabled) :
-						?>
-							<form class="search-form my-2 my-lg-0" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-								<div class="input-group">
-									<input type="text" name="s" class="form-control" placeholder="<?php esc_attr_e('Search', 'thethirdspaceartcenter'); ?>" title="<?php esc_attr_e('Search', 'thethirdspaceartcenter'); ?>" />
-									<button type="submit" name="submit" class="btn btn-outline-secondary"><?php esc_html_e('Search', 'thethirdspaceartcenter'); ?></button>
-								</div>
-							</form>
-						<?php
-						endif;
-						?>
-						<?php if (is_active_sidebar('secondary_widget_area')) : ?>
-							<div class="navbar-extra">
-								<?php dynamic_sidebar('secondary_widget_area'); ?>
-							</div>
-						<?php endif; ?>
-
-					</div>/.navbar-collapse -->
-					<div class="offcanvas offcanvas-start bg-secondary" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-						<div class="offcanvas-header">
-							<h2 class="offcanvas-title text-white" id="mobileMenuLabel">Menu</h2>
-							<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-						<div class="offcanvas-body">
-							<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'main-menu',
-									'menu_class'     => 'navbar-nav ms-auto text-lg-end',
-									'container'      => '',
-									'fallback_cb'    => 'WP_Bootstrap_Navwalker::fallback',
-									'walker'         => new WP_Bootstrap_Navwalker(),
-									'items_wrap'     => '<ul role="menubar" class="%2$s">%3$s</ul>',
-								)
-							);
-
-							if ('1' === $search_enabled) :
-							?>
-								<form class="search-form my-2 my-lg-0" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
-									<div class="input-group">
-										<input type="text" name="s" class="form-control" placeholder="<?php esc_attr_e('Search', 'thethirdspaceartcenter'); ?>" title="<?php esc_attr_e('Search', 'thethirdspaceartcenter'); ?>" />
-										<button type="submit" name="submit" class="btn btn-outline-secondary"><?php esc_html_e('Search', 'thethirdspaceartcenter'); ?></button>
-									</div>
-								</form>
-							<?php
-							endif;
-							?>
-							<?php if (is_active_sidebar('secondary_widget_area')) : ?>
-								<div class="navbar-extra pt-3 pt-md-0">
-									<?php dynamic_sidebar('secondary_widget_area'); ?>
-								</div>
-							<?php endif; ?>
-						</div>
+			<div class="offcanvas offcanvas-start bg-secondary" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+				<div class="offcanvas-header">
+					<h2 class="offcanvas-title text-white" id="mobileMenuLabel">Menu</h2>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'main-menu',
+							'menu_class'     => 'navbar-nav ms-auto text-lg-end',
+							'container'      => '',
+							'fallback_cb'    => 'WP_Bootstrap_Navwalker::fallback',
+							'walker'         => new WP_Bootstrap_Navwalker(),
+							'items_wrap'     => '<ul role="menubar" class="%2$s">%3$s</ul>',
+						)
+					);
+					?>
+				<?php if (is_active_sidebar('secondary_widget_area')) : ?>
+					<div class="navbar-extra pt-3 pt-md-0">
+						<?php dynamic_sidebar('secondary_widget_area'); ?>
 					</div>
+				<?php endif; ?>
+					<button type="button" class="btn search-toggle-btn align-self-center" id="searchToggle"
+						aria-label="<?php esc_attr_e('Open search', 'mediafast'); ?>"
+						aria-expanded="false" aria-controls="searchOverlay">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+							<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+						</svg>
+					</button>
+				</div>
+			</div>
 				</div><!-- /.container -->
 			</nav><!-- /#header -->
 		</header>
 
-		<main id="main" <?php if (isset($navbar_position) && 'fixed_top' === $navbar_position) : echo ' style="padding-top: 100px;"';
+		<div id="searchOverlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e('Search', 'mediafast'); ?>" hidden>
+		<div class="search-overlay__inner">
+			<button type="button" class="search-overlay__close" id="searchOverlayClose" aria-label="<?php esc_attr_e('Close search', 'mediafast'); ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+					<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+				</svg>
+			</button>
+			<p class="search-overlay__label"><?php esc_html_e('Search MediaFast', 'mediafast'); ?></p>
+			<form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" class="search-overlay__form search-form">
+				<div class="search-overlay__input-wrap">
+					<input type="search" name="s" id="searchOverlayInput" class="search-overlay__input"
+						placeholder="<?php esc_attr_e('What are you looking for?', 'mediafast'); ?>"
+						autocomplete="off"
+						value="<?php echo esc_attr(get_search_query()); ?>" />
+					<button type="submit" class="search-overlay__submit" aria-label="<?php esc_attr_e('Submit search', 'mediafast'); ?>">
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+							<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+						</svg>
+					</button>
+				</div>
+			</form>
+			<nav class="search-overlay__popular" aria-label="<?php esc_attr_e('Popular searches', 'mediafast'); ?>">
+				<span><?php esc_html_e('Popular:', 'mediafast'); ?></span>
+			<a href="<?php echo esc_url(home_url('/video-brochure/')); ?>">Video Brochures</a>
+			<a href="<?php echo esc_url(home_url('/video-mailer/')); ?>">Video Mailers</a>
+			<a href="<?php echo esc_url(home_url('/video-box/')); ?>">Video Boxes</a>
+				<a href="<?php echo esc_url(home_url('/contact-us/')); ?>">Contact Us</a>
+			</nav>
+		</div>
+	</div>
+
+	<main id="main" <?php if (isset($navbar_position) && 'fixed_top' === $navbar_position) : echo ' style="padding-top: 100px;"';
 						elseif (isset($navbar_position) && 'fixed_bottom' === $navbar_position) : echo ' style="padding-bottom: 100px;"';
 						endif; ?>>
 			<?php
