@@ -433,24 +433,19 @@ img {
 
 .navbar-brand {
   img {
-    height: auto; // Let height scale naturally
-    max-width: 350px; // Default: larger on mobile (menu collapsed)
-    width: auto; // Maintain aspect ratio
-    object-fit: contain; // Ensure proper scaling
-    
-    // Very small screens (430px and below): reduce size
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    max-width: 350px; // Mobile (menu collapsed) — full size
+
+    // Very small screens
     @media screen and (max-width: 430px) {
       max-width: 280px;
     }
-    
-    // Medium screens (1200px - 1261px): menu expanded, need smaller logo
-    @media screen and (min-width: 1200px) and (max-width: 1260px) {
-      max-width: 220px;
-    }
-    
-    // Large screens (1261px+): menu expanded but more space available
-    @media screen and (min-width: 1261px) {
-      max-width: 350px;
+
+    // Nav is expanded but tight — shrink logo to prevent item wrapping
+    @media screen and (min-width: 1200px) and (max-width: 1275px) {
+      max-width: 210px;
     }
   }
 }
@@ -954,6 +949,13 @@ h4,
   color: $cyan;
 }
 
+.text-inherit {
+  color: inherit;
+  &:hover {
+    color: $cyan;
+  }
+}
+
 .text-large {
   font-size: 1.2rem;
 }
@@ -1327,7 +1329,6 @@ a {
   color: #fff !important;
   background-color: $primary !important;
 }
-
 .hidden-on-mobile {
   display: none;
   visibility: hidden;
@@ -1352,12 +1353,13 @@ a {
 }
 
 // Blog - Single Posts
-
 .post-template-default h2 {
   color: $secondary;
   font-size: clamp(1.6rem, 3vw, 2rem);
   padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
 }
+
 
 ul.wp-block-list li {
   list-style: disc;
@@ -1450,6 +1452,7 @@ ul.wp-block-list li {
       }
     }
   }
+  
   
   // Direct iframes (not wrapped in embed containers)
   > iframe,

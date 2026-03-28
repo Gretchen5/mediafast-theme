@@ -1,0 +1,129 @@
+{
+    "key": "group_67f59a8001b00",
+    "title": "Team Member Bio Fields",
+    "fields": [
+        {
+            "key": "field_67f59a8001c01",
+            "label": "Headshot",
+            "name": "team_headshot",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload a professional headshot photo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_67f59a8001c02",
+            "label": "Job Title",
+            "name": "team_job_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_67f59a8001c03",
+            "label": "Bio",
+            "name": "team_bio",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Full bio text displayed on the team member\u2019s individual page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_67f59a8001c04",
+            "label": "Email",
+            "name": "team_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "Optional. Contact email for this team member.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_67f59a8001c05",
+            "label": "LinkedIn URL",
+            "name": "team_linkedin_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Optional. Full LinkedIn profile URL.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "https:\/\/linkedin.com\/in\/..."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "team"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1743033600
+}

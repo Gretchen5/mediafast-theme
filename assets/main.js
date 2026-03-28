@@ -288,12 +288,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendlyUrl = trigger.getAttribute("data-calendly-url");
       if (calendlyUrl) {
         contentHTML += `<div class="calendly-wrapper">
-					<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy" title="Schedule a consultation with MediaFast"></iframe>
-				</div>`;
-
-        if (typeof wc_iframe_ypbib === "function") {
-          wc_iframe_ypbib(calendlyUrl, "calendly.com");
-        }
+				<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy" title="Schedule a consultation with MediaFast"></iframe>
+			</div>`;
       }
     }
 
@@ -545,3 +541,4 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 });
+

@@ -149,6 +149,25 @@
                     "parent_repeater": "field_68b638ca92a69"
                 },
                 {
+                    "key": "field_67f59a8001d01",
+                    "label": "Bio Page Link",
+                    "name": "bio_link",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "Optional. Paste the URL of this team member’s bio page to make their name and photo clickable.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "https:\/\/",
+                    "parent_repeater": "field_68b638ca92a69"
+                },
+                {
                     "key": "field_68b638ea92a6b",
                     "label": "Position",
                     "name": "position",
@@ -210,5 +229,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774065406
+    "modified": 1774658751
 }

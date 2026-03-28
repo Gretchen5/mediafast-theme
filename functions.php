@@ -1053,6 +1053,13 @@ function custom_posts_per_page($query)
 
 	if ($query->is_post_type_archive('testimonial')) {
 		$query->set('posts_per_page', 15);
+		return;
+	}
+
+	if ($query->is_post_type_archive('team')) {
+		$query->set('posts_per_page', 20);
+		$query->set('orderby', 'menu_order');
+		$query->set('order', 'ASC');
 	}
 }
 add_action('pre_get_posts', 'custom_posts_per_page');
@@ -1076,6 +1083,9 @@ function mediafast_invalidate_query_transients($post_id)
 			break;
 		case 'case-study':
 			delete_transient('mediafast_case_studies_slider');
+			break;
+		case 'team':
+			delete_transient('mediafast_team_members');
 			break;
 		case 'post':
 			delete_transient('mediafast_sidebar_recent_posts');
