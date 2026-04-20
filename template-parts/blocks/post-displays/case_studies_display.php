@@ -59,7 +59,9 @@ $background_image_url = $background_image ? (is_array($background_image) ? $back
                                 setup_postdata($post);
                                 
                                 $thumb = get_the_post_thumbnail_url($post->ID, 'large');
-                                $excerpt = has_excerpt($post->ID) ? get_the_excerpt($post->ID) : wp_trim_words(strip_tags(get_post_field('post_content', $post->ID)), 25, '…');
+                $raw_excerpt = has_excerpt($post->ID) ? get_the_excerpt($post->ID) : get_post_field('post_content', $post->ID);
+                $excerpt = wp_trim_words(strip_tags($raw_excerpt), 20, '…');
+                $excerpt = preg_replace('/\s+(\S+)\s*$/', '&nbsp;$1', $excerpt);
                                 $industry = wp_get_post_terms($post->ID, 'industry');
                                 $industry_name = $industry && !is_wp_error($industry) ? $industry[0]->name : '';
                                 $industry_link = $industry && !is_wp_error($industry) ? get_term_link($industry[0]) : '';

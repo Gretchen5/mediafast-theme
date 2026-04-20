@@ -259,8 +259,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const formId = trigger.getAttribute("data-form-id") || "";
 
     // Set title in the modal-header so it stays visible above scrollable content.
+    // Calendly has its own built-in header, so no title needed (and it covers the loading dots).
     const modalLabel = document.getElementById("mediaModalLabel");
-    if (modalLabel) modalLabel.textContent = type !== "form" ? title : "";
+    if (modalLabel) modalLabel.textContent = (type !== "form" && type !== "calendly") ? title : "";
 
     let contentHTML = "";
     if (desc && type !== "calendly") {
@@ -287,8 +288,20 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (type === "calendly") {
       const calendlyUrl = trigger.getAttribute("data-calendly-url");
       if (calendlyUrl) {
+        const cleanCalendlyUrl = calendlyUrl
+          .replace(/[?&]embed_type=[^&]*/g, "")
+          .replace(/[?&]embed_domain=[^&]*/g, "")
+          .replace(/\?&/, "?")
+          .replace(/&&/g, "&")
+          .replace(/[?&]$/, "");
         contentHTML += `<div class="calendly-wrapper">
-				<iframe id="calendlyIframe" src="${calendlyUrl}" width="100%" height="800" frameborder="0" loading="lazy" title="Schedule a consultation with MediaFast"></iframe>
+				<div class="calendly-loading" aria-live="polite">
+					<div class="spinner-border text-primary" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+					<p class="mt-3 mb-0 text-secondary fw-500">Loading scheduler&hellip;</p>
+				</div>
+				<iframe id="calendlyIframe" src="${cleanCalendlyUrl}" width="100%" height="800" frameborder="0" loading="eager" title="Schedule a consultation with MediaFast"></iframe>
 			</div>`;
       }
     }
@@ -306,6 +319,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     mediaContainer.innerHTML = contentHTML;
+
+    // Fade out the loading overlay once Calendly has fully rendered.
+    // Calendly does an internal redirect after the first iframe load (causing a blink
+    // if we hide on the first event). We debounce: the overlay hides 1s after the
+    // *last* load event fires, so it stays up through the redirect.
+    if (type === "calendly") {
+      const calendlyIframe = document.getElementById("calendlyIframe");
+      const calendlyLoading = document.querySelector(".calendly-loading");
+      let hideTimer = null;
+      let fallbackTimer = null;
+
+      const hideOverlay = () => {
+        if (!calendlyLoading || calendlyLoading.style.opacity === "0") return;
+        clearTimeout(hideTimer);
+        clearTimeout(fallbackTimer);
+        calendlyLoading.style.transition = "opacity 0.3s ease";
+        calendlyLoading.style.opacity = "0";
+        setTimeout(() => calendlyLoading.remove(), 320);
+      };
+
+      if (calendlyIframe) {
+        calendlyIframe.addEventListener("load", () => {
+          clearTimeout(hideTimer);
+          hideTimer = setTimeout(hideOverlay, 1000);
+        });
+      }
+
+      // Hard fallback in case load never fires (e.g. network block)
+      fallbackTimer = setTimeout(hideOverlay, 15000);
+    }
 
     // Toggle logic must be set after modal content is injected
     if (type === "image_video") {
@@ -339,6 +382,9 @@ document.addEventListener("DOMContentLoaded", function () {
     iframes.forEach((iframe) => {
       iframe.src = "";
     });
+    // Clear Calendly iframe so it reloads fresh next open
+    const calendlyIframe = document.getElementById("calendlyIframe");
+    if (calendlyIframe) calendlyIframe.src = "";
   });
 
   // Footer menu Calendly link handler - convert footer menu Calendly links to modal triggers
@@ -541,4 +587,3 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 });
-
